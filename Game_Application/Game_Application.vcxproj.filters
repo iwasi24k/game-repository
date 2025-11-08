@@ -13,6 +13,21 @@
     <Filter Include="pch">
       <UniqueIdentifier>{6966c2d3-7a4e-4e6c-8d30-02fd528310af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Graphics">
+      <UniqueIdentifier>{40b2a385-6378-4775-9c62-4971ca5f22aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Renderer">
+      <UniqueIdentifier>{a4ad40b7-e2c5-48c2-a6f8-59cc90a1d887}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Resources">
+      <UniqueIdentifier>{71adc1c9-908f-4a72-9f46-4dbe3ff31757}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Resources\Shader">
+      <UniqueIdentifier>{13c3adda-543f-4fa0-90c1-4374eee7a76e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Math">
+      <UniqueIdentifier>{20e7933b-0f4c-476d-b3c1-10e326040659}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -30,6 +45,39 @@
     <ClCompile Include="Framework\Core\Timer.cpp">
       <Filter>Framework\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Graphics\Renderer\ViewportManager.cpp">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Renderer\SwapChain.cpp">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Renderer\SamplerManager.cpp">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Renderer\RenderTargetManager.cpp">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Renderer\Renderer.cpp">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Renderer\RasterizerStateManager.cpp">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Renderer\Device.cpp">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Renderer\DepthStencilState.cpp">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Renderer\ConstantBufferManager.cpp">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Renderer\BlendStateManager.cpp">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Resources\ShaderManager.cpp">
+      <Filter>Framework\Graphics\Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -44,5 +92,60 @@
     <ClInclude Include="Framework\Core\Timer.h">
       <Filter>Framework\Core</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\Graphics\Renderer\ViewportManager.h">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Renderer\SwapChain.h">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Renderer\SamplerManager.h">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Renderer\RenderTargetManager.h">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Renderer\Renderer.h">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Renderer\RasterizerStateManager.h">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Renderer\Device.h">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Renderer\DepthStencilState.h">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Renderer\ConstantBufferManager.h">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Renderer\BlendStateManager.h">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Resources\ShaderManager.h">
+      <Filter>Framework\Graphics\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Math\MathTransform.h">
+      <Filter>Framework\Math</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Framework\Graphics\Resources\Shader\PixelShader.hlsl">
+      <Filter>Framework\Graphics\Resources\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Graphics\Resources\Shader\VertexShader.hlsl">
+      <Filter>Framework\Graphics\Resources\Shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Framework\Graphics\Resources\Shader\Common.hlsl">
+      <Filter>Framework\Graphics\Resources\Shader</Filter>
+    </None>
+    <None Include="Framework\Graphics\Resources\ShaderManager.inl">
+      <Filter>Framework\Graphics\Resources</Filter>
+    </None>
+    <None Include="Framework\Graphics\Renderer\ConstantBufferManager.inl">
+      <Filter>Framework\Graphics\Renderer</Filter>
+    </None>
   </ItemGroup>
 </Project>

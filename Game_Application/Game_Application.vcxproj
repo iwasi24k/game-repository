@@ -180,6 +180,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Framework\Graphics\Renderer\ConstantBufferManager.inl" />
     <None Include="Framework\Graphics\Resources\Shader\Common.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
