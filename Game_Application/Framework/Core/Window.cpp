@@ -5,8 +5,7 @@
 // Created     : 2025-11-06
 // Last Update : 2025-11-08
 //------------------------------------------------------------------------------
-// Overview :
-// Windowä«óù
+// 
 //==============================================================================
 #include "pch.h"
 #include "Window.h"
@@ -55,6 +54,8 @@ bool Window::Initialize(HINSTANCE hInstance, int nCmdShow) {
 }
 
 void Window::Shutdown() {
+    LOG_IF(L"Window Shutdown..");
+
     if (m_hWnd) {
         DestroyWindow(m_hWnd);
         m_hWnd = nullptr;

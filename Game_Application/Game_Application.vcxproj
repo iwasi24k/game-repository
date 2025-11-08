@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include;$(ProjectDir)Framework\Math;$(ProjectDir)Framework\Graphics\Resources;$(ProjectDir)Framework\Graphics\Renderer</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -125,7 +125,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include;$(ProjectDir)Framework\Math;$(ProjectDir)Framework\Graphics\Resources;$(ProjectDir)Framework\Graphics\Renderer</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -144,6 +144,17 @@
     <ClCompile Include="Framework\Core\Application.cpp" />
     <ClCompile Include="Framework\Core\Timer.cpp" />
     <ClCompile Include="Framework\Core\Window.cpp" />
+    <ClCompile Include="Framework\Graphics\Renderer\BlendStateManager.cpp" />
+    <ClCompile Include="Framework\Graphics\Renderer\ConstantBufferManager.cpp" />
+    <ClCompile Include="Framework\Graphics\Renderer\DepthStencilState.cpp" />
+    <ClCompile Include="Framework\Graphics\Renderer\Device.cpp" />
+    <ClCompile Include="Framework\Graphics\Renderer\RasterizerStateManager.cpp" />
+    <ClCompile Include="Framework\Graphics\Renderer\Renderer.cpp" />
+    <ClCompile Include="Framework\Graphics\Renderer\RenderTargetManager.cpp" />
+    <ClCompile Include="Framework\Graphics\Renderer\SamplerManager.cpp" />
+    <ClCompile Include="Framework\Graphics\Renderer\SwapChain.cpp" />
+    <ClCompile Include="Framework\Graphics\Renderer\ViewportManager.cpp" />
+    <ClCompile Include="Framework\Graphics\Resources\ShaderManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -154,7 +165,45 @@
     <ClInclude Include="Framework\Core\Application.h" />
     <ClInclude Include="Framework\Core\Timer.h" />
     <ClInclude Include="Framework\Core\Window.h" />
+    <ClInclude Include="Framework\Graphics\Renderer\BlendStateManager.h" />
+    <ClInclude Include="Framework\Graphics\Renderer\ConstantBufferManager.h" />
+    <ClInclude Include="Framework\Graphics\Renderer\DepthStencilState.h" />
+    <ClInclude Include="Framework\Graphics\Renderer\Device.h" />
+    <ClInclude Include="Framework\Graphics\Renderer\RasterizerStateManager.h" />
+    <ClInclude Include="Framework\Graphics\Renderer\Renderer.h" />
+    <ClInclude Include="Framework\Graphics\Renderer\RenderTargetManager.h" />
+    <ClInclude Include="Framework\Graphics\Renderer\SamplerManager.h" />
+    <ClInclude Include="Framework\Graphics\Renderer\SwapChain.h" />
+    <ClInclude Include="Framework\Graphics\Renderer\ViewportManager.h" />
+    <ClInclude Include="Framework\Graphics\Resources\ShaderManager.h" />
+    <ClInclude Include="Framework\Math\MathTransform.h" />
     <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Framework\Graphics\Resources\Shader\Common.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <FxCompile Include="Framework\Graphics\Resources\Shader\PixelShader.hlsl">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Framework\Graphics\Resources\Shader\%(Filename).cso</ObjectFileOutput>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Framework\Graphics\Resources\Shader\%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Framework\Graphics\Resources\Shader\VertexShader.hlsl">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Framework\Graphics\Resources\Shader\%(Filename).cso</ObjectFileOutput>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Framework\Graphics\Resources\Shader\%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Framework\Graphics\Resources\ShaderManager.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
