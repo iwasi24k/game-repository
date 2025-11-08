@@ -9,6 +9,7 @@
 //==============================================================================
 #include "pch.h"
 #include "Timer.h"
+#include "DebugTool.h"
 
 using namespace Framework;
 
@@ -17,6 +18,7 @@ void Timer::Initialize() {
 	QueryPerformanceFrequency(reinterpret_cast<LARGE_INTEGER*>(&frequency));
 	m_SecondsPerCount = 1.0 / static_cast<double>(frequency);
 	Reset();
+	LOG_IF(L"Timer Initialize Completed");
 }
 
 void Timer::Reset() {

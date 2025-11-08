@@ -10,9 +10,12 @@
 //==============================================================================
 #include "pch.h"
 #include <mmsystem.h>
+#include "Application.h"
+
+// --- my library ---
+#include "DebugTool.h"
 
 // --- core ---
-#include "Application.h"
 #include "Window.h"
 #include "Timer.h"
 
@@ -26,27 +29,39 @@ bool Application::Initialize(HINSTANCE hInstance, int nCmdShow) {
     CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
     timeBeginPeriod(1);
 
+	// --- log initialize ---
+    LOG_INITIALIZE;
+    LOG_IF(L"Application Initialize Start");
+
+	// --- timer initialize ---
     Timer::Initialize();
 
 	// --- window initialize ---
     m_Window = std::make_unique<Window>();
     if (!m_Window->Initialize(hInstance, nCmdShow)) {
+        LOG_EFF(L"Window Initialize Failure");
         return false;
     }
     m_hWnd = m_Window->GetHWnd();
+    MSGBOX_INITIALIZE(m_hWnd);
 
     // --- game initialize ---
     if (!Init()) {
+        LOG_EFF(L"Game Initialize Failure");
         return false;
     }
 
+    LOG_IF(L"Application Initialize Completed");
     return true;
 }
 
 void Application::Shutdown() {
+	LOG_IF(L"Application Shutdown..");
     Finalize();
 
     if (m_Window) m_Window->Shutdown();
+
+    LOG_SHUTDOWN;
 
     timeEndPeriod(1);
     CoUninitialize();

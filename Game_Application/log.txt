@@ -1,0 +1,5 @@
+[2025-11-08 16:56:03] [Info] (Application.cpp:34) Application Initialize Start
+[2025-11-08 16:56:03] [Info] (Timer.cpp:21) Timer Initialize Completed
+[2025-11-08 16:56:03] [Info] (Window.cpp:53) Window Initialize Completed
+[2025-11-08 16:56:03] [Info] (Application.cpp:54) Application Initialize Completed
+[2025-11-08 16:56:05] [Info] (Application.cpp:59) Application Shutdown..
