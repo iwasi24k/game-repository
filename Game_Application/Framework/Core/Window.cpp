@@ -10,6 +10,7 @@
 //==============================================================================
 #include "pch.h"
 #include "Window.h"
+#include "DebugTool.h"
 
 using namespace Framework;
 
@@ -49,6 +50,7 @@ bool Window::Initialize(HINSTANCE hInstance, int nCmdShow) {
     ShowWindow(m_hWnd, nCmdShow);
     UpdateWindow(m_hWnd);
 
+    LOG_IF(L"Window Initialize Completed");
     return true;
 }
 
