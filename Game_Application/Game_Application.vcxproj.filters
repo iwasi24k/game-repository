@@ -27,6 +27,9 @@
     <ClCompile Include="Framework\Core\Application.cpp">
       <Filter>Framework\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Core\Timer.cpp">
+      <Filter>Framework\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -36,6 +39,9 @@
       <Filter>Framework\Core</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Core\Application.h">
+      <Filter>Framework\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Core\Timer.h">
       <Filter>Framework\Core</Filter>
     </ClInclude>
   </ItemGroup>

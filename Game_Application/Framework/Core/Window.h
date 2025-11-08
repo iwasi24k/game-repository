@@ -11,7 +11,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include "pch.h"
+#include <Windows.h>
 
 namespace Framework {
 
