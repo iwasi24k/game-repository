@@ -14,7 +14,7 @@
 using namespace Framework;
 
 const wchar_t* CLASS_NAME = L"AppClass";
-const wchar_t* WINDOW_NAME = L"DX11ゲーム";
+const wchar_t* WINDOW_NAME = L"DX11-3Dゲーム";
 
 Window::Window() {}
 Window::~Window() { Shutdown(); }
@@ -89,7 +89,6 @@ LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
         return 0;
 
     case WM_SYSCOMMAND:
-        // Altキーでのシステムメニュー呼び出しを無視
         if ((wParam & 0xFFF0) == SC_KEYMENU)
             return 0;
         break;

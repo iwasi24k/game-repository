@@ -11,7 +11,6 @@
 #define APPLICATION_H
 
 #include <memory>
-#include <cstddef>
 #include "Window.h"
 
 namespace Framework {
