@@ -10,7 +10,6 @@
 // ApplicationåƒÇ—èoÇµ
 //==============================================================================
 #include "pch.h"
-#include <Windows.h>
 #include "Framework/Core/Application.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow) {

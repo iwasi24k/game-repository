@@ -33,6 +33,7 @@ using namespace DirectX;
 //#include "DirectXTex.h"
 
 #pragma comment (lib, "winmm.lib")
+#include <mmsystem.h>
 
 #define SCREEN_WIDTH    (1280)
 #define SCREEN_HEIGHT    (720)

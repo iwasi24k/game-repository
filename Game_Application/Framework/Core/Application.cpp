@@ -9,9 +9,7 @@
 // game loop ÉQÅ[ÉÄ
 //==============================================================================
 #include "pch.h"
-#include <mmsystem.h>
 #include "Application.h"
-#include "Window.h"
 
 using namespace Framework;
 
