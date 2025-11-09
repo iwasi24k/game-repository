@@ -17,6 +17,7 @@
 #define RENDERER_H
 
 #include <memory>
+#include "MathTransform.h"
 
 namespace Framework {
 
@@ -55,10 +56,10 @@ namespace Framework {
 		void SetRasterizerEnable(bool enable);
 		void SetBlendEnable(bool enable);
 		void SetSampler(UINT slot);
-		//void SetMatrix(math::matrix world, math::matrix view, math::matrix projection);
+		void SetMatrix(math::matrix world, math::matrix view, math::matrix projection);
 		//void SetLight(math::vector4f light);
 		//void SetMaterial(math::vector4f diffuse, math::vector4f ambient = {}, math::vector4f specular = {}, float shininess = {}, bool textureEnable = {}, math::vector2f texUv = { 1, 1 });
-		//void SetColor(math::vector4f color);
+		void SetColor(math::vector4f color);
 
 		ID3D11Device* GetDevice() const;
 		ID3D11DeviceContext* GetContext() const;

@@ -28,6 +28,12 @@
     <Filter Include="Framework\Math">
       <UniqueIdentifier>{20e7933b-0f4c-476d-b3c1-10e326040659}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Graphics\Texture">
+      <UniqueIdentifier>{da977940-85c6-4166-bda1-f168a63ea839}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Graphics\Sprite">
+      <UniqueIdentifier>{aaf9840f-be47-482b-8917-e44a965d759d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -77,6 +83,15 @@
     </ClCompile>
     <ClCompile Include="Framework\Graphics\Resources\ShaderManager.cpp">
       <Filter>Framework\Graphics\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Texture\Texture.cpp">
+      <Filter>Framework\Graphics\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Texture\TextureManager.cpp">
+      <Filter>Framework\Graphics\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Sprite\Sprite.cpp">
+      <Filter>Framework\Graphics\Sprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +143,16 @@
     <ClInclude Include="Framework\Math\MathTransform.h">
       <Filter>Framework\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\Graphics\Texture\TextureManager.h">
+      <Filter>Framework\Graphics\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Texture\Texture.h">
+      <Filter>Framework\Graphics\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Framework\Graphics\Sprite\Sprite.h">
+      <Filter>Framework\Graphics\Sprite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Framework\Graphics\Resources\Shader\PixelShader.hlsl">
@@ -136,16 +161,25 @@
     <FxCompile Include="Framework\Graphics\Resources\Shader\VertexShader.hlsl">
       <Filter>Framework\Graphics\Resources\Shader</Filter>
     </FxCompile>
+    <FxCompile Include="Framework\Graphics\Resources\Shader\SpritePS.hlsl">
+      <Filter>Framework\Graphics\Resources\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Graphics\Resources\Shader\SpriteVS.hlsl">
+      <Filter>Framework\Graphics\Resources\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Framework\Graphics\Resources\Shader\Common.hlsl">
+      <Filter>Framework\Graphics\Resources\Shader</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Framework\Graphics\Resources\Shader\Common.hlsl">
-      <Filter>Framework\Graphics\Resources\Shader</Filter>
-    </None>
     <None Include="Framework\Graphics\Resources\ShaderManager.inl">
       <Filter>Framework\Graphics\Resources</Filter>
     </None>
     <None Include="Framework\Graphics\Renderer\ConstantBufferManager.inl">
       <Filter>Framework\Graphics\Renderer</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game_Application.rc" />
   </ItemGroup>
 </Project>

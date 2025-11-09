@@ -87,3 +87,9 @@ struct VSOutput
     float2 Tex : TEXCOORD0;
     float4 Color : COLOR0;
 };
+
+struct VertexOutput_Sprite
+{
+    float4 Position : SV_POSITION;
+    float2 TexCoord : TEXCOORD0;
+};

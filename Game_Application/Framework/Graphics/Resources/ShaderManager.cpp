@@ -101,7 +101,7 @@ void ShaderManager::LoadVS(const std::wstring& name, const std::wstring& vsPath,
     m_InputLayouts[name] = layout;
 }
 
-void Framework::ShaderManager::LoadPS(const std::wstring& name, const std::wstring& psPath) {
+void ShaderManager::LoadPS(const std::wstring& name, const std::wstring& psPath) {
     std::vector<char> psData;
     if (!LoadShaderFile(psPath, psData)) return;
 
