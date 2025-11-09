@@ -31,7 +31,12 @@ namespace Shader {
 		float pad2[2];             // padding 8->16
 	};
 
-	struct SkinnedVertex {
+	struct alignas(16) SpriteVertex {
+		math::vector2f Position;   // 8
+		math::vector2f TexCoord;   // 8
+	};
+
+	struct alignas(16) SkinnedVertex {
 		DirectX::XMFLOAT3 Position;     // 頂点座標
 		DirectX::XMFLOAT3 Normal;       // 法線
 		DirectX::XMFLOAT2 TexCoord;     // テクスチャ座標

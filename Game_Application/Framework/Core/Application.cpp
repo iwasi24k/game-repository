@@ -21,11 +21,14 @@
 // --- graphics ---
 #include "Renderer.h"
 #include "ShaderManager.h"
+#include "Sprite.h"
+#include "TextureManager.h"
 
 using namespace Framework;
 
 Application::Application() {}
 Application::~Application() { Finalize(); }
+Sprite sprite;
 
 
 bool Application::Initialize(HINSTANCE hInstance, int nCmdShow) {
@@ -102,6 +105,19 @@ void Application::Run() {
 
 // --- game loop ---
 bool Application::Init() {
+    ShaderManager::GetInstance().LoadVS(L"SpriteShader", L"cso-file\\SpriteVS.cso", Shader::VertexLayoutType::Sprite);
+    ShaderManager::GetInstance().LoadPS(L"SpriteShader", L"cso-file\\SpritePS.cso");
+
+    auto texture = TextureManager::GetInstance().LoadTexture(L"Asset\\Texture\\nazuna.png");
+
+    // スプライト初期化
+    sprite.Initialize();
+    sprite.SetTexture(texture);
+    sprite.SetTransform({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 }, { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
+    //sprite.SetSize(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	//sprite.SetUV(0.0f, 0.0f, 1.0f, 1.0f);
+    //sprite.SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
+
     return true;
 }
 
@@ -110,9 +126,10 @@ void Application::Update() {
 }
 
 void Application::Draw() {
-
+    ShaderManager::GetInstance().SetShader(L"SpriteShader");
+	sprite.Draw();
 }
 
 void Application::Finalize() {
-    
+	sprite.Finalize();
 }

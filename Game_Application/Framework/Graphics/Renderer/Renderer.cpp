@@ -200,7 +200,6 @@ void Renderer::SetBlendEnable(bool enable) {
 void Renderer::SetSampler(UINT slot) {
 	m_SamplerManager->SetSampler(slot, nullptr, m_Device->GetContext());
 }
-/*
 void Renderer::SetMatrix(math::matrix world, math::matrix view, math::matrix projection) {
     Shader::MatrixBuffer vpData;
 
@@ -211,6 +210,7 @@ void Renderer::SetMatrix(math::matrix world, math::matrix view, math::matrix pro
     m_ConstantBufferManager->Update(m_Device->GetContext(), vpData, 0, Shader::ShaderStage::Vertex);
 }
 
+/*
 void Renderer::SetLight(math::vector4f light) {
     Shader::LightBuffer lpData;
 
@@ -232,12 +232,13 @@ void Renderer::SetMaterial(math::vector4f diffuse, math::vector4f ambient, math:
     m_ConstantBufferManager->Update(m_Device->GetContext(), mb, 2, Shader::ShaderStage::Pixel);
 }
 
+}*/
 void Renderer::SetColor(math::vector4f color) {
     Shader::ColorBuffer cb{};
     cb.Color = color;
 
     m_ConstantBufferManager->Update(m_Device->GetContext(), cb, 3, Shader::ShaderStage::Pixel);
-}*/
+}
 
 ID3D11Device* Renderer::GetDevice() const {
     return m_Device->GetDevice();
