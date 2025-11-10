@@ -1,5 +1,5 @@
 //==============================================================================
-// File        : ShaderManager.inl
+// File        : ShaderManager.h
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-08-20
@@ -13,8 +13,11 @@
 // 頂点フォーマット (Vertex / SkinnedVertex) から、描画パラメータ (LightBuffer 等) まで、
 // シェーダー通信を統一的に扱うための基礎モジュールとなっています。
 //==============================================================================
-#ifndef SHADER_MANAGER_INL
-#define SHADER_MANAGER_INL
+#ifndef SHADER_TYPES_H
+#define SHADER_TYPES_H
+
+#include <d3d11.h>
+#include "MathTransform.h"
 
 namespace Shader {
 
@@ -105,4 +108,4 @@ namespace Shader {
 }
 
 
-#endif // SHADER_MANAGER_INL
+#endif // SHADER_TYPES_H

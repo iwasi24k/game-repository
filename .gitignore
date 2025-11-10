@@ -26,3 +26,5 @@ obj/
 
 # Compiled shader binaries
 *.cso
+
+Assimp/

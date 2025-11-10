@@ -26,8 +26,8 @@ namespace Framework {
     private:
         std::shared_ptr<Texture> m_Texture;
 
-        float m_Width = 100.0f;
-        float m_Height = 100.0f;
+        float m_Width = 1.0f;
+        float m_Height = 1.0f;
         UVRect m_UV{ 0.0f, 0.0f, 1.0f, 1.0f };
 
 		math::matrix m_TransformMatrix;

@@ -57,8 +57,8 @@ namespace Framework {
 		void SetBlendEnable(bool enable);
 		void SetSampler(UINT slot);
 		void SetMatrix(math::matrix world, math::matrix view, math::matrix projection);
-		//void SetLight(math::vector4f light);
-		//void SetMaterial(math::vector4f diffuse, math::vector4f ambient = {}, math::vector4f specular = {}, float shininess = {}, bool textureEnable = {}, math::vector2f texUv = { 1, 1 });
+		void SetLight(math::vector4f direction, math::vector4f diffuse, math::vector4f ambient, math::vector4f position, math::vector4f pointLightParam);
+		void SetMaterial(math::vector4f ambient, math::vector4f diffuse, math::vector4f specular, math::vector4f texUv, float shininess, bool textureEnable);
 		void SetColor(math::vector4f color);
 
 		ID3D11Device* GetDevice() const;
