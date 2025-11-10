@@ -114,6 +114,7 @@ bool Application::Init() {
     sprite.Initialize();
     sprite.SetTexture(texture);
     sprite.SetTransform({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 }, { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
+    //sprite.SetSize( SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 );
     //sprite.SetSize(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	//sprite.SetUV(0.0f, 0.0f, 1.0f, 1.0f);
     //sprite.SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });

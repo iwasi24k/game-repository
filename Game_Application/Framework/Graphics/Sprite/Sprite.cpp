@@ -38,11 +38,12 @@ bool Sprite::Initialize() {
 	ibData.pSysMem = indices;
 	device->CreateBuffer(&ibDesc, &ibData, m_IndexBuffer.GetAddressOf());
 
-	m_Width = 100.0f;
-	m_Height = 100.0f;
+	m_Width = 1.0f;
+	m_Height = 1.0f;
 	m_UV = { 0.0f, 0.0f, 1.0f, 1.0f };
 	m_TransformMatrix = math::matrix::Identity();
 	m_Color = { 1.0f,1.0f,1.0f,1.0f };
+	UpdateVertexBuffer();
 
 	return true;
 }
