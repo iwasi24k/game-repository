@@ -34,6 +34,9 @@
     <Filter Include="Framework\Graphics\Sprite">
       <UniqueIdentifier>{aaf9840f-be47-482b-8917-e44a965d759d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Graphics\Model">
+      <UniqueIdentifier>{eaf8bac5-3520-4813-8e55-57c38e569337}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -93,6 +96,8 @@
     <ClCompile Include="Framework\Graphics\Sprite\Sprite.cpp">
       <Filter>Framework\Graphics\Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Graphics\Model\Mesh.cpp" />
+    <ClCompile Include="Framework\Graphics\Model\Model.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -153,6 +158,18 @@
     <ClInclude Include="Framework\Graphics\Sprite\Sprite.h">
       <Filter>Framework\Graphics\Sprite</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\Graphics\Model\Model.h">
+      <Filter>Framework\Graphics\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Model\Mesh.h">
+      <Filter>Framework\Graphics\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Model\Material.h">
+      <Filter>Framework\Graphics\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Resources\ShaderTypes.h">
+      <Filter>Framework\Graphics\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Framework\Graphics\Resources\Shader\PixelShader.hlsl">
@@ -172,9 +189,6 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Framework\Graphics\Resources\ShaderManager.inl">
-      <Filter>Framework\Graphics\Resources</Filter>
-    </None>
     <None Include="Framework\Graphics\Renderer\ConstantBufferManager.inl">
       <Filter>Framework\Graphics\Renderer</Filter>
     </None>

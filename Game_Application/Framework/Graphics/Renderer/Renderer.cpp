@@ -200,6 +200,7 @@ void Renderer::SetBlendEnable(bool enable) {
 void Renderer::SetSampler(UINT slot) {
 	m_SamplerManager->SetSampler(slot, nullptr, m_Device->GetContext());
 }
+
 void Renderer::SetMatrix(math::matrix world, math::matrix view, math::matrix projection) {
     Shader::MatrixBuffer vpData;
 
@@ -210,29 +211,31 @@ void Renderer::SetMatrix(math::matrix world, math::matrix view, math::matrix pro
     m_ConstantBufferManager->Update(m_Device->GetContext(), vpData, 0, Shader::ShaderStage::Vertex);
 }
 
-/*
-void Renderer::SetLight(math::vector4f light) {
+void Renderer::SetLight(math::vector4f direction, math::vector4f diffuse, math::vector4f ambient, math::vector4f position, math::vector4f pointLightParam) {
     Shader::LightBuffer lpData;
 
-    lpData.LightDirection = light;
+    lpData.Direction = direction;
+    lpData.Diffuse = diffuse;
+    lpData.Ambient = ambient;
+    lpData.Position = position;
+    lpData.PointLightParam = pointLightParam;   
 
     m_ConstantBufferManager->Update(m_Device->GetContext(), lpData, 1, Shader::ShaderStage::Pixel);
 
 }
 
-void Renderer::SetMaterial(math::vector4f diffuse, math::vector4f ambient, math::vector4f specular, float shininess, bool textureEnable, math::vector2f texUv) {
+void Renderer::SetMaterial(math::vector4f ambient, math::vector4f diffuse, math::vector4f specular, math::vector4f emission, float shininess, bool textureEnable) {
     Shader::MaterialBuffer mb{};
-    mb.Diffuse = diffuse;
     mb.Ambient = ambient;
+    mb.Diffuse = diffuse;
     mb.Specular = specular;
+    mb.Emission = emission;
     mb.Shininess = shininess;
     mb.TextureEnable = textureEnable;
-    mb.TextureUv = texUv;
 
     m_ConstantBufferManager->Update(m_Device->GetContext(), mb, 2, Shader::ShaderStage::Pixel);
 }
 
-}*/
 void Renderer::SetColor(math::vector4f color) {
     Shader::ColorBuffer cb{};
     cb.Color = color;

@@ -20,10 +20,9 @@
 #include <string>
 #include <unordered_map>
 #include "MathTransform.h"
+#include "ShaderTypes.h"
 
 namespace Framework {
-
-#include "ShaderManager.inl"
 
     class ShaderManager {
     private:
