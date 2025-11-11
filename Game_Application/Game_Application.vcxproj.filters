@@ -96,8 +96,12 @@
     <ClCompile Include="Framework\Graphics\Sprite\Sprite.cpp">
       <Filter>Framework\Graphics\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\Graphics\Model\Mesh.cpp" />
-    <ClCompile Include="Framework\Graphics\Model\Model.cpp" />
+    <ClCompile Include="Framework\Graphics\Model\Mesh.cpp">
+      <Filter>Framework\Graphics\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Model\Model.cpp">
+      <Filter>Framework\Graphics\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
