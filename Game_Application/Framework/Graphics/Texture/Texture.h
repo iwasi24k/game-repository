@@ -24,6 +24,7 @@ namespace Framework {
 	class Texture {
 	private:
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_ShaderResourceView;
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> m_Texture;
 
 	public:
 		Texture();
@@ -36,6 +37,8 @@ namespace Framework {
 
 		void SetSRV(ID3D11ShaderResourceView* srv);
 		ID3D11ShaderResourceView* GetSRV() const; 
+
+		bool InitializeFromMemory(unsigned char* pixelData, int width, int height);
 	};
 }
 

@@ -10,6 +10,11 @@
 #include "pch.h"
 #include "TextureManager.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
+#include "DebugTool.h"
+
 using namespace Framework;
 
 TextureManager::TextureManager(){}
@@ -17,10 +22,14 @@ TextureManager::~TextureManager(){}
 
 bool TextureManager::Initialize() {
     m_Textures.clear();
+
+    LOG_IF(L"TextureManager Initialize Completed");
     return true;
 }
 
 void TextureManager::Finalize() {
+    LOG_IF(L"TextureManager Finalize..");
+
     m_Textures.clear();
 }
 
@@ -36,6 +45,22 @@ std::shared_ptr<Texture> TextureManager::LoadTexture(const std::wstring& filePat
         return nullptr;
 
     m_Textures[filePath] = texture;
+    return texture;
+}
+
+std::shared_ptr<Texture> TextureManager::LoadFromMemory(unsigned char* data, size_t size) {
+    int width = 0, height = 0, channels = 0;
+    unsigned char* pixels = stbi_load_from_memory(data, static_cast<int>(size), &width, &height, &channels, 4);
+
+    if (!pixels) return nullptr;
+
+    auto texture = std::make_shared<Texture>();
+    if (!texture->InitializeFromMemory(pixels, width, height)) {
+        stbi_image_free(pixels);
+        return nullptr;
+    }
+
+    stbi_image_free(pixels);
     return texture;
 }
 

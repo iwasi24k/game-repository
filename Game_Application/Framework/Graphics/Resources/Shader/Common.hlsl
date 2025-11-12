@@ -80,16 +80,27 @@ struct VertexInput_Skinned
 // -------------------------------
 // 頂点シェーダ出力／ピクセル入力
 // -------------------------------
-struct VSOutput
+struct VSPS_Default
 {
-    float4 PosH : SV_POSITION;
+    float4 Position : SV_POSITION;
+    float4 WorldPosition : POSITION0;
     float3 Normal : NORMAL;
-    float2 Tex : TEXCOORD0;
     float4 Color : COLOR0;
+    float2 TexCoord : TEXCOORD0;
 };
 
-struct VertexOutput_Sprite
+struct VSPS_Sprite
 {
     float4 Position : SV_POSITION;
     float2 TexCoord : TEXCOORD0;
+};
+
+struct VSPS_Skinned
+{
+    float4 Position : SV_POSITION;
+    float4 WorldPosition : POSITION0;
+    float3 Normal : NORMAL;
+    float2 TexCoord : TEXCOORD;
+    uint4 BoneIndices : BLENDINDICES;
+    float4 BoneWeights : BLENDWEIGHT;
 };
