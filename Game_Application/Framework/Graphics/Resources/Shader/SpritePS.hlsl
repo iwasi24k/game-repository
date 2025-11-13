@@ -10,10 +10,11 @@
 //==============================================================================
 #include "Common.hlsl"
 
-Texture2D diffuseTex : register(t0);
-SamplerState samp : register(s0);
+Texture2D g_Texture : register(t0);
+SamplerState g_Sampler : register(s0);
 
 float4 main(VSPS_Sprite input) : SV_TARGET
 {
-    return diffuseTex.Sample(samp, input.TexCoord);
+    float4 finalColor = g_Texture.Sample(g_Sampler, input.TexCoord) * Color;
+    return finalColor;
 }

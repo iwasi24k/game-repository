@@ -25,6 +25,10 @@
 #include "SpriteManager.h"
 #include "ModelManager.h"
 
+// --- input ---
+#include "InputKeyboard.h"
+#include "InputMouse.h"
+
 using namespace Framework;
 
 Application::Application() {}
@@ -52,6 +56,9 @@ bool Application::Initialize(HINSTANCE hInstance, int nCmdShow) {
     }
     m_hWnd = m_Window->GetHWnd();
     MSGBOX_INITIALIZE(m_hWnd);
+
+    InputMouse::Initialize(m_hWnd);
+    InputKeyboard::Initialize(m_hWnd);
 
 	// --- renderer initialize ---
     if (!Renderer::GetInstance().Initialize(m_hWnd)) {
@@ -97,6 +104,9 @@ void Application::Run() {
     while (m_Window->ProcessMessage()) {
 		Timer::Update();
 
+        InputMouse::Update();
+        InputKeyboard::Update();
+        InputMouse::LockCursorCenter();
         Update();
 
 		Renderer::GetInstance().BeginFrame();
@@ -130,12 +140,17 @@ bool Application::Init() {
 }
 
 void Application::Update() {
-
+    if (InputMouse::IsMouseClicked(MB::Left))
+		sprite.lock()->SetColor({ 1.0f, 0.0f, 0.0f, 1.0f });
+		//sprite.lock()->SetTransform({ SCREEN_WIDTH, SCREEN_HEIGHT }, { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
+	if (InputKeyboard::IsKeyTriggered(KB::R))
+		model.lock()->SetTransform({1.0f, 1.0f, 1.0f}, { 1.0f, 1.0f, 1.0f }, { 1.0f, 1.0f, 1.0f });
 }
 
 void Application::Draw() {
     ShaderManager::GetInstance().SetShader(L"SpriteShader");
 	Renderer::GetInstance().SetDepthEnable(false);
+
 	sprite.lock()->Draw();
 
     ShaderManager::GetInstance().SetShader(L"ModelShader");

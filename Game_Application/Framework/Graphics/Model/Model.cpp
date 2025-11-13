@@ -36,10 +36,13 @@ bool Model::Initialize(const std::wstring& filePath) {
     LoadMeshesFromScene(scene);
 
     m_TransformMatrix = math::matrix::Identity();
+
+    LOG_IF(L"Model Initialize Completed");
     return true;
 }
 
 void Model::Finalize() {
+    LOG_IF(L"Model Finalize..");
     m_Meshes.clear();
 }
 
