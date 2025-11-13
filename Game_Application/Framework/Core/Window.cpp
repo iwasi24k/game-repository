@@ -3,12 +3,17 @@
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-11-06
-// Last Update : 2025-11-08
+// Last Update : 2025-11-13
 //------------------------------------------------------------------------------
 // 
 //==============================================================================
 #include "pch.h"
 #include "Window.h"
+
+// --- Input ---
+#include "InputMouse.h"
+
+// --- DebugTool ---
 #include "DebugTool.h"
 
 using namespace Framework;
@@ -86,6 +91,8 @@ LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
 
     case WM_KEYDOWN:
         if (wParam == VK_ESCAPE) {
+            InputMouse::EnableCursorLock(false);
+            InputMouse::DisplayMouse(true);
             DestroyWindow(hWnd);
         }
 
@@ -95,6 +102,34 @@ LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
         if ((wParam & 0xFFF0) == SC_KEYMENU)
             return 0;
         break;
+
+    case WM_LBUTTONDOWN:
+        InputMouse::OnMouseDown(0);
+        return 0;
+
+    case WM_LBUTTONUP:
+        InputMouse::OnMouseUp(0);
+        return 0;
+
+    case WM_RBUTTONDOWN:
+        InputMouse::OnMouseDown(1);
+        return 0;
+
+    case WM_RBUTTONUP:
+        InputMouse::OnMouseUp(1);
+        return 0;
+
+    case WM_MBUTTONDOWN:
+        InputMouse::OnMouseDown(2);
+        return 0;
+
+    case WM_MBUTTONUP:
+        InputMouse::OnMouseUp(2);
+        return 0;
+
+    case WM_MOUSEWHEEL:
+        InputMouse::OnWheel(GET_WHEEL_DELTA_WPARAM(wParam));
+        return 0;
     }
 
     return DefWindowProc(hWnd, msg, wParam, lParam);

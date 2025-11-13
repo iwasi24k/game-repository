@@ -37,6 +37,9 @@
     <Filter Include="Framework\Graphics\Model">
       <UniqueIdentifier>{eaf8bac5-3520-4813-8e55-57c38e569337}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Input">
+      <UniqueIdentifier>{2aa237a1-2614-4f59-8f0e-30b40500f0aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -107,6 +110,12 @@
     </ClCompile>
     <ClCompile Include="Framework\Graphics\Model\ModelManager.cpp">
       <Filter>Framework\Graphics\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\InputMouse.cpp">
+      <Filter>Framework\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\InputKeyboard.cpp">
+      <Filter>Framework\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +195,12 @@
     <ClInclude Include="Framework\Graphics\Sprite\SpriteManager.h">
       <Filter>Framework\Graphics\Sprite</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\Input\InputKeyboard.h">
+      <Filter>Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\InputMouse.h">
+      <Filter>Framework\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Framework\Graphics\Resources\Shader\PixelShader.hlsl">
@@ -207,6 +222,9 @@
   <ItemGroup>
     <None Include="Framework\Graphics\Renderer\ConstantBufferManager.inl">
       <Filter>Framework\Graphics\Renderer</Filter>
+    </None>
+    <None Include="Framework\Input\InputKeyboard.inl">
+      <Filter>Framework\Input</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

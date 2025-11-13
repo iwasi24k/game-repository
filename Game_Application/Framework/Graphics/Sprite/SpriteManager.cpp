@@ -14,8 +14,14 @@
 
 using namespace Framework;
 
-void SpriteManager::Initialize() { m_Sprites.clear(); }
-void SpriteManager::Finalize() { m_Sprites.clear(); }
+void SpriteManager::Initialize() { 
+    LOG_IF(L"SpriteManager Initialize Completed");
+    m_Sprites.clear(); 
+}
+void SpriteManager::Finalize() { 
+    LOG_IF(L"SpriteManager Finalize..");
+    m_Sprites.clear();
+}
 
 std::shared_ptr<Sprite> SpriteManager::LoadSprite(const std::wstring& texturePath) {
     // Šù‚Éƒ[ƒhÏ‚İ‚È‚ç‚»‚ê‚ğ•Ô‚·

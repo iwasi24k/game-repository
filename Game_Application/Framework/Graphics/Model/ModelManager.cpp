@@ -9,11 +9,18 @@
 //==============================================================================
 #include "pch.h"
 #include "ModelManager.h"
+#include "DebugTool.h"
 
 using namespace Framework;
 
-void ModelManager::Initialize() { m_Models.clear(); }
-void ModelManager::Finalize() { m_Models.clear(); }
+void ModelManager::Initialize() { 
+    m_Models.clear();
+    LOG_IF(L"ModelManager Initialize Completed");
+}
+void ModelManager::Finalize() { 
+    LOG_IF(L"ModelManager Finalize..");
+    m_Models.clear(); 
+}
 
 std::shared_ptr<Model> ModelManager::LoadModel(const std::wstring& path) {
     // ä˘Ç…ì«Ç›çûÇ›çœÇ›Ç»ÇÁÇªÇÍÇï‘Ç∑

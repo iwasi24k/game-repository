@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include;$(ProjectDir)Framework\Math;$(ProjectDir)Framework\Graphics\Resources;$(ProjectDir)Framework\Graphics\Renderer;$(ProjectDir)ExternalLibrary\DirectXTex\Include;$(ProjectDir)Framework\Graphics\Sprite;$(ProjectDir)Framework\Graphics\Texture;$(ProjectDir)Framework\Graphics\Resources\Shader;$(ProjectDir)ExternalLibrary;$(ProjectDir)Framework\Graphics\Model</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include;$(ProjectDir)Framework\Math;$(ProjectDir)Framework\Graphics\Resources;$(ProjectDir)Framework\Graphics\Renderer;$(ProjectDir)ExternalLibrary\DirectXTex\Include;$(ProjectDir)Framework\Graphics\Sprite;$(ProjectDir)Framework\Graphics\Texture;$(ProjectDir)Framework\Graphics\Resources\Shader;$(ProjectDir)ExternalLibrary;$(ProjectDir)Framework\Graphics\Model;$(ProjectDir)Framework\Input</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -128,7 +128,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include;$(ProjectDir)Framework\Math;$(ProjectDir)Framework\Graphics\Resources;$(ProjectDir)Framework\Graphics\Renderer;$(ProjectDir)ExternalLibrary\DirectXTex\Include;$(ProjectDir)Framework\Graphics\Sprite;$(ProjectDir)Framework\Graphics\Texture;$(ProjectDir)Framework\Graphics\Resources\Shader;$(ProjectDir)ExternalLibrary;$(ProjectDir)Framework\Graphics\Model</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include;$(ProjectDir)Framework\Math;$(ProjectDir)Framework\Graphics\Resources;$(ProjectDir)Framework\Graphics\Renderer;$(ProjectDir)ExternalLibrary\DirectXTex\Include;$(ProjectDir)Framework\Graphics\Sprite;$(ProjectDir)Framework\Graphics\Texture;$(ProjectDir)Framework\Graphics\Resources\Shader;$(ProjectDir)ExternalLibrary;$(ProjectDir)Framework\Graphics\Model;$(ProjectDir)Framework\Input</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -168,6 +168,8 @@
     <ClCompile Include="Framework\Graphics\Sprite\SpriteManager.cpp" />
     <ClCompile Include="Framework\Graphics\Texture\Texture.cpp" />
     <ClCompile Include="Framework\Graphics\Texture\TextureManager.cpp" />
+    <ClCompile Include="Framework\Input\InputKeyboard.cpp" />
+    <ClCompile Include="Framework\Input\InputMouse.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -198,6 +200,8 @@
     <ClInclude Include="Framework\Graphics\Sprite\SpriteManager.h" />
     <ClInclude Include="Framework\Graphics\Texture\Texture.h" />
     <ClInclude Include="Framework\Graphics\Texture\TextureManager.h" />
+    <ClInclude Include="Framework\Input\InputKeyboard.h" />
+    <ClInclude Include="Framework\Input\InputMouse.h" />
     <ClInclude Include="Framework\Math\MathTransform.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
@@ -243,6 +247,7 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+    <None Include="Framework\Input\InputKeyboard.inl" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game_Application.rc" />
