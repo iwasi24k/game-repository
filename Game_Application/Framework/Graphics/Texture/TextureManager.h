@@ -42,6 +42,8 @@ namespace Framework {
         void Finalize();
 
         std::shared_ptr<Texture> LoadTexture(const std::wstring& filePath);
+        std::shared_ptr<Texture> LoadFromMemory(unsigned char* data, size_t size);
+
         std::shared_ptr<Texture> GetTexture(const std::wstring& filePath) const;
     };
 

@@ -21,15 +21,17 @@
 // --- graphics ---
 #include "Renderer.h"
 #include "ShaderManager.h"
-#include "Sprite.h"
 #include "TextureManager.h"
+#include "Sprite.h"
+#include "Model.h"
 
 using namespace Framework;
 
 Application::Application() {}
 Application::~Application() { Finalize(); }
-Sprite sprite;
 
+Sprite sprite;
+Model model;
 
 bool Application::Initialize(HINSTANCE hInstance, int nCmdShow) {
     CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
@@ -119,6 +121,15 @@ bool Application::Init() {
 	//sprite.SetUV(0.0f, 0.0f, 1.0f, 1.0f);
     //sprite.SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
 
+    ShaderManager::GetInstance().LoadVS(L"ModelShader", L"cso-file\\VertexShader.cso");
+    ShaderManager::GetInstance().LoadPS(L"ModelShader", L"cso-file\\PixelShader.cso");
+
+	model.Initialize(L"Asset/Model/slime.fbx");
+    //math::matrix transform = math::matrix::Identity();
+    //transform = transform * math::matrix::Translation({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.5f }); // âÊñ íÜêS
+    //model.SetTransform(transform);
+    model.SetTransform({ 1.0f, 1.0f, 0.0f }, { 2.0f, 1.0f, 1.0f }, { 1.0f, 1.0f, 0.0f });
+    
     return true;
 }
 
@@ -128,9 +139,33 @@ void Application::Update() {
 
 void Application::Draw() {
     ShaderManager::GetInstance().SetShader(L"SpriteShader");
-	sprite.Draw();
+	Renderer::GetInstance().SetDepthEnable(false);
+	//sprite.Draw();
+
+    ShaderManager::GetInstance().SetShader(L"ModelShader");
+	Renderer::GetInstance().SetDepthEnable(true);
+    math::matrix view = math::matrix::LookAtLH(
+        { 0.0f, 0.0f, -5.0f }, // eye
+        { 0.0f, 0.0f, 0.0f },  // at
+        { 0.0f, 1.0f, 0.0f }   // up
+    );
+    math::matrix proj = math::matrix::PerspectiveFovLH(
+        DirectX::XMConvertToRadians(60.0f),
+        static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT),
+        0.1f, 100.0f
+    );
+    Renderer::GetInstance().SetLight(
+        { -0.5f, -1.0f, -0.5f, 0.0f }, // direction
+        { 1.0f, 1.0f, 1.0f, 1.0f },    // diffuse
+        { 0.2f, 0.2f, 0.2f, 1.0f },    // ambient
+        { 0.0f, 0.0f, -5.0f, 1.0f },   // position
+        { 1.0f, 0.1f, 0.0f, 0.0f }     // pointLightParam (range, attenuation, unused, unused)
+	);
+	Renderer::GetInstance().SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
+	model.Draw(view, proj);
 }
 
 void Application::Finalize() {
+    model.Finalize();
 	sprite.Finalize();
 }

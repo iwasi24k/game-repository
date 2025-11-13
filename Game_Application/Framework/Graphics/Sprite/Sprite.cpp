@@ -11,6 +11,7 @@
 #include "Sprite.h"
 #include "Renderer.h"
 #include "ShaderManager.h"
+#include "DebugTool.h"
 
 using namespace Framework;
 
@@ -45,10 +46,13 @@ bool Sprite::Initialize() {
 	m_Color = { 1.0f,1.0f,1.0f,1.0f };
 	UpdateVertexBuffer();
 
+	LOG_IF(L"Sprite Initialize Completed");
 	return true;
 }
 
 void Sprite::Finalize() {
+	LOG_IF(L"Sprite Finalize..");
+
 	m_Texture.reset();
 	m_VertexBuffer.Reset();
 	m_IndexBuffer.Reset();

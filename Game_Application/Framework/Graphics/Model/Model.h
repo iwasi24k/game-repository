@@ -10,42 +10,43 @@
 #ifndef MODEL_H
 #define MODEL_H
 
+#include "Renderer.h"
+#include <vector>
 #include <Assimp/Include/scene.h>
 
-#include <vector>
-#include <memory>
-#include <string>
-
-#include "Mesh.h"
-#include "Material.h"
+#include "ShaderTypes.h"
 #include "TextureManager.h"
-/*
+#include "Mesh.h"
+
 namespace Framework {
 
     class Model {
-    private:
-        std::vector<std::shared_ptr<Mesh>> m_Meshes;
-        std::shared_ptr<TextureManager> m_TexManager;
-
-        math::transform<math::vector3f> m_Transform;
-
     public:
-        Model() = default;
-        ~Model() = default;
+        Model();
+        ~Model();
 
-        bool Initialize(const std::wstring& filePath);
+        bool Initialize(const std::wstring& path);
         void Finalize();
 
-        void SetTransform(const math::vector3f& position,
-            const math::vector3f& scale,
-            const math::vector3f& rotation);
+        void SetTransform(const math::vector3f& position, const math::vector3f& scale, const math::vector3f& rotation);
+        void SetAlpha(float alpha) { m_Alpha = alpha; }
 
-        void Draw(const math::matrix& view, const math::matrix& projection);
+        void Draw(const math::matrix& view, const math::matrix& proj);
 
     private:
+        std::vector<Mesh> m_Meshes;
+        math::transform<math::vector3f> m_Transform;
+        math::matrix m_TransformMatrix = math::matrix::Identity();
+        float m_Alpha = 1.0f;
+
         void LoadMeshesFromScene(const aiScene* scene);
-        std::shared_ptr<Material> LoadMaterialFromAi(const aiMaterial* material, const aiScene* scene);
+        void LoadMaterial(const aiMaterial* material, const aiScene* scene, Mesh& mesh);
+
+        void CreateVertexBuffer(ID3D11Device* device, const std::vector<Shader::Vertex>& vertices, Microsoft::WRL::ComPtr<ID3D11Buffer>& buffer);
+        void CreateIndexBuffer(ID3D11Device* device, const std::vector<UINT>& indices, Microsoft::WRL::ComPtr<ID3D11Buffer>& buffer);
     };
-}*/
+
+} // namespace Framework
+
 
 #endif // MODEL_H

@@ -20,12 +20,15 @@ namespace Framework {
     class Texture; // 既存の Texture クラス
 
     struct Material {
-        math::vector4f Diffuse{ 1,1,1,1 };
-        math::vector4f Ambient{ 0.1f,0.1f,0.1f,1 };
-        math::vector4f Specular{ 0.0f,0.0f,0.0f,1 };
-        float Shininess = 1.0f;
+        math::vector4f Ambient = { 1,1,1,1 };
+        math::vector4f Diffuse = { 1,1,1,1 };
+        math::vector4f Specular = { 0,0,0,1 };
+        math::vector4f Emission = { 0,0,0,1 };
+        float Shininess = 0.0f;
+        std::shared_ptr<Texture> Texture = nullptr;
 
-        std::shared_ptr<Texture> TexturePtr; // テクスチャ参照（null可）
+        // デフォルトコンストラクタで初期化済み
+        Material() = default;
     };
 }
 

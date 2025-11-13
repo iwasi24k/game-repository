@@ -10,9 +10,9 @@
 //==============================================================================
 #include "Common.hlsl"
 
-VertexOutput_Sprite main(VertexInput_Sprite input)
+VSPS_Sprite main(VertexInput_Sprite input)
 {
-    VertexOutput_Sprite output;
+    VSPS_Sprite output;
     matrix WorldViewProjection = mul(mul(World, View), Projection);
     
     // Position をワールドビュー投影に変換

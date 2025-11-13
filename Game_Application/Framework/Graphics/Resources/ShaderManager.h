@@ -47,7 +47,7 @@ namespace Framework {
         bool Initialize(ID3D11Device* device, ID3D11DeviceContext* context);
         void Finalize();
 
-        void LoadVS(const std::wstring& name, const std::wstring& vsPath, Shader::VertexLayoutType layoutType);
+        void LoadVS(const std::wstring& name, const std::wstring& vsPath, Shader::VertexLayoutType layoutType = Shader::VertexLayoutType::Default);
         void LoadPS(const std::wstring& name, const std::wstring& psPath);
         bool LoadShaderFile(const std::wstring& path, std::vector<char>& outShaderData);
 

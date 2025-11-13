@@ -91,7 +91,7 @@ namespace Shader {
 		math::vector4f Emission;
 		float Shininess;
 		int TextureEnable;
-		float pad;           // 16バイト境界に調整
+		float pad[2];           // 16バイト境界に調整
 	};
 
 	struct alignas(16) ColorBuffer {
