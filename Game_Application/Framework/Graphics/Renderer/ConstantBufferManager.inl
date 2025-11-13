@@ -10,8 +10,6 @@
 #ifndef CONSTANT_BUFFER_MANAGER_INL
 #define CONSTANT_BUFFER_MANAGER_INL
 
-using namespace Framework;
-
 template<typename T>
 inline void ConstantBufferManager::Update(ID3D11DeviceContext* context, const T& data, UINT slot, Shader::ShaderStage stage) {
 

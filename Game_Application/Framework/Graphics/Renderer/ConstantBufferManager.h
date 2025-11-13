@@ -38,7 +38,7 @@ namespace Framework {
         template<typename T>
         void Update(ID3D11DeviceContext* context, const T& data, UINT slot, Shader::ShaderStage stage);       
     };
-}
 #include "ConstantBufferManager.inl"
+}
 
 #endif // CONSTANT_BUFFER_MANAGER_H
