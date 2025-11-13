@@ -16,12 +16,23 @@ namespace Framework {
 
     class InputKeyboard {
     private:
-        static inline HWND m_hWnd = nullptr;
+        HWND m_hWnd = nullptr;
 
-        static inline BYTE m_CurrentKey[256] = {};
-        static inline BYTE m_PreviousKey[256] = {};
+        BYTE m_CurrentKey[256] = {};
+        BYTE m_PreviousKey[256] = {};
+
+		InputKeyboard() = default;
+		~InputKeyboard() = default;
+
+        InputKeyboard(const InputKeyboard&) = delete;
+        InputKeyboard& operator=(const InputKeyboard&) = delete;
 
     public:
+        static InputKeyboard& GetInstance() {
+            static InputKeyboard instance;
+            return instance;
+        }
+
 #include "InputKeyboard.inl"
 
         //==============================================================================
@@ -38,7 +49,7 @@ namespace Framework {
         // 用途例：移動処理（WASD）、押しっぱなしアクション、連続操作の判定など
         //
         //==============================================================================
-        static bool IsKeyDown(Key key);
+        bool IsKeyDown(Key key);
 
         //==============================================================================
         // 
@@ -54,7 +65,7 @@ namespace Framework {
         // 用途例：ジャンプ・決定・モード切替などの1回反応が必要な操作
         //
         //==============================================================================
-        static bool IsKeyTriggered(Key key);
+        bool IsKeyTriggered(Key key);
 
         //==============================================================================
         // 
@@ -70,13 +81,13 @@ namespace Framework {
         // 用途例：押し離しでの入力受理、チャージ解除、ステップ実行のタイミング取得など
         //
         //==============================================================================
-        static bool IsKeyReleased(Key key);
+        bool IsKeyReleased(Key key);
 
 
 
     private:
-        static void Initialize(HWND hwnd);
-        static void Update();
+        void Initialize(HWND hwnd);
+        void Update();
 
         friend class Application;
 

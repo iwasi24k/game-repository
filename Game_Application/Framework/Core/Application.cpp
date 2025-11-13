@@ -57,8 +57,8 @@ bool Application::Initialize(HINSTANCE hInstance, int nCmdShow) {
     m_hWnd = m_Window->GetHWnd();
     MSGBOX_INITIALIZE(m_hWnd);
 
-    InputMouse::Initialize(m_hWnd);
-    InputKeyboard::Initialize(m_hWnd);
+    InputMouse::GetInstance().Initialize(m_hWnd);
+    InputKeyboard::GetInstance().Initialize(m_hWnd);
 
 	// --- renderer initialize ---
     if (!Renderer::GetInstance().Initialize(m_hWnd)) {
@@ -104,9 +104,9 @@ void Application::Run() {
     while (m_Window->ProcessMessage()) {
 		Timer::Update();
 
-        InputMouse::Update();
-        InputKeyboard::Update();
-        InputMouse::LockCursorCenter();
+        InputMouse::GetInstance().Update();
+        InputKeyboard::GetInstance().Update();
+        InputMouse::GetInstance().LockCursorCenter();
         Update();
 
 		Renderer::GetInstance().BeginFrame();
@@ -140,10 +140,10 @@ bool Application::Init() {
 }
 
 void Application::Update() {
-    if (InputMouse::IsMouseClicked(MB::Left))
+    if (InputMouse::GetInstance().IsMouseClicked(MB::Left))
 		sprite.lock()->SetColor({ 1.0f, 0.0f, 0.0f, 1.0f });
 		//sprite.lock()->SetTransform({ SCREEN_WIDTH, SCREEN_HEIGHT }, { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
-	if (InputKeyboard::IsKeyTriggered(KB::R))
+	if (InputKeyboard::GetInstance().IsKeyTriggered(KB::R))
 		model.lock()->SetTransform({1.0f, 1.0f, 1.0f}, { 1.0f, 1.0f, 1.0f }, { 1.0f, 1.0f, 1.0f });
 }
 
