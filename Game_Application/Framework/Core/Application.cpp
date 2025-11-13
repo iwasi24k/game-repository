@@ -110,8 +110,6 @@ bool Application::Init() {
     ShaderManager::GetInstance().LoadVS(L"SpriteShader", L"cso-file\\SpriteVS.cso", Shader::VertexLayoutType::Sprite);
     ShaderManager::GetInstance().LoadPS(L"SpriteShader", L"cso-file\\SpritePS.cso");
 
-    auto texture = TextureManager::GetInstance().LoadTexture(L"Asset\\Texture\\nazuna.png");
-
     // スプライト初期化
     SpriteManager::GetInstance().Initialize();
 	sprite = SpriteManager::GetInstance().LoadSprite(L"Asset\\Texture\\nazuna.png");
