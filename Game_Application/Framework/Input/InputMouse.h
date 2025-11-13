@@ -17,24 +17,34 @@ namespace Framework {
 
     class InputMouse {
     private:
-        static inline HWND m_hWnd = nullptr;
+        HWND m_hWnd = nullptr;
 
-        static inline bool m_MouseButton[3] = {};
-        static inline bool m_MousePrevButton[3] = {};
-        static inline bool m_MouseDownTemp[3] = {};
+        bool m_MouseButton[3] = {};
+        bool m_MousePrevButton[3] = {};
+        bool m_MouseDownTemp[3] = {};
 
-        static inline POINT m_MousePos = {};
+        POINT m_MousePos = {};
 
-        static inline int m_WheelDelta = 0;
-        static inline int s_WheelDeltaCached = 0;
+        int m_WheelDelta = 0;
+        int s_WheelDeltaCached = 0;
 
-        static inline bool s_CursorLockEnabled = false;
+        bool s_CursorLockEnabled = false;
 
-        static inline math::vector2f s_MouseRelativeMovement{ 0.0f, 0.0f };
-        static inline math::vector2f s_LastMousePos{ 0.0f, 0.0f };
-        static inline bool s_FirstUpdate = true;
+        math::vector2f s_MouseRelativeMovement{ 0.0f, 0.0f };
+        math::vector2f s_LastMousePos{ 0.0f, 0.0f };
+        bool s_FirstUpdate = true;
+
+		InputMouse() = default;
+		~InputMouse() = default;
+		InputMouse(const InputMouse&) = delete;
+		InputMouse& operator=(const InputMouse&) = delete;
 
     public:
+        static InputMouse& GetInstance() {
+            static InputMouse instance;
+            return instance;
+        }
+
         // ◆ マウスボタン
         // MB::Left => 左クリック / MB::Right => 右クリック / MB::Middle => ホイールクリック
         enum class MouseButton { Left = 0, Right = 1, Middle = 2 };
@@ -52,7 +62,7 @@ namespace Framework {
         // - false：ボタンが押されていない
         //
         //==============================================================================
-        static bool IsMouseDown(MouseButton button);
+        bool IsMouseDown(MouseButton button);
 
         //==============================================================================
         // 
@@ -69,7 +79,7 @@ namespace Framework {
         // 例：UI選択・決定ボタン等に使用
         //
         //==============================================================================
-        static bool IsMouseClicked(MouseButton button);
+        bool IsMouseClicked(MouseButton button);
 
         //==============================================================================
         // 
@@ -85,7 +95,7 @@ namespace Framework {
         // 用途例：ドラッグ解除、UI確定後の指離し判定、チャージ解除など
         //
         //==============================================================================
-        static bool IsMouseReleased(MouseButton button);
+        bool IsMouseReleased(MouseButton button);
 
         //==============================================================================
         // 
@@ -97,7 +107,7 @@ namespace Framework {
         // 例：UIや当たり判定の中心として使用可能
         //
         //==============================================================================
-        static math::vector2f GetMousePosition();
+        math::vector2f GetMousePosition();
 
         //==============================================================================
         // 
@@ -107,7 +117,7 @@ namespace Framework {
         // 例：ズーム処理・ページ切替などに使用
         //
         //==============================================================================
-        static int GetWheelDelta();
+        int GetWheelDelta();
 
         //==============================================================================
         // 
@@ -125,7 +135,7 @@ namespace Framework {
         // 例：ボタンやメニュー項目の選択判定に使用
         //
         //==============================================================================
-        static bool HitBox(const math::vector2f& center, const math::vector2f& size, float rotationRad = 0.0f);
+        bool HitBox(const math::vector2f& center, const math::vector2f& size, float rotationRad = 0.0f);
 
         //==============================================================================
         // 
@@ -138,7 +148,7 @@ namespace Framework {
         // 例：FPS / TPS カメラモード中は非表示、UI操作時は表示など、状態に応じて切り替え
         //
         //==============================================================================
-        static void DisplayMouse(bool display);
+        void DisplayMouse(bool display);
 
         //==============================================================================
         // 
@@ -151,7 +161,7 @@ namespace Framework {
         // 例：マウス操作で視点回転する場合に有効。ロック中はGetMouseRelativeMovement()を用いて視点回転を行う設計が推奨される
         //
         //==============================================================================
-        static void EnableCursorLock(bool enable);
+        void EnableCursorLock(bool enable);
 
         //==============================================================================
         // 
@@ -159,7 +169,7 @@ namespace Framework {
         // - カメラ操作中などでカーソル位置を初期化したい場合に使用
         //
         //==============================================================================
-        static void LockCursorCenter();
+        void LockCursorCenter();
 
         //==============================================================================
         // 
@@ -172,19 +182,19 @@ namespace Framework {
         // 用途例：TPS/FPS視点におけるカメラ回転、ドラッグ操作、ポインタの慣性移動など
         // 
         //==============================================================================
-        static math::vector2f GetMouseRelativeMovement();
+        math::vector2f GetMouseRelativeMovement();
 
     private:
-        static void ResetLastMousePosition(const math::vector2f& pos);
+        void ResetLastMousePosition(const math::vector2f& pos);
 
         // Application1箇所で呼び出し
-        static void Initialize(HWND hwnd);
-        static void Update();
+        void Initialize(HWND hwnd);
+        void Update();
 
         // WndProc連携
-        static void OnMouseDown(int button);
-        static void OnMouseUp(int button);
-        static void OnWheel(short delta);
+        void OnMouseDown(int button);
+        void OnMouseUp(int button);
+        void OnWheel(short delta);
 
         friend class Application;
         friend class Window;

@@ -91,8 +91,8 @@ LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
 
     case WM_KEYDOWN:
         if (wParam == VK_ESCAPE) {
-            InputMouse::EnableCursorLock(false);
-            InputMouse::DisplayMouse(true);
+            InputMouse::GetInstance().EnableCursorLock(false);
+            InputMouse::GetInstance().DisplayMouse(true);
             DestroyWindow(hWnd);
         }
 
@@ -104,31 +104,31 @@ LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
         break;
 
     case WM_LBUTTONDOWN:
-        InputMouse::OnMouseDown(0);
+        InputMouse::GetInstance().OnMouseDown(0);
         return 0;
 
     case WM_LBUTTONUP:
-        InputMouse::OnMouseUp(0);
+        InputMouse::GetInstance().OnMouseUp(0);
         return 0;
 
     case WM_RBUTTONDOWN:
-        InputMouse::OnMouseDown(1);
+        InputMouse::GetInstance().OnMouseDown(1);
         return 0;
 
     case WM_RBUTTONUP:
-        InputMouse::OnMouseUp(1);
+        InputMouse::GetInstance().OnMouseUp(1);
         return 0;
 
     case WM_MBUTTONDOWN:
-        InputMouse::OnMouseDown(2);
+        InputMouse::GetInstance().OnMouseDown(2);
         return 0;
 
     case WM_MBUTTONUP:
-        InputMouse::OnMouseUp(2);
+        InputMouse::GetInstance().OnMouseUp(2);
         return 0;
 
     case WM_MOUSEWHEEL:
-        InputMouse::OnWheel(GET_WHEEL_DELTA_WPARAM(wParam));
+        InputMouse::GetInstance().OnWheel(GET_WHEEL_DELTA_WPARAM(wParam));
         return 0;
     }
 
