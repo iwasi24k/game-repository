@@ -22,16 +22,16 @@
 #include "Renderer.h"
 #include "ShaderManager.h"
 #include "TextureManager.h"
-#include "Sprite.h"
-#include "Model.h"
+#include "SpriteManager.h"
+#include "ModelManager.h"
 
 using namespace Framework;
 
 Application::Application() {}
 Application::~Application() { Finalize(); }
 
-Sprite sprite;
-Model model;
+std::weak_ptr<Sprite> sprite;
+std::weak_ptr<Model> model;
 
 bool Application::Initialize(HINSTANCE hInstance, int nCmdShow) {
     CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
@@ -113,22 +113,20 @@ bool Application::Init() {
     auto texture = TextureManager::GetInstance().LoadTexture(L"Asset\\Texture\\nazuna.png");
 
     // スプライト初期化
-    sprite.Initialize();
-    sprite.SetTexture(texture);
-    sprite.SetTransform({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 }, { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
-    //sprite.SetSize( SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 );
-    //sprite.SetSize(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-	//sprite.SetUV(0.0f, 0.0f, 1.0f, 1.0f);
-    //sprite.SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
+    SpriteManager::GetInstance().Initialize();
+	sprite = SpriteManager::GetInstance().LoadSprite(L"Asset\\Texture\\nazuna.png");
+    sprite.lock()->SetTransform({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 }, { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
+    //sprite.lock()->SetSize( SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 );
+    //sprite.lock()->SetSize(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	//sprite.lock()->SetUV(0.0f, 0.0f, 1.0f, 1.0f);
+    //sprite.lock()->SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
 
     ShaderManager::GetInstance().LoadVS(L"ModelShader", L"cso-file\\VertexShader.cso");
     ShaderManager::GetInstance().LoadPS(L"ModelShader", L"cso-file\\PixelShader.cso");
 
-	model.Initialize(L"Asset/Model/slime.fbx");
-    //math::matrix transform = math::matrix::Identity();
-    //transform = transform * math::matrix::Translation({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.5f }); // 画面中心
-    //model.SetTransform(transform);
-    model.SetTransform({ 1.0f, 1.0f, 0.0f }, { 2.0f, 1.0f, 1.0f }, { 1.0f, 1.0f, 0.0f });
+	ModelManager::GetInstance().Initialize();
+	model = ModelManager::GetInstance().LoadModel(L"Asset/Model/cube.fbx");
+    model.lock()->SetTransform({1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {-IX_PI / 1.5f, 0.0f, 0.0f});
     
     return true;
 }
@@ -140,7 +138,7 @@ void Application::Update() {
 void Application::Draw() {
     ShaderManager::GetInstance().SetShader(L"SpriteShader");
 	Renderer::GetInstance().SetDepthEnable(false);
-	//sprite.Draw();
+	sprite.lock()->Draw();
 
     ShaderManager::GetInstance().SetShader(L"ModelShader");
 	Renderer::GetInstance().SetDepthEnable(true);
@@ -162,10 +160,10 @@ void Application::Draw() {
         { 1.0f, 0.1f, 0.0f, 0.0f }     // pointLightParam (range, attenuation, unused, unused)
 	);
 	Renderer::GetInstance().SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
-	model.Draw(view, proj);
+	model.lock()->Draw(view, proj);
 }
 
 void Application::Finalize() {
-    model.Finalize();
-	sprite.Finalize();
+	ModelManager::GetInstance().Finalize();
+	SpriteManager::GetInstance().Finalize();
 }

@@ -42,7 +42,7 @@ float4 main(VSPS_Default input) : SV_TARGET
     // テクスチャ適用（有効時）
     if (MaterialData.TextureEnable)
     {
-        baseColor *= g_Texture.Sample(g_Sampler, input.TexCoord).rgb;
+        baseColor = g_Texture.Sample(g_Sampler, input.TexCoord).rgb;
     }
 
     // 合成

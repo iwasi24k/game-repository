@@ -102,6 +102,12 @@
     <ClCompile Include="Framework\Graphics\Model\Model.cpp">
       <Filter>Framework\Graphics\Model</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Graphics\Sprite\SpriteManager.cpp">
+      <Filter>Framework\Graphics\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Graphics\Model\ModelManager.cpp">
+      <Filter>Framework\Graphics\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -173,6 +179,12 @@
     </ClInclude>
     <ClInclude Include="Framework\Graphics\Resources\ShaderTypes.h">
       <Filter>Framework\Graphics\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Model\ModelManager.h">
+      <Filter>Framework\Graphics\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphics\Sprite\SpriteManager.h">
+      <Filter>Framework\Graphics\Sprite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
