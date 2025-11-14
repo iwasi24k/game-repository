@@ -29,6 +29,9 @@
 #include "InputKeyboard.h"
 #include "InputMouse.h"
 
+// --- scene ---
+#include "SceneManager.h"
+
 using namespace Framework;
 
 Application::Application() {}
@@ -117,6 +120,8 @@ void Application::Run() {
 
 // --- game loop ---
 bool Application::Init() {
+	//SceneManager::GetInstance().LoadScene(std::make_uniqe<‰ŠúƒV[ƒ“‚ÌÝ’è>());
+    
     ShaderManager::GetInstance().LoadVS(L"SpriteShader", L"cso-file\\SpriteVS.cso", Shader::VertexLayoutType::Sprite);
     ShaderManager::GetInstance().LoadPS(L"SpriteShader", L"cso-file\\SpritePS.cso");
 
@@ -140,6 +145,7 @@ bool Application::Init() {
 }
 
 void Application::Update() {
+	//SceneManager::GetInstance().Update();
     if (InputMouse::GetInstance().IsMouseClicked(MB::Left))
 		sprite.lock()->SetColor({ 1.0f, 0.0f, 0.0f, 1.0f });
 		//sprite.lock()->SetTransform({ SCREEN_WIDTH, SCREEN_HEIGHT }, { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
@@ -148,6 +154,7 @@ void Application::Update() {
 }
 
 void Application::Draw() {
+	//SceneManager::GetInstance().Draw();
     ShaderManager::GetInstance().SetShader(L"SpriteShader");
 	Renderer::GetInstance().SetDepthEnable(false);
 
@@ -177,6 +184,7 @@ void Application::Draw() {
 }
 
 void Application::Finalize() {
+	//SceneManager::GetInstance().UnloadScene();
 	ModelManager::GetInstance().Finalize();
 	SpriteManager::GetInstance().Finalize();
 }

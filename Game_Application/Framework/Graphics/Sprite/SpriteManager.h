@@ -25,10 +25,12 @@ namespace Framework {
 
     class SpriteManager {
     private:
+        std::unordered_map<std::wstring, std::shared_ptr<Sprite>> m_Sprites;
+
         SpriteManager() = default;
         ~SpriteManager() = default;
-
-        std::unordered_map<std::wstring, std::shared_ptr<Sprite>> m_Sprites;
+		SpriteManager(const SpriteManager&) = delete;
+		SpriteManager& operator=(const SpriteManager&) = delete;
 
     public:
         static SpriteManager& GetInstance() {

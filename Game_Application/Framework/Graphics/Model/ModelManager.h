@@ -24,10 +24,12 @@ namespace Framework {
 
     class ModelManager {
     private:
+        std::unordered_map<std::wstring, std::shared_ptr<Model>> m_Models;
+
         ModelManager() = default;
         ~ModelManager() = default;
-
-        std::unordered_map<std::wstring, std::shared_ptr<Model>> m_Models;
+		ModelManager(const ModelManager&) = delete;
+		ModelManager& operator=(const ModelManager&) = delete;
 
     public:
         static ModelManager& GetInstance() {
