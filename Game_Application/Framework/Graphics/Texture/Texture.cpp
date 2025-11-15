@@ -93,14 +93,26 @@ bool Texture::InitializeFromMemory(unsigned char* pixelData, int width, int heig
 
     // 初期データなしで作成（後でUpdateSubresource）
     HRESULT hr = device->CreateTexture2D(&desc, nullptr, m_Texture.GetAddressOf());
+#if _DEBUG
+        char buf[256];
+        sprintf_s(buf, "CreateTexture2D hr = 0x%08X\n", hr);
+        OutputDebugStringA(buf);
+#endif
     if (FAILED(hr))
         return false;
 
     // ピクセルデータを書き込み
     context->UpdateSubresource(m_Texture.Get(), 0, nullptr, pixelData, width * 4, 0);
-
+#if _DEBUG
+        sprintf_s(buf, "UpdateSubresource (no hr)\n");
+        OutputDebugStringA(buf);
+#endif
     // シェーダーリソースビュー作成
     hr = device->CreateShaderResourceView(m_Texture.Get(), nullptr, m_ShaderResourceView.GetAddressOf());
+#if _DEBUG
+        sprintf_s(buf, "CreateSRV hr = 0x%08X\n", hr);
+        OutputDebugStringA(buf);
+#endif
     if (FAILED(hr))
         return false;
 

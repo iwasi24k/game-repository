@@ -31,6 +31,15 @@ bool Model::Initialize(const std::wstring& filePath) {
         aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 
     if (!scene || !scene->HasMeshes()) return false;
+    HMODULE h = GetModuleHandleA("assimp-vc143-mt.dll");
+    if (h) {
+        char path[MAX_PATH] = { 0 };
+        GetModuleFileNameA(h, path, MAX_PATH);
+        OutputDebugStringA(("Assimp DLL path: " + std::string(path) + "\n").c_str());
+    }
+    else {
+        OutputDebugStringA("Assimp not loaded\n");
+    }
 
     m_Meshes.clear();
     LoadMeshesFromScene(scene);
@@ -51,6 +60,26 @@ void Model::SetTransform(const math::vector3f& position, const math::vector3f& s
     m_TransformMatrix = m_Transform.toMatrix();
 }
 
+void Model::SetOverrideMaterial(const Material& material) {
+    for (auto& mesh : m_Meshes) {
+        mesh.OverrideMaterial = material;
+	}
+}
+
+void Model::SetOverrideTexture(UINT slot, const std::wstring& texturePath) {
+    auto texture = TextureManager::GetInstance().LoadTexture(texturePath);
+    for (auto& mesh : m_Meshes) {
+        if (mesh.OverrideMaterial) {
+            mesh.OverrideMaterial->Texture = texture;
+            mesh.OverrideMaterial->TextureSlot = slot;
+        }
+        else {
+            mesh.OverrideMaterial = mesh.MaterialData;
+            mesh.OverrideMaterial->Texture = texture;
+        }
+	}
+}
+
 void Model::Draw(const math::matrix& view, const math::matrix& proj) {
     auto renderer = &Renderer::GetInstance();
     auto context = renderer->GetContext();
@@ -58,19 +87,25 @@ void Model::Draw(const math::matrix& view, const math::matrix& proj) {
     for (auto& mesh : m_Meshes) {
         renderer->SetMatrix(m_TransformMatrix.Transposed(), view.Transposed(), proj.Transposed());
 
+        Material& mat = mesh.OverrideMaterial ? *mesh.OverrideMaterial : mesh.MaterialData;
+
         // Material設定
         renderer->SetMaterial(
-            mesh.MaterialData.Diffuse,        // Diffuse
-            mesh.MaterialData.Ambient,        // Ambient
-            mesh.MaterialData.Specular,       // Specular
-            mesh.MaterialData.Emission,       // Emission
-            mesh.MaterialData.Shininess,      // Shininess
-            mesh.MaterialData.Texture != nullptr // TextureEnable
+            mat.Ambient,        // Ambient
+            mat.Diffuse,        // Diffuse
+            mat.Specular,       // Specular
+            mat.Emission,       // Emission
+            mat.Shininess,      // Shininess
+            mat.Texture != nullptr // TextureEnable
         );
 
+        if (mat.Texture)
+            ShaderManager::GetInstance().SetTexture(mat.TextureSlot, mat.Texture->GetSRV());
 
-        if (mesh.MaterialData.Texture)
-            ShaderManager::GetInstance().SetTexture(0, mesh.MaterialData.Texture->GetSRV());
+        if (mat.Diffuse.w < 1.0f)
+            Renderer::GetInstance().SetBlendEnable(true);
+        else
+            Renderer::GetInstance().SetBlendEnable(false);
 
         mesh.Draw(context);
         context->DrawIndexed(mesh.IndexCount, 0, 0);
@@ -92,7 +127,7 @@ void Model::LoadMeshesFromScene(const aiScene* scene) {
             vert.Position = { ai_mesh->mVertices[v].x, ai_mesh->mVertices[v].y, ai_mesh->mVertices[v].z };
             vert.Normal = ai_mesh->HasNormals() ? math::vector3f{ ai_mesh->mNormals[v].x, ai_mesh->mNormals[v].y, ai_mesh->mNormals[v].z } : math::vector3f{};
             vert.TexCoord = ai_mesh->HasTextureCoords(0) ? math::vector2f{ ai_mesh->mTextureCoords[0][v].x, ai_mesh->mTextureCoords[0][v].y } : math::vector2f{};
-            vert.Diffuse = { 1,1,1,1 };
+            vert.Diffuse = math::vector4f{ 1,1,1,1 };
         }
 
         // インデックス
@@ -152,10 +187,19 @@ void Model::LoadMaterial(const aiMaterial* material, const aiScene* scene, Mesh&
                 reinterpret_cast<unsigned char*>(embeddedTex->pcData),
                 embeddedTex->mWidth
             );
+
+#if _DEBUG
+            char buf[256];
+            sprintf_s(buf, "EmbeddedTex: width=%d height=%d format=%s\n",
+                embeddedTex->mWidth,
+                embeddedTex->mHeight,
+                embeddedTex->achFormatHint);
+            OutputDebugStringA(buf);
+#endif
         }
         else {
             // 外部テクスチャの処理
-            mesh.MaterialData.Texture = TextureManager::GetInstance().LoadTexture(/*L"Asset\\Texture\\" + */std::wstring(texName.begin(), texName.end()));
+            mesh.MaterialData.Texture = TextureManager::GetInstance().LoadTexture(L"Asset\\Texture\\" + std::wstring(texName.begin(), texName.end()));
         }
     }
 }

@@ -36,6 +36,8 @@ namespace Framework {
 
         void SetTransform(const math::vector3f& position, const math::vector3f& scale, const math::vector3f& rotation);
         void SetAlpha(float alpha) { m_Alpha = alpha; }
+        void SetOverrideMaterial(const Material& material);
+        void SetOverrideTexture(UINT slot, const std::wstring& texturePath);
 
         void Draw(const math::matrix& view, const math::matrix& proj);
 

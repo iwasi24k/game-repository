@@ -14,6 +14,7 @@
 #include <d3d11.h>
 #include <memory>
 #include <vector>
+#include <optional>
 
 #include "Material.h"
 
@@ -24,6 +25,7 @@ namespace Framework {
         Microsoft::WRL::ComPtr<ID3D11Buffer> IndexBuffer;
         UINT IndexCount = 0;
         Material MaterialData;
+        std::optional<Material> OverrideMaterial;
 
         void Draw(ID3D11DeviceContext* context);
     };
