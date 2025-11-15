@@ -25,6 +25,7 @@ namespace Framework {
         math::vector4f Specular = { 0,0,0,1 };
         math::vector4f Emission = { 0,0,0,1 };
         float Shininess = 0.0f;
+		UINT TextureSlot = 0;
         std::shared_ptr<Texture> Texture = nullptr;
 
         // デフォルトコンストラクタで初期化済み

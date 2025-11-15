@@ -134,13 +134,23 @@ bool Application::Init() {
 	//sprite.lock()->SetUV(0.0f, 0.0f, 1.0f, 1.0f);
     //sprite.lock()->SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
 
-    ShaderManager::GetInstance().LoadVS(L"ModelShader", L"cso-file\\VertexShader.cso");
+    ShaderManager::GetInstance().LoadVS(L"ModelShader", L"cso-file\\VertexShader.cso", Shader::VertexLayoutType::Default);
     ShaderManager::GetInstance().LoadPS(L"ModelShader", L"cso-file\\PixelShader.cso");
 
 	ModelManager::GetInstance().Initialize();
-	model = ModelManager::GetInstance().LoadModel(L"Asset/Model/cube.fbx");
+	model = ModelManager::GetInstance().LoadModel(L"Asset/Model/cube.obj");
+	//model = ModelManager::GetInstance().LoadModel(L"Asset/Model/cube.fbx");
     model.lock()->SetTransform({1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {-IX_PI / 1.5f, 0.0f, 0.0f});
-    
+	Material material;
+	material.Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
+	material.Ambient = { 0.2f, 0.2f, 0.2f, 1.0f };
+	material.Specular = { 0.0f, 0.0f, 0.0f, 1.0f };
+	material.Shininess = 32.0f;
+	material.Emission = { 0.0f, 0.0f, 0.0f, 1.0f };
+	material.TextureSlot = 0;
+    material.Texture = TextureManager::GetInstance().LoadTexture(L"Asset\\Texture\\nazuna.png");
+	model.lock()->SetOverrideMaterial(material);
+
     return true;
 }
 
@@ -179,7 +189,6 @@ void Application::Draw() {
         { 0.0f, 0.0f, -5.0f, 1.0f },   // position
         { 1.0f, 0.1f, 0.0f, 0.0f }     // pointLightParam (range, attenuation, unused, unused)
 	);
-	Renderer::GetInstance().SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
 	model.lock()->Draw(view, proj);
 }
 

@@ -33,7 +33,7 @@ struct Material
     float4 Emission;
     float Shininess;
     float TextureEnable;
-    float3 pad; // 16バイト境界に調整
+    float2 pad; // 16バイト境界に調整
 };
 
 cbuffer LightBuffer : register(b1)

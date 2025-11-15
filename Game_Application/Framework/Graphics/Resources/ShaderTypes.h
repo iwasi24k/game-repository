@@ -90,7 +90,7 @@ namespace Shader {
 		math::vector4f Specular;
 		math::vector4f Emission;
 		float Shininess;
-		int TextureEnable;
+		float TextureEnable;
 		float pad[2];           // 16ƒoƒCƒg‹«ŠE‚É’²®
 	};
 
