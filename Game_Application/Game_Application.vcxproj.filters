@@ -46,17 +46,29 @@
     <Filter Include="Framework\Scene\Components">
       <UniqueIdentifier>{c1677005-edcb-4ac4-8e71-bb05077b63ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UserProjects">
-      <UniqueIdentifier>{80cdcf10-5a38-430c-ac8e-3a37e5c44e3a}</UniqueIdentifier>
+    <Filter Include="Project">
+      <UniqueIdentifier>{9f5aedb8-d2f0-4302-b5e2-3d2cabbb6a23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UserProjects\Scene">
-      <UniqueIdentifier>{69e4b16f-6e0e-489d-97d1-16bb095ccfa1}</UniqueIdentifier>
+    <Filter Include="Project\Prefab">
+      <UniqueIdentifier>{3ee72f4d-b454-4a45-ad0d-e2af98748487}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UserProjects\Prefab">
-      <UniqueIdentifier>{1b3fd6e3-922b-4885-be9f-38773f2f1f1b}</UniqueIdentifier>
+    <Filter Include="Project\Scene">
+      <UniqueIdentifier>{35b17dec-a1a1-40e9-bc57-8de15b1eeb0d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UserProjects\Scripts">
-      <UniqueIdentifier>{6aa002ea-e6d5-4c9c-82d4-ee29b00532c7}</UniqueIdentifier>
+    <Filter Include="Project\Script">
+      <UniqueIdentifier>{faf2482b-1eb9-4a81-80e3-ee9da994d933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene\Game">
+      <UniqueIdentifier>{3372dddc-35d2-43f3-8054-52dbcc99bfb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Prefab\Game">
+      <UniqueIdentifier>{f9c802d3-3031-415e-a59f-7d962df60bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Script\Game">
+      <UniqueIdentifier>{d37ab90f-b6a7-43c7-b6aa-8d68bc637da0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Scene\Components\RenderComponent">
+      <UniqueIdentifier>{050be533-2736-4f47-975c-1263342fcd06}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -150,8 +162,17 @@
     <ClCompile Include="Framework\Scene\Component.cpp">
       <Filter>Framework\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="UserProjects\Scene\GameScene.cpp">
-      <Filter>UserProjects\Scene</Filter>
+    <ClCompile Include="Project\Scene\Game\GameScene.cpp">
+      <Filter>Project\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scene\Components\RenderComponent\ModelComponent.cpp">
+      <Filter>Framework\Scene\Components\RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scene\Components\RenderComponent\RenderComponentManager.cpp">
+      <Filter>Framework\Scene\Components\RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scene\Components\RenderComponent\SpriteComponent.cpp">
+      <Filter>Framework\Scene\Components\RenderComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -261,14 +282,29 @@
     <ClInclude Include="Framework\Scene\MonoBehaviour.h">
       <Filter>Framework\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="UserProjects\Scene\GameScene.h">
-      <Filter>UserProjects\Scene</Filter>
+    <ClInclude Include="Project\Scene\Game\GameScene.h">
+      <Filter>Project\Scene\Game</Filter>
     </ClInclude>
-    <ClInclude Include="UserProjects\Scripts\PlayerScript.h">
-      <Filter>UserProjects\Scripts</Filter>
+    <ClInclude Include="Project\Prefab\Game\TestPrefab.h">
+      <Filter>Project\Prefab\Game</Filter>
     </ClInclude>
-    <ClInclude Include="UserProjects\Prefab\PlayerPrefab.h">
-      <Filter>UserProjects\Prefab</Filter>
+    <ClInclude Include="Project\Script\Game\PlayerScript.h">
+      <Filter>Project\Script\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Game\PlayerPrefab.h">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene\Components\RenderComponent\ModelComponent.h">
+      <Filter>Framework\Scene\Components\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene\Components\RenderComponent\RenderComponent.h">
+      <Filter>Framework\Scene\Components\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene\Components\RenderComponent\RenderComponentManager.h">
+      <Filter>Framework\Scene\Components\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene\Components\RenderComponent\SpriteComponent.h">
+      <Filter>Framework\Scene\Components\RenderComponent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
