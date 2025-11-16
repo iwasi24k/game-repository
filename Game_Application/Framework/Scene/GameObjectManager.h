@@ -6,7 +6,13 @@
 // Last Update : 2025-11-14
 //------------------------------------------------------------------------------
 // Overview :
-// 
+// GameObjectManager はシーン内に存在する全ての GameObject を統括する中心的な管理クラスです。
+// CreateObject() により新しいオブジェクトを安全に生成し、タグ検索用マップに登録します。
+// 実体は PendingAdd に蓄え、FlushPending() によってフレーム境界で確実に m_Objects へ反映。
+// Awake / Start / Update / FixedUpdate / LateUpdate / OnEnable / OnDisable / OnDestroy など、
+// ライフサイクルコールはすべて全オブジェクトへ順番に一括伝播します。
+// FindObject / FindObjects によるタグ検索、ExistsTag での存在確認も可能です。
+// FinalizeInternal では全データを綺麗に解放し、次のシーンへの安全な引き継ぎを保証します。
 //==============================================================================
 #ifndef GAME_OBJECT_MANAGER_H
 #define GAME_OBJECT_MANAGER_H
