@@ -11,11 +11,13 @@
 #include "GameObjectManager.h"
 #include "GameObject.h"
 
+#include "Components/RenderComponent/RenderComponentManager.h"
+
 using namespace Framework;
 
 GameObjectManager::GameObjectManager() {
 	//m_PhysicsManager = std::make_unique<PhysicsManager>();
-	//m_RenderManager = std::make_unique<RenderManager>();
+	m_RenderComponentManager = std::make_unique<RenderComponentManager>();
 }
 GameObjectManager::~GameObjectManager() {}
 
@@ -83,10 +85,10 @@ void GameObjectManager::LateUpdate() {
 	for (auto& obj : m_Objects) obj->LateUpdate();
 }
 void GameObjectManager::DrawGizmos() {
-	//m_RenderManager->DrawGizmos();
+	//m_RenderComponentManager->DrawGizmos();
 }
 void GameObjectManager::Draw() {
-	//m_RenderManager->Draw();
+	m_RenderComponentManager->Draw(m_Objects);
 }
 void GameObjectManager::OnDisable() {
 	for (auto& obj : m_Objects) obj->OnDisable();
@@ -99,7 +101,7 @@ void GameObjectManager::FinalizeInternal() {
 	m_PendingAdd.clear();
 	m_Objects.clear();
 	//m_PhysicsManager.reset();
-	//m_RenderManager.reset();
+	m_RenderComponentManager.reset();
 }
 
 void GameObjectManager::FlushPending() {

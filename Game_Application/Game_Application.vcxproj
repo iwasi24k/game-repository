@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include;$(ProjectDir)Framework\Math;$(ProjectDir)Framework\Graphics\Resources;$(ProjectDir)Framework\Graphics\Renderer;$(ProjectDir)ExternalLibrary\DirectXTex\Include;$(ProjectDir)Framework\Graphics\Sprite;$(ProjectDir)Framework\Graphics\Texture;$(ProjectDir)Framework\Graphics\Resources\Shader;$(ProjectDir)ExternalLibrary;$(ProjectDir)Framework\Graphics\Model;$(ProjectDir)Framework\Input;$(ProjectDir)Framework\Scene</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include;$(ProjectDir)Framework\Math;$(ProjectDir)Framework\Graphics\Resources;$(ProjectDir)Framework\Graphics\Renderer;$(ProjectDir)ExternalLibrary\DirectXTex\Include;$(ProjectDir)Framework\Graphics\Sprite;$(ProjectDir)Framework\Graphics\Texture;$(ProjectDir)Framework\Graphics\Resources\Shader;$(ProjectDir)ExternalLibrary;$(ProjectDir)Framework\Graphics\Model;$(ProjectDir)Framework\Input;$(ProjectDir)Framework\Scene;$(ProjectDir)Project</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -128,7 +128,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include;$(ProjectDir)Framework\Math;$(ProjectDir)Framework\Graphics\Resources;$(ProjectDir)Framework\Graphics\Renderer;$(ProjectDir)ExternalLibrary\DirectXTex\Include;$(ProjectDir)Framework\Graphics\Sprite;$(ProjectDir)Framework\Graphics\Texture;$(ProjectDir)Framework\Graphics\Resources\Shader;$(ProjectDir)ExternalLibrary;$(ProjectDir)Framework\Graphics\Model;$(ProjectDir)Framework\Input;$(ProjectDir)Framework\Scene</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include;$(ProjectDir)Framework\Math;$(ProjectDir)Framework\Graphics\Resources;$(ProjectDir)Framework\Graphics\Renderer;$(ProjectDir)ExternalLibrary\DirectXTex\Include;$(ProjectDir)Framework\Graphics\Sprite;$(ProjectDir)Framework\Graphics\Texture;$(ProjectDir)Framework\Graphics\Resources\Shader;$(ProjectDir)ExternalLibrary;$(ProjectDir)Framework\Graphics\Model;$(ProjectDir)Framework\Input;$(ProjectDir)Framework\Scene;$(ProjectDir)Project</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -171,6 +171,9 @@
     <ClCompile Include="Framework\Input\InputKeyboard.cpp" />
     <ClCompile Include="Framework\Input\InputMouse.cpp" />
     <ClCompile Include="Framework\Scene\Component.cpp" />
+    <ClCompile Include="Framework\Scene\Components\RenderComponent\ModelComponent.cpp" />
+    <ClCompile Include="Framework\Scene\Components\RenderComponent\RenderComponentManager.cpp" />
+    <ClCompile Include="Framework\Scene\Components\RenderComponent\SpriteComponent.cpp" />
     <ClCompile Include="Framework\Scene\GameObject.cpp" />
     <ClCompile Include="Framework\Scene\GameObjectManager.cpp" />
     <ClCompile Include="Framework\Scene\Scene.cpp" />
@@ -180,7 +183,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="UserProjects\Scene\GameScene.cpp" />
+    <ClCompile Include="Project\Scene\Game\GameScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Core\Application.h" />
@@ -211,6 +214,10 @@
     <ClInclude Include="Framework\Math\MathTransform.h" />
     <ClInclude Include="Framework\Scene\Behaviour.h" />
     <ClInclude Include="Framework\Scene\Component.h" />
+    <ClInclude Include="Framework\Scene\Components\RenderComponent\ModelComponent.h" />
+    <ClInclude Include="Framework\Scene\Components\RenderComponent\RenderComponent.h" />
+    <ClInclude Include="Framework\Scene\Components\RenderComponent\RenderComponentManager.h" />
+    <ClInclude Include="Framework\Scene\Components\RenderComponent\SpriteComponent.h" />
     <ClInclude Include="Framework\Scene\GameObject.h" />
     <ClInclude Include="Framework\Scene\GameObjectManager.h" />
     <ClInclude Include="Framework\Scene\MonoBehaviour.h" />
@@ -218,10 +225,11 @@
     <ClInclude Include="Framework\Scene\Scene.h" />
     <ClInclude Include="Framework\Scene\SceneManager.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Project\Prefab\Game\PlayerPrefab.h" />
+    <ClInclude Include="Project\Prefab\Game\TestPrefab.h" />
+    <ClInclude Include="Project\Scene\Game\GameScene.h" />
+    <ClInclude Include="Project\Script\Game\PlayerScript.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="UserProjects\Prefab\PlayerPrefab.h" />
-    <ClInclude Include="UserProjects\Scene\GameScene.h" />
-    <ClInclude Include="UserProjects\Scripts\PlayerScript.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Framework\Graphics\Renderer\ConstantBufferManager.inl" />

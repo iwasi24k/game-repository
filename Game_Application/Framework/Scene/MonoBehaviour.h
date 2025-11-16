@@ -12,9 +12,27 @@
 
 #include "Behaviour.h"
 
-class MonoBehaviour : public Framework::Behaviour {
-public:
-	// --- user API ---
-};
+namespace Framework {
+
+    class MonoBehaviour : public Behaviour {
+    public:
+        // --- user API ---
+
+
+        // -----------------------------------------------
+        // --- Example MonoBehaviour ---
+        // class PlayerScript : public MonoBehaviour {
+        // public:
+        //     void Start() override {
+        //         // Initialization code here
+        //     }
+        //   
+        //     void Update() override {
+        //         // Update code here
+        //     }
+        // };
+        // -----------------------------------------------
+    };
+}
 
 #endif // MONO_BEHAVIOUR_H

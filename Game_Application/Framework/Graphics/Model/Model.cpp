@@ -62,22 +62,33 @@ void Model::SetTransform(const math::vector3f& position, const math::vector3f& s
 
 void Model::SetOverrideMaterial(const Material& material) {
     for (auto& mesh : m_Meshes) {
-        mesh.OverrideMaterial = material;
-	}
+
+        // 初めてなら元の MaterialData をコピー
+        if (!mesh.OverrideMaterial) {
+            mesh.OverrideMaterial = mesh.MaterialData;
+        }
+
+        // ★色だけを更新（テクスチャは触らない）
+        mesh.OverrideMaterial->Ambient = material.Ambient;
+        mesh.OverrideMaterial->Diffuse = material.Diffuse;
+        mesh.OverrideMaterial->Specular = material.Specular;
+        mesh.OverrideMaterial->Emission = material.Emission;
+        mesh.OverrideMaterial->Shininess = material.Shininess;
+    }
 }
 
 void Model::SetOverrideTexture(UINT slot, const std::wstring& texturePath) {
     auto texture = TextureManager::GetInstance().LoadTexture(texturePath);
+
     for (auto& mesh : m_Meshes) {
-        if (mesh.OverrideMaterial) {
-            mesh.OverrideMaterial->Texture = texture;
-            mesh.OverrideMaterial->TextureSlot = slot;
-        }
-        else {
+        if (!mesh.OverrideMaterial) {
             mesh.OverrideMaterial = mesh.MaterialData;
-            mesh.OverrideMaterial->Texture = texture;
         }
-	}
+
+        // ★テクスチャだけ上書き（色は触らない）
+        mesh.OverrideMaterial->Texture = texture;
+        mesh.OverrideMaterial->TextureSlot = slot;
+    }
 }
 
 void Model::Draw(const math::matrix& view, const math::matrix& proj) {
