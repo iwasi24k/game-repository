@@ -6,7 +6,10 @@
 // Last Update : 2025-11-14
 //------------------------------------------------------------------------------
 // Overview :
-// 
+// Prefab は、GameObject の生成手順をカプセル化するための基底クラスです。
+// Create() により必要なコンポーネント構成や初期設定を一括で構築し、
+// Inspector() を通して外部からのプロパティ編集にも対応できます。
+// これにより、統一された生成処理・再利用性・拡張性の高いオブジェクト構築を実現します。
 //==============================================================================
 #ifndef PREFAB_H
 #define PREFAB_H
@@ -27,8 +30,6 @@ namespace Framework {
 	// --- Example Prefab ---
 	// class PlayerPrefab : public Prefab {
 	// public:
-	//	 PlayerPrefab() = default;
-	//   ~PlayerPrefab() = default;
 	// 	 GameObject* Create(GameObjectManager* mgr) override {
 	// 	 	auto obj = mgr->CreateObject("Player");
 	// 	 	obj->AddComponent<PlayerMove>();

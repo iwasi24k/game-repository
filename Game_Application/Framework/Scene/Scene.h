@@ -6,7 +6,14 @@
 // Last Update : 2025-11-14
 //------------------------------------------------------------------------------
 // Overview :
-// 
+// Scene クラスはシーン単位のゲームオブジェクト管理を担い、
+// 内部で GameObjectManager を所有し、その全ライフサイクル呼び出しを委譲します。
+// コンストラクタで GameObjectManager を生成し、デストラクタで確実に解放します。
+// Awake / OnEnable / Start / Update / FixedUpdate / LateUpdate / DrawGizmos / Draw など
+// すべてのイベントは GameObjectManager によって処理され、
+// Scene 自身は「管理のハブ」として機能します。
+// FinalizeInternal や OnDisable / OnDestroy などの終了処理も同様に委譲され、
+// シーンの状態管理とゲームオブジェクトの一貫した制御を可能にします。
 //==============================================================================
 #ifndef SCENE_H
 #define SCENE_H
