@@ -26,9 +26,10 @@ namespace Framework {
 		GameObject* m_Owner = nullptr;
 
 	public:
-		explicit Component(GameObject* owner) : m_Owner(owner) {}
+		explicit Component() = default;
 		virtual ~Component() = default;
 
+		void SetOwner(GameObject* owner) { m_Owner = owner; }
 		GameObject* GetOwner() const { return m_Owner; }
 		GameObject* FindObject(const std::string& tag);
 
