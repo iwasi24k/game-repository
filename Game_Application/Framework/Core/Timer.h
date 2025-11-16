@@ -23,21 +23,31 @@ namespace Framework {
 
 	class Timer {
 	private:
-		static inline INT64 m_StartTime = 0;
-		static inline INT64 m_PreviousTime = 0;
-		static inline INT64 m_CurrentTime = 0;
+		INT64 m_StartTime = 0;
+		INT64 m_PreviousTime = 0;
+		INT64 m_CurrentTime = 0;
 
-		static inline double m_SecondsPerCount = 0.0;
-		static inline float m_DeltaTime = 0.0f;
+		double m_SecondsPerCount = 0.0;
+		float m_DeltaTime = 0.0f;
+
+		Timer() = default;
+		~Timer() = default;
+		Timer(const Timer&) = delete;
+		Timer& operator=(const Timer&) = delete;
 
 	public:
-		static void Initialize();
+		static Timer& GetInstance() {
+			static Timer instance;
+			return instance;
+		}
 
-		static void Reset();
-		static void Update();
+		void Initialize();
 
-		static float GetDeltaTime();
-		static float GetTotalTime();
+		void Reset();
+		void Update();
+
+		float GetDeltaTime();
+		float GetTotalTime();
 	};
 }
 

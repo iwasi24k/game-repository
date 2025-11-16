@@ -51,7 +51,7 @@ bool Application::Initialize(HINSTANCE hInstance, int nCmdShow) {
     LOG_IF(L"Application Initialize Start");
 
 	// --- timer initialize ---
-    Timer::Initialize();
+    Timer::GetInstance().Initialize();
 
 	// --- window initialize ---
     m_Window = std::make_unique<Window>();
@@ -104,10 +104,10 @@ void Application::Shutdown() {
 }
 
 void Application::Run() {
-	Timer::Reset();
+	Timer::GetInstance().Reset();
 
     while (m_Window->ProcessMessage()) {
-		Timer::Update();
+		Timer::GetInstance().Update();
 
         InputMouse::GetInstance().Update();
         InputKeyboard::GetInstance().Update();
