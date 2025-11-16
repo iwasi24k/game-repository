@@ -9,6 +9,7 @@
 //==============================================================================
 #include "pch.h"
 #include <mmsystem.h>
+#include <memory>
 #include "Application.h"
 
 // --- my library ---
@@ -31,6 +32,7 @@
 
 // --- scene ---
 #include "SceneManager.h"
+#include "Scene/Game/GameScene.h"
 
 using namespace Framework;
 
@@ -120,80 +122,25 @@ void Application::Run() {
 
 // --- game loop ---
 bool Application::Init() {
-	//SceneManager::GetInstance().LoadScene(std::make_uniqe<初期シーンの設定>());
-    
-    ShaderManager::GetInstance().LoadVS(L"SpriteShader", L"cso-file\\SpriteVS.cso", Shader::VertexLayoutType::Sprite);
-    ShaderManager::GetInstance().LoadPS(L"SpriteShader", L"cso-file\\SpritePS.cso");
-
-    // スプライト初期化
+    ModelManager::GetInstance().Initialize();
     SpriteManager::GetInstance().Initialize();
-	sprite = SpriteManager::GetInstance().LoadSprite(L"Asset\\Texture\\nazuna.png");
-    sprite.lock()->SetTransform({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 }, { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
-    //sprite.lock()->SetSize( SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 );
-    //sprite.lock()->SetSize(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-	//sprite.lock()->SetUV(0.0f, 0.0f, 1.0f, 1.0f);
-    //sprite.lock()->SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
 
-    ShaderManager::GetInstance().LoadVS(L"ModelShader", L"cso-file\\VertexShader.cso", Shader::VertexLayoutType::Default);
-    ShaderManager::GetInstance().LoadPS(L"ModelShader", L"cso-file\\PixelShader.cso");
-
-	ModelManager::GetInstance().Initialize();
-	model = ModelManager::GetInstance().LoadModel(L"Asset/Model/cube.obj");
-	//model = ModelManager::GetInstance().LoadModel(L"Asset/Model/cube.fbx");
-    model.lock()->SetTransform({1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {-IX_PI / 1.5f, 0.0f, 0.0f});
-	Material material;
-	material.Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
-	material.Ambient = { 0.2f, 0.2f, 0.2f, 1.0f };
-	material.Specular = { 0.0f, 0.0f, 0.0f, 1.0f };
-	material.Shininess = 32.0f;
-	material.Emission = { 0.0f, 0.0f, 0.0f, 1.0f };
-	material.TextureSlot = 0;
-    material.Texture = TextureManager::GetInstance().LoadTexture(L"Asset\\Texture\\nazuna.png");
-	model.lock()->SetOverrideMaterial(material);
+	SceneManager::GetInstance().LoadScene(std::make_unique<GameScene>());
 
     return true;
 }
 
 void Application::Update() {
-	//SceneManager::GetInstance().Update();
-    if (InputMouse::GetInstance().IsMouseClicked(MB::Left))
-		sprite.lock()->SetColor({ 1.0f, 0.0f, 0.0f, 1.0f });
-		//sprite.lock()->SetTransform({ SCREEN_WIDTH, SCREEN_HEIGHT }, { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
-	if (InputKeyboard::GetInstance().IsKeyTriggered(KB::R))
-		model.lock()->SetTransform({1.0f, 1.0f, 1.0f}, { 1.0f, 1.0f, 1.0f }, { 1.0f, 1.0f, 1.0f });
+	SceneManager::GetInstance().Update();
 }
 
 void Application::Draw() {
-	//SceneManager::GetInstance().Draw();
-    ShaderManager::GetInstance().SetShader(L"SpriteShader");
-	Renderer::GetInstance().SetDepthEnable(false);
-
-	sprite.lock()->Draw();
-
-    ShaderManager::GetInstance().SetShader(L"ModelShader");
-	Renderer::GetInstance().SetDepthEnable(true);
-    math::matrix view = math::matrix::LookAtLH(
-        { 0.0f, 0.0f, -5.0f }, // eye
-        { 0.0f, 0.0f, 0.0f },  // at
-        { 0.0f, 1.0f, 0.0f }   // up
-    );
-    math::matrix proj = math::matrix::PerspectiveFovLH(
-        DirectX::XMConvertToRadians(60.0f),
-        static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT),
-        0.1f, 100.0f
-    );
-    Renderer::GetInstance().SetLight(
-        { -0.5f, -1.0f, -0.5f, 0.0f }, // direction
-        { 1.0f, 1.0f, 1.0f, 1.0f },    // diffuse
-        { 0.2f, 0.2f, 0.2f, 1.0f },    // ambient
-        { 0.0f, 0.0f, -5.0f, 1.0f },   // position
-        { 1.0f, 0.1f, 0.0f, 0.0f }     // pointLightParam (range, attenuation, unused, unused)
-	);
-	model.lock()->Draw(view, proj);
+	SceneManager::GetInstance().Draw();
 }
 
 void Application::Finalize() {
-	//SceneManager::GetInstance().UnloadScene();
+	SceneManager::GetInstance().UnloadScene();
+
 	ModelManager::GetInstance().Finalize();
 	SpriteManager::GetInstance().Finalize();
 }
