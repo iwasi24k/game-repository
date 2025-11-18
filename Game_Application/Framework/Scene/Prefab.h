@@ -8,7 +8,7 @@
 // Overview :
 // Prefab は、GameObject の生成手順をカプセル化するための基底クラスです。
 // Create() により必要なコンポーネント構成や初期設定を一括で構築し、
-// Inspector() を通して外部からのプロパティ編集にも対応できます。
+// Configure() を通して外部からのプロパティ編集にも対応できます。
 // これにより、統一された生成処理・再利用性・拡張性の高いオブジェクト構築を実現します。
 //==============================================================================
 #ifndef PREFAB_H
@@ -23,7 +23,7 @@ namespace Framework {
 		Prefab() = default;
 		virtual ~Prefab() = default;
 		virtual GameObject* Create(GameObjectManager* mgr) = 0;
-		virtual void Inspector(GameObject* obj) {}
+		virtual void Configure(GameObject* obj) {}
 	};
 
 	// -----------------------------------------------
@@ -34,10 +34,10 @@ namespace Framework {
 	// 	 	auto obj = mgr->CreateObject("Player");
 	// 	 	obj->AddComponent<PlayerMove>();
 	// 	 	obj->AddComponent<PlayerAttack>();
-	//      Inspector(obj);
+	//      Configure(obj);
 	// 	 	return obj;
 	// 	 }
-	//   void Inspector(GameObject* obj) override {
+	//   void Configure(GameObject* obj) override {
 	//      obj->GetComponent<PlayerMove>()->SetSpeed(5.0f);
 	//      obj->GetComponent<PlayerAttack>()->SetDamage(10);
 	//   }

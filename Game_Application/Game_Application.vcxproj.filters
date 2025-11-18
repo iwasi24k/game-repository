@@ -70,6 +70,9 @@
     <Filter Include="Framework\Scene\Components\RenderComponent">
       <UniqueIdentifier>{050be533-2736-4f47-975c-1263342fcd06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Scene\Components\PhysicsComponent">
+      <UniqueIdentifier>{857f4d00-c59e-4650-8248-969ec2a75e94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -173,6 +176,15 @@
     </ClCompile>
     <ClCompile Include="Framework\Scene\Components\RenderComponent\SpriteComponent.cpp">
       <Filter>Framework\Scene\Components\RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scene\Components\PhysicsComponent\Rigidbody.cpp">
+      <Filter>Framework\Scene\Components\PhysicsComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Prefab\Game\PlayerPrefab.cpp">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Script\Game\PlayerScript.cpp">
+      <Filter>Project\Script\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -305,6 +317,9 @@
     </ClInclude>
     <ClInclude Include="Framework\Scene\Components\RenderComponent\SpriteComponent.h">
       <Filter>Framework\Scene\Components\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene\Components\PhysicsComponent\Rigidbody.h">
+      <Filter>Framework\Scene\Components\PhysicsComponent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

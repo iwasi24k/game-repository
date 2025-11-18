@@ -19,7 +19,6 @@ namespace Framework {
 		bool m_Enabled = true;
 
     public:
-        virtual void Inspector() {}
         virtual bool IsEnabled() const { return m_Enabled; }
         virtual void SetEnabled(bool enabled) { m_Enabled = enabled; }
     };

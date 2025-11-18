@@ -9,10 +9,10 @@ public:
 	Framework::GameObject* Create(Framework::GameObjectManager* mgr) override {
 		auto obj = mgr->CreateObject("Test");
 		obj->AddComponent<Framework::SpriteComponent>();
-		Inspector(obj);
+		Configure(obj);
 		return obj;
 	}
-	void Inspector(Framework::GameObject* obj) override {
+	void Configure(Framework::GameObject* obj) override {
 		obj->GetTransform().position = { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 1.0f };
 		obj->GetTransform().scale = { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 1.0f };
 		obj->GetTransform().rotation = { 1.0f, 1.0f, 0.0f };
