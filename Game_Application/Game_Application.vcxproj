@@ -171,12 +171,14 @@
     <ClCompile Include="Framework\Input\InputKeyboard.cpp" />
     <ClCompile Include="Framework\Input\InputMouse.cpp" />
     <ClCompile Include="Framework\Scene\Component.cpp" />
+    <ClCompile Include="Framework\Scene\Components\CameraComponent\TopDownCamera.cpp" />
     <ClCompile Include="Framework\Scene\Components\PhysicsComponent\Rigidbody.cpp" />
     <ClCompile Include="Framework\Scene\Components\RenderComponent\ModelComponent.cpp" />
     <ClCompile Include="Framework\Scene\Components\RenderComponent\RenderComponentManager.cpp" />
     <ClCompile Include="Framework\Scene\Components\RenderComponent\SpriteComponent.cpp" />
     <ClCompile Include="Framework\Scene\GameObject.cpp" />
     <ClCompile Include="Framework\Scene\GameObjectManager.cpp" />
+    <ClCompile Include="Framework\Scene\Prefab\CameraPrefab.cpp" />
     <ClCompile Include="Framework\Scene\Scene.cpp" />
     <ClCompile Include="Framework\Scene\SceneManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -217,6 +219,8 @@
     <ClInclude Include="Framework\Math\MathTransform.h" />
     <ClInclude Include="Framework\Scene\Behaviour.h" />
     <ClInclude Include="Framework\Scene\Component.h" />
+    <ClInclude Include="Framework\Scene\Components\CameraComponent\Camera.h" />
+    <ClInclude Include="Framework\Scene\Components\CameraComponent\TopDownCamera.h" />
     <ClInclude Include="Framework\Scene\Components\PhysicsComponent\Rigidbody.h" />
     <ClInclude Include="Framework\Scene\Components\RenderComponent\ModelComponent.h" />
     <ClInclude Include="Framework\Scene\Components\RenderComponent\RenderComponent.h" />
@@ -226,6 +230,7 @@
     <ClInclude Include="Framework\Scene\GameObjectManager.h" />
     <ClInclude Include="Framework\Scene\MonoBehaviour.h" />
     <ClInclude Include="Framework\Scene\Prefab.h" />
+    <ClInclude Include="Framework\Scene\Prefab\CameraPrefab.h" />
     <ClInclude Include="Framework\Scene\Scene.h" />
     <ClInclude Include="Framework\Scene\SceneManager.h" />
     <ClInclude Include="pch.h" />

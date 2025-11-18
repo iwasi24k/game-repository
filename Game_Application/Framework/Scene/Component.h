@@ -16,6 +16,7 @@
 #define COMPONENT_H
 
 #include <string>
+#include <vector>
 
 namespace Framework {
 
@@ -32,6 +33,7 @@ namespace Framework {
 		void SetOwner(GameObject* owner) { m_Owner = owner; }
 		GameObject* GetOwner() const { return m_Owner; }
 		GameObject* FindObject(const std::string& tag);
+		std::vector<GameObject*> FindObjects(const std::string& tag);
 
 		// --- Lifecycle methods ---
 		virtual void Awake() {}
