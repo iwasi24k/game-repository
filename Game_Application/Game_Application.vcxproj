@@ -171,6 +171,7 @@
     <ClCompile Include="Framework\Input\InputKeyboard.cpp" />
     <ClCompile Include="Framework\Input\InputMouse.cpp" />
     <ClCompile Include="Framework\Scene\Component.cpp" />
+    <ClCompile Include="Framework\Scene\Components\PhysicsComponent\Rigidbody.cpp" />
     <ClCompile Include="Framework\Scene\Components\RenderComponent\ModelComponent.cpp" />
     <ClCompile Include="Framework\Scene\Components\RenderComponent\RenderComponentManager.cpp" />
     <ClCompile Include="Framework\Scene\Components\RenderComponent\SpriteComponent.cpp" />
@@ -183,7 +184,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Project\Prefab\Game\PlayerPrefab.cpp" />
     <ClCompile Include="Project\Scene\Game\GameScene.cpp" />
+    <ClCompile Include="Project\Script\Game\PlayerScript.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Core\Application.h" />
@@ -214,6 +217,7 @@
     <ClInclude Include="Framework\Math\MathTransform.h" />
     <ClInclude Include="Framework\Scene\Behaviour.h" />
     <ClInclude Include="Framework\Scene\Component.h" />
+    <ClInclude Include="Framework\Scene\Components\PhysicsComponent\Rigidbody.h" />
     <ClInclude Include="Framework\Scene\Components\RenderComponent\ModelComponent.h" />
     <ClInclude Include="Framework\Scene\Components\RenderComponent\RenderComponent.h" />
     <ClInclude Include="Framework\Scene\Components\RenderComponent\RenderComponentManager.h" />
