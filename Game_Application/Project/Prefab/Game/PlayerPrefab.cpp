@@ -28,7 +28,7 @@ GameObject* PlayerPrefab::Create(GameObjectManager* mgr) {
 void PlayerPrefab::Configure(GameObject* obj) {
 
 	// --- Transform Ý’è ---
-	obj->GetTransform().position = { -7.0f, 0.0f, 0.0f };
+	obj->GetTransform().position = { 0.0f, 0.0f, 0.0f };
 	obj->GetTransform().scale = { 1.0f, 1.0f, 1.0f };
 	obj->GetTransform().rotation = { 0.0f, 0.0f, 0.0f };
 

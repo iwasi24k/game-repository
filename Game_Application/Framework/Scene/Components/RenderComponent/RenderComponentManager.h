@@ -21,7 +21,11 @@
 namespace Framework {
 
     class RenderComponentManager {
+    private:
+		GameObject* m_MainCameraObject = nullptr;
+
     public:
+		void Start(std::vector<std::unique_ptr<GameObject>>& gameObjects);
         void Draw(std::vector<std::unique_ptr<GameObject>>& gameObjects);
     };
 }

@@ -10,24 +10,23 @@
 #include "pch.h"
 #include "RenderComponentManager.h"
 
+#include "SceneManager.h"
 #include "GameObject.h"
 #include "ModelComponent.h"
 #include "SpriteComponent.h"
 #include "Renderer.h"
+#include "Components/CameraComponent/Camera.h"
 
 using namespace Framework;
 
+void RenderComponentManager::Start(std::vector<std::unique_ptr<GameObject>>& gameObjects) {
+    m_MainCameraObject = SceneManager::GetInstance().GetCurrentScene()->GetGameObjectManager()->FindObject("MainCamera");
+}
+
 void RenderComponentManager::Draw(std::vector<std::unique_ptr<GameObject>>& gameObjects) {
-    math::matrix view = math::matrix::LookAtLH(
-        { 0.0f, 0.0f, -5.0f },
-        { 0.0f, 0.0f, 0.0f },
-        { 0.0f, 1.0f, 0.0f }
-    );
-    math::matrix proj = math::matrix::PerspectiveFovLH(
-        DirectX::XMConvertToRadians(60.0f),
-        static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT),
-        0.1f, 100.0f
-    );
+	auto mainCamera = m_MainCameraObject->GetComponent<Camera>();
+    math::matrix view = mainCamera->GetView();
+    math::matrix proj = mainCamera->GetProjection();
 
     // ‹¤’ÊRenderItem
     struct RenderItem {

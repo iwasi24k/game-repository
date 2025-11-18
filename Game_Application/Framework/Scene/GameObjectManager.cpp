@@ -69,6 +69,7 @@ void GameObjectManager::OnEnable() {
 }
 void GameObjectManager::Start() {
 	FlushPending();
+	m_RenderComponentManager->Start(m_Objects);
 	for (auto& obj : m_Objects) obj->Start();
 }
 void GameObjectManager::Update() {
