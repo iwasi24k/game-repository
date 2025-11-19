@@ -42,8 +42,8 @@ bool Sprite::Initialize() {
 	m_Width = 1.0f;
 	m_Height = 1.0f;
 	m_UV = { 0.0f, 0.0f, 1.0f, 1.0f };
-	m_TransformMatrix = math::matrix::Identity();
-	m_Color = { 1.0f,1.0f,1.0f,1.0f };
+	//m_TransformMatrix = math::matrix::Identity();
+	//m_Color = { 1.0f,1.0f,1.0f,1.0f };
 	UpdateVertexBuffer();
 
 	LOG_IF(L"Sprite Initialize Completed");
@@ -73,30 +73,11 @@ void Sprite::SetUV(float u0, float v0, float u1, float v1) {
 	UpdateVertexBuffer();
 }
 
-void Sprite::SetTransform(const math::transform<math::vector2f>& transform) {
-	math::transform<math::vector3f> trans({ transform.position.x, transform.position.y, 0.0f }, { transform.scale.x, transform.scale.y, 1.0f }, { 0.0f, 0.0f, transform.rotation });
-	m_TransformMatrix = trans.toMatrix();
-}
-void Sprite::SetTransform(const math::vector2f& position, const math::vector2f& scale, float rotation) {
-	math::transform<math::vector3f> transform({ position.x, position.y, 0.0f }, { scale.x, scale.y, 1.0f }, { 0.0f, 0.0f, rotation });
-	m_TransformMatrix = transform.toMatrix();
-}
-
-void Sprite::SetColor(const math::vector4f& color) {
-	m_Color = color;
-}
-
 void Sprite::Draw() {
 	if (!m_Texture || !m_Texture->GetSRV()) return;
 
 	auto& renderer = Renderer::GetInstance();
 	auto& shader = ShaderManager::GetInstance();
-
-	math::matrix view = math::matrix::Identity();
-	math::matrix proj = math::matrix::OrthographicOffCenterLH(0, (float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0, 0, 1);
-
-	renderer.SetMatrix(m_TransformMatrix.Transposed(), view, proj.Transposed());
-	renderer.SetColor(m_Color);
 
 	UINT stride = sizeof(Shader::SpriteVertex);
 	UINT offset = 0;

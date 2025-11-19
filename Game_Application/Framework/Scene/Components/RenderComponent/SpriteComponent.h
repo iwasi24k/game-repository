@@ -19,15 +19,21 @@
 namespace Framework {
 
     class Sprite;
+    enum class SpriteDrawMode { Single, Instance };
 
     class SpriteComponent : public RenderComponent {
     private:
-        std::weak_ptr<Sprite> m_Sprite;
+        SpriteDrawMode m_SpriteDrawMode = SpriteDrawMode::Single;
+        std::shared_ptr<Sprite> m_Sprite;
+        std::weak_ptr<Sprite> m_SpriteInstance;
+
         float m_Layer;
         std::wstring m_ShaderName;
+        math::matrix m_WorldMatrix = math::matrix::Identity();
+        math::vector4f m_Color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
     public:
-        void LoadSprite(const std::wstring& path);
+        void LoadSprite(const std::wstring& path, SpriteDrawMode mode = SpriteDrawMode::Single);
         void SetLayer(float layer);
         void SetColor(math::vector4f color);
         void SetTexture(UINT slot, const std::wstring& texturePath);
@@ -40,6 +46,7 @@ namespace Framework {
 		void SetUV(float u0, float v0, float u1, float v1);
 
         void Draw() override;
+        void OnDestroy() override;
 
         float GetLayer() const { return m_Layer; }
     };

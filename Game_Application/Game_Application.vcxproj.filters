@@ -73,6 +73,15 @@
     <Filter Include="Framework\Scene\Components\PhysicsComponent">
       <UniqueIdentifier>{857f4d00-c59e-4650-8248-969ec2a75e94}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Scene\Components\CameraComponent">
+      <UniqueIdentifier>{32c77eeb-7f9e-4e3c-a46a-9a5c676ac184}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Scene\Prefab">
+      <UniqueIdentifier>{ef133f68-939c-4d51-9b4e-571d77ade651}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Script\Game\Manager">
+      <UniqueIdentifier>{bb7bfafd-071a-4ccf-bd61-9128ef6876cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -185,6 +194,18 @@
     </ClCompile>
     <ClCompile Include="Project\Script\Game\PlayerScript.cpp">
       <Filter>Project\Script\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Prefab\Game\BlockPrefab.cpp">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scene\Components\CameraComponent\TopDownCamera.cpp">
+      <Filter>Framework\Scene\Components\CameraComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scene\Prefab\CameraPrefab.cpp">
+      <Filter>Framework\Scene\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Script\Game\Manager\BlockManager.cpp">
+      <Filter>Project\Script\Game\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -320,6 +341,21 @@
     </ClInclude>
     <ClInclude Include="Framework\Scene\Components\PhysicsComponent\Rigidbody.h">
       <Filter>Framework\Scene\Components\PhysicsComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Game\BlockPrefab.h">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene\Components\CameraComponent\Camera.h">
+      <Filter>Framework\Scene\Components\CameraComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene\Components\CameraComponent\TopDownCamera.h">
+      <Filter>Framework\Scene\Components\CameraComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene\Prefab\CameraPrefab.h">
+      <Filter>Framework\Scene\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Game\Manager\BlockManager.h">
+      <Filter>Project\Script\Game\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

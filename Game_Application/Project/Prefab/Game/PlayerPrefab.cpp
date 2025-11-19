@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-11-16
-// Last Update : 2025-11-16
+// Last Update : 2025-11-19
 //------------------------------------------------------------------------------
 // 
 //==============================================================================
@@ -13,6 +13,7 @@
 #include "Script/Game/PlayerScript.h"
 #include "Components/RenderComponent/ModelComponent.h"
 #include "Components/PhysicsComponent/Rigidbody.h"
+#include "Material.h"
 
 using namespace Framework;
 
@@ -29,36 +30,31 @@ GameObject* PlayerPrefab::Create(GameObjectManager* mgr) {
 void PlayerPrefab::Configure(GameObject* obj) {
 
 	// --- Transform Ý’è ---
-	obj->GetTransform().position = { 0.0f, 0.0f, 0.0f };
-	obj->GetTransform().scale = { 1.0f, 1.0f, 1.0f };
+	obj->GetTransform().position = { 0.0f, 2.5f, 0.0f };
+	obj->GetTransform().scale = { 0.5f, 0.75f, 0.5f };
 	obj->GetTransform().rotation = { 0.0f, 0.0f, 0.0f };
 
 	// --- ModelComponent Ý’è ---
 	auto modelComp = obj->GetComponent<ModelComponent>();
-	if (modelComp) {
-		modelComp->LoadModel(L"Asset/Model/cube.obj");
-		modelComp->SetMaterial(
-			{ 0.2f, 0.2f, 0.2f, 1.0f }, // ambient
-			{ 1.0f, 1.0f, 1.0f, 1.0f }, // diffuse
-			{ 0.5f, 0.5f, 0.5f, 1.0f }, // specular
-			{ 0.0f, 0.0f, 0.0f, 1.0f }, // emission
-			32.0f                       // shininess
-		);
-		modelComp->SetLayer(1.0f);
-		modelComp->LoadShader(L"ModelShader", L"cso-file\\VertexShader.cso", L"cso-file\\PixelShader.cso");
-		modelComp->SetTexture(0, L"Asset/Texture/test.png");
+	modelComp->LoadModel(L"Asset/Model/cube.obj");
+	modelComp->SetTexture(0, L"Asset/Texture/test.png");
+	modelComp->LoadShader(L"ModelShader", L"cso-file\\VertexShader.cso", L"cso-file\\PixelShader.cso");
+	Material mat;
+	mat.Ambient = { 0.2f, 0.2f, 0.2f, 1.0f };
+	mat.Diffuse = { 0.0f, 1.0f, 1.0f, 1.0f };
+	mat.Specular = { 0.2f, 0.2f, 0.2f, 1.0f };
+	mat.Emission = { 0.2f, 0.2f, 0.2f, 1.0f };
+	mat.Shininess = 32.0f;
+	modelComp->SetMaterial(mat);
+	modelComp->SetLayer(1.0f);
 
-		// --- Rigidbody Ý’è ---
-		RigidbodyConfig rbConfig;
-		rbConfig.velocity = math::vector3f(0.0f, 0.0f, 0.0f);
-		rbConfig.mass = 1.0f;
-		rbConfig.useGravity = false;
-		rbConfig.gravity = -40.0f;
-		rbConfig.drag = 0.5f;
-
-		auto rb = obj->GetComponent<Rigidbody>();
-		if (rb) {
-			rb->Configure(rbConfig);
-		}
-	}
+	// --- Rigidbody Ý’è ---
+	auto rb = obj->GetComponent<Rigidbody>();
+	RigidbodyConfig rbConfig;
+	rbConfig.velocity = math::vector3f(0.0f, 0.0f, 0.0f);
+	rbConfig.mass = 1.0f;
+	rbConfig.useGravity = false;
+	rbConfig.gravity = -40.0f;
+	rbConfig.drag = 0.5f;
+	rb->Configure(rbConfig);
 }
