@@ -1,36 +1,33 @@
 //==============================================================================
-// File        : PlayerPrefab.cpp
+// File        : BlockPrefab.cpp
 //------------------------------------------------------------------------------
 // Author      : ix.U
-// Created     : 2025-11-16
-// Last Update : 2025-11-16
+// Created     : 2025-11-18
+// Last Update : 2025-11-18
 //------------------------------------------------------------------------------
 // 
 //==============================================================================
 #include "pch.h"
-#include "PlayerPrefab.h"
+#include "BlockPrefab.h"
 
-#include "Script/Game/PlayerScript.h"
+#include "GameObject.h"
 #include "Components/RenderComponent/ModelComponent.h"
-#include "Components/PhysicsComponent/Rigidbody.h"
 
 using namespace Framework;
 
-GameObject* PlayerPrefab::Create(GameObjectManager* mgr) {
-    auto obj = mgr->CreateObject("Player");
-    obj->AddComponent<PlayerScript>();
-    obj->AddComponent<ModelComponent>();
-	obj->AddComponent<Rigidbody>();
+GameObject* BlockPrefab::Create(GameObjectManager* mgr) {
+	auto obj = mgr->CreateObject("Block");
+	obj->AddComponent<ModelComponent>();
 
-    Configure(obj);
-    return obj;
+	Configure(obj);
+	return obj;
 }
 
-void PlayerPrefab::Configure(GameObject* obj) {
+void BlockPrefab::Configure(GameObject* obj) {
 
 	// --- Transform Ý’è ---
 	obj->GetTransform().position = { 0.0f, 0.0f, 0.0f };
-	obj->GetTransform().scale = { 1.0f, 1.0f, 1.0f };
+	obj->GetTransform().scale = { 0.5f, 0.5f, 0.5f };
 	obj->GetTransform().rotation = { 0.0f, 0.0f, 0.0f };
 
 	// --- ModelComponent Ý’è ---
@@ -47,18 +44,5 @@ void PlayerPrefab::Configure(GameObject* obj) {
 		modelComp->SetLayer(1.0f);
 		modelComp->LoadShader(L"ModelShader", L"cso-file\\VertexShader.cso", L"cso-file\\PixelShader.cso");
 		modelComp->SetTexture(0, L"Asset/Texture/test.png");
-
-		// --- Rigidbody Ý’è ---
-		RigidbodyConfig rbConfig;
-		rbConfig.velocity = math::vector3f(0.0f, 0.0f, 0.0f);
-		rbConfig.mass = 1.0f;
-		rbConfig.useGravity = false;
-		rbConfig.gravity = -40.0f;
-		rbConfig.drag = 0.5f;
-
-		auto rb = obj->GetComponent<Rigidbody>();
-		if (rb) {
-			rb->Configure(rbConfig);
-		}
 	}
 }

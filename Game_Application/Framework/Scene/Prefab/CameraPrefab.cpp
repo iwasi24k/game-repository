@@ -5,7 +5,7 @@
 // Created     : 2025-11-18
 // Last Update : 2025-11-18
 //------------------------------------------------------------------------------
-//
+// 
 //==============================================================================
 #include "pch.h"
 #include "CameraPrefab.h"
@@ -15,8 +15,7 @@
 
 using namespace Framework;
 
-GameObject* CameraPrefab::Create(GameObjectManager* mgr)
-{
+GameObject* CameraPrefab::Create(GameObjectManager* mgr) {
     GameObject* cameraObject = mgr->CreateObject("MainCamera");
     cameraObject->AddComponent<TopDownCamera>();
     Configure(cameraObject);

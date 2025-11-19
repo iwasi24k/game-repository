@@ -109,6 +109,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -133,6 +134,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -186,6 +188,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Project\Prefab\Game\BlockPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Game\PlayerPrefab.cpp" />
     <ClCompile Include="Project\Scene\Game\GameScene.cpp" />
     <ClCompile Include="Project\Script\Game\PlayerScript.cpp" />
@@ -234,6 +237,7 @@
     <ClInclude Include="Framework\Scene\Scene.h" />
     <ClInclude Include="Framework\Scene\SceneManager.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Project\Prefab\Game\BlockPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\PlayerPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\TestPrefab.h" />
     <ClInclude Include="Project\Scene\Game\GameScene.h" />
