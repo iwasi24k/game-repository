@@ -32,7 +32,7 @@ void PlayerScript::Update() {
 		math::vector3f cameraRight = math::vector3f(1.0f, 0.0f, 0.0f);
 
 		auto velocity = rb->GetVelocity();
-		float speed = 3.0f;
+		float speed = 5.0f;
 		float jumpForce = 5.0f;
         
         if (keyboard.IsKeyDown(KB::D)) {

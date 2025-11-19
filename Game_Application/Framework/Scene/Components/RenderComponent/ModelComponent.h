@@ -14,23 +14,28 @@
 #ifndef MODEL_COMPONENT_H
 #define MODEL_COMPONENT_H
 
+#include <optional>
 #include "RenderComponent.h"
 
 namespace Framework {
 
 	class Model;
+    class Material;
 
     class ModelComponent : public RenderComponent {
 	private:
         std::weak_ptr<Model> m_Model;
         float m_Layer;
 		std::wstring m_ShaderName;
+		math::matrix m_WorldMatrix = math::matrix::Identity();
+        std::vector<std::optional<Material>> m_OverrideMaterials;
 
     public:
         void LoadModel(const std::wstring& path);
         void SetLayer(float layer);
-        void SetMaterial(math::vector4f ambient, math::vector4f diffuse, math::vector4f specular, math::vector4f emission, float shininess);
+        void SetMaterial(const Material& mat);
         void SetTexture(UINT slot, const std::wstring& texturePath);
+
 		void SetLight(math::vector4f direction, math::vector4f diffuse, math::vector4f ambient, math::vector4f position, math::vector4f pointLightParam);
 
         void SetShaderName(const std::wstring& name) override;

@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-11-12
-// Last Update : 2025-11-12
+// Last Update : 2025-11-19
 //------------------------------------------------------------------------------
 // 
 //==============================================================================
@@ -44,8 +44,6 @@ bool Model::Initialize(const std::wstring& filePath) {
     m_Meshes.clear();
     LoadMeshesFromScene(scene);
 
-    m_TransformMatrix = math::matrix::Identity();
-
     LOG_IF(L"Model Initialize Completed");
     return true;
 }
@@ -53,74 +51,6 @@ bool Model::Initialize(const std::wstring& filePath) {
 void Model::Finalize() {
     LOG_IF(L"Model Finalize..");
     m_Meshes.clear();
-}
-
-void Model::SetTransform(const math::vector3f& position, const math::vector3f& scale, const math::vector3f& rotation) {
-    m_Transform = { position, scale, rotation };
-    m_TransformMatrix = m_Transform.toMatrix();
-}
-
-void Model::SetOverrideMaterial(const Material& material) {
-    for (auto& mesh : m_Meshes) {
-
-        // 初めてなら元の MaterialData をコピー
-        if (!mesh.OverrideMaterial) {
-            mesh.OverrideMaterial = mesh.MaterialData;
-        }
-
-        // ★色だけを更新（テクスチャは触らない）
-        mesh.OverrideMaterial->Ambient = material.Ambient;
-        mesh.OverrideMaterial->Diffuse = material.Diffuse;
-        mesh.OverrideMaterial->Specular = material.Specular;
-        mesh.OverrideMaterial->Emission = material.Emission;
-        mesh.OverrideMaterial->Shininess = material.Shininess;
-    }
-}
-
-void Model::SetOverrideTexture(UINT slot, const std::wstring& texturePath) {
-    auto texture = TextureManager::GetInstance().LoadTexture(texturePath);
-
-    for (auto& mesh : m_Meshes) {
-        if (!mesh.OverrideMaterial) {
-            mesh.OverrideMaterial = mesh.MaterialData;
-        }
-
-        // ★テクスチャだけ上書き（色は触らない）
-        mesh.OverrideMaterial->Texture = texture;
-        mesh.OverrideMaterial->TextureSlot = slot;
-    }
-}
-
-void Model::Draw(const math::matrix& view, const math::matrix& proj) {
-    auto renderer = &Renderer::GetInstance();
-    auto context = renderer->GetContext();
-
-    for (auto& mesh : m_Meshes) {
-        renderer->SetMatrix(m_TransformMatrix.Transposed(), view.Transposed(), proj.Transposed());
-
-        Material& mat = mesh.OverrideMaterial ? *mesh.OverrideMaterial : mesh.MaterialData;
-
-        // Material設定
-        renderer->SetMaterial(
-            mat.Ambient,        // Ambient
-            mat.Diffuse,        // Diffuse
-            mat.Specular,       // Specular
-            mat.Emission,       // Emission
-            mat.Shininess,      // Shininess
-            mat.Texture != nullptr // TextureEnable
-        );
-
-        if (mat.Texture)
-            ShaderManager::GetInstance().SetTexture(mat.TextureSlot, mat.Texture->GetSRV());
-
-        if (mat.Diffuse.w < 1.0f)
-            Renderer::GetInstance().SetBlendEnable(true);
-        else
-            Renderer::GetInstance().SetBlendEnable(false);
-
-        mesh.Draw(context);
-        context->DrawIndexed(mesh.IndexCount, 0, 0);
-    }
 }
 
 // --- プライベート関数 ---

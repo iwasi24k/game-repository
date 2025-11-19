@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-11-12
-// Last Update : 2025-11-12
+// Last Update : 2025-11-19
 //------------------------------------------------------------------------------
 // Overview : Model‚ÌƒƒbƒVƒ…î•ñ‚ğŠi”[‚·‚é\‘¢‘Ì
 //==============================================================================
@@ -25,7 +25,6 @@ namespace Framework {
         Microsoft::WRL::ComPtr<ID3D11Buffer> IndexBuffer;
         UINT IndexCount = 0;
         Material MaterialData;
-        std::optional<Material> OverrideMaterial;
 
         void Draw(ID3D11DeviceContext* context);
     };
