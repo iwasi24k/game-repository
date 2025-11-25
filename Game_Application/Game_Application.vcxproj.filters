@@ -195,9 +195,6 @@
     <ClCompile Include="Project\Script\Game\PlayerScript.cpp">
       <Filter>Project\Script\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Prefab\Game\BlockPrefab.cpp">
-      <Filter>Project\Prefab\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\Scene\Components\CameraComponent\TopDownCamera.cpp">
       <Filter>Framework\Scene\Components\CameraComponent</Filter>
     </ClCompile>
@@ -206,6 +203,12 @@
     </ClCompile>
     <ClCompile Include="Project\Script\Game\Manager\BlockManager.cpp">
       <Filter>Project\Script\Game\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Prefab\Game\BlackBlockPrefab.cpp">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Prefab\Game\WhiteBlockPrefab.cpp">
+      <Filter>Project\Prefab\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -342,9 +345,6 @@
     <ClInclude Include="Framework\Scene\Components\PhysicsComponent\Rigidbody.h">
       <Filter>Framework\Scene\Components\PhysicsComponent</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Prefab\Game\BlockPrefab.h">
-      <Filter>Project\Prefab\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\Scene\Components\CameraComponent\Camera.h">
       <Filter>Framework\Scene\Components\CameraComponent</Filter>
     </ClInclude>
@@ -356,6 +356,12 @@
     </ClInclude>
     <ClInclude Include="Project\Script\Game\Manager\BlockManager.h">
       <Filter>Project\Script\Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Game\BlackBlockPrefab.h">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Game\WhiteBlockPrefab.h">
+      <Filter>Project\Prefab\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
