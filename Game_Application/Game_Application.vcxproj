@@ -188,8 +188,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Project\Prefab\Game\BlockPrefab.cpp" />
+    <ClCompile Include="Project\Prefab\Game\BlackBlockPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Game\PlayerPrefab.cpp" />
+    <ClCompile Include="Project\Prefab\Game\WhiteBlockPrefab.cpp" />
     <ClCompile Include="Project\Scene\Game\GameScene.cpp" />
     <ClCompile Include="Project\Script\Game\Manager\BlockManager.cpp" />
     <ClCompile Include="Project\Script\Game\PlayerScript.cpp" />
@@ -238,9 +239,10 @@
     <ClInclude Include="Framework\Scene\Scene.h" />
     <ClInclude Include="Framework\Scene\SceneManager.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Project\Prefab\Game\BlockPrefab.h" />
+    <ClInclude Include="Project\Prefab\Game\BlackBlockPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\PlayerPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\TestPrefab.h" />
+    <ClInclude Include="Project\Prefab\Game\WhiteBlockPrefab.h" />
     <ClInclude Include="Project\Scene\Game\GameScene.h" />
     <ClInclude Include="Project\Script\Game\Manager\BlockManager.h" />
     <ClInclude Include="Project\Script\Game\PlayerScript.h" />

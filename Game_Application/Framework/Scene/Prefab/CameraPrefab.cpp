@@ -27,7 +27,7 @@ void CameraPrefab::Configure(GameObject* obj) {
 
     TopDownCameraConfig cameraConfig;
     cameraConfig.targetTag = "Player";
-    cameraConfig.height = 10.0f;
+    cameraConfig.height = 7.0f;
     cameraConfig.distance = 10.0f;
     cameraConfig.smooth = 100.0f;
 
