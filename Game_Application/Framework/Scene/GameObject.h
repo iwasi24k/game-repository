@@ -22,6 +22,7 @@
 #include <memory>
 #include "MathTransform.h"
 #include "Component.h"
+#include "Components/PhysicsComponent/ColliderComponent.h"
 
 namespace Framework {
 
@@ -53,6 +54,13 @@ namespace Framework {
         const std::string& GetTag() const;
 		const math::transform<math::vector3f>& GetTransform() const;
 		math::transform<math::vector3f>& GetTransform();
+
+        void OnCollisionEnter(GameObject* other) { for (auto& c : m_Components) c->OnCollisionEnter(other); }
+        void OnCollisionStay(GameObject* other) { for (auto& c : m_Components) c->OnCollisionStay(other); }
+        void OnCollisionExit(GameObject* other) { for (auto& c : m_Components) c->OnCollisionExit(other); }
+        void OnTriggerEnter(GameObject* other) { for (auto& c : m_Components) c->OnTriggerEnter(other); }
+        void OnTriggerStay(GameObject* other) { for (auto& c : m_Components) c->OnTriggerStay(other); }
+        void OnTriggerExit(GameObject* other) { for (auto& c : m_Components) c->OnTriggerExit(other); }
 
     private:
         // --- Lifecycle ---

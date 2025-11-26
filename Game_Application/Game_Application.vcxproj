@@ -174,6 +174,8 @@
     <ClCompile Include="Framework\Input\InputMouse.cpp" />
     <ClCompile Include="Framework\Scene\Component.cpp" />
     <ClCompile Include="Framework\Scene\Components\CameraComponent\TopDownCamera.cpp" />
+    <ClCompile Include="Framework\Scene\Components\PhysicsComponent\BoxCollider.cpp" />
+    <ClCompile Include="Framework\Scene\Components\PhysicsComponent\PhysicsComponentManager.cpp" />
     <ClCompile Include="Framework\Scene\Components\PhysicsComponent\Rigidbody.cpp" />
     <ClCompile Include="Framework\Scene\Components\RenderComponent\ModelComponent.cpp" />
     <ClCompile Include="Framework\Scene\Components\RenderComponent\RenderComponentManager.cpp" />
@@ -222,10 +224,14 @@
     <ClInclude Include="Framework\Input\InputKeyboard.h" />
     <ClInclude Include="Framework\Input\InputMouse.h" />
     <ClInclude Include="Framework\Math\MathTransform.h" />
+    <ClInclude Include="Framework\Physics\AABBShapes.h" />
     <ClInclude Include="Framework\Scene\Behaviour.h" />
     <ClInclude Include="Framework\Scene\Component.h" />
     <ClInclude Include="Framework\Scene\Components\CameraComponent\Camera.h" />
     <ClInclude Include="Framework\Scene\Components\CameraComponent\TopDownCamera.h" />
+    <ClInclude Include="Framework\Scene\Components\PhysicsComponent\BoxCollider.h" />
+    <ClInclude Include="Framework\Scene\Components\PhysicsComponent\ColliderComponent.h" />
+    <ClInclude Include="Framework\Scene\Components\PhysicsComponent\PhysicsComponentManager.h" />
     <ClInclude Include="Framework\Scene\Components\PhysicsComponent\Rigidbody.h" />
     <ClInclude Include="Framework\Scene\Components\RenderComponent\ModelComponent.h" />
     <ClInclude Include="Framework\Scene\Components\RenderComponent\RenderComponent.h" />

@@ -44,6 +44,14 @@ namespace Framework {
 		virtual void LateUpdate() {}
 		virtual void OnDisable() {}
 		virtual void OnDestroy() {}
+
+		virtual void OnCollisionEnter(class GameObject* other) {}
+		virtual void OnCollisionStay(class GameObject* other) {}
+		virtual void OnCollisionExit(class GameObject* other) {}
+
+		virtual void OnTriggerEnter(class GameObject* other) {}
+		virtual void OnTriggerStay(class GameObject* other) {}
+		virtual void OnTriggerExit(class GameObject* other) {}
 	};
 } // namespace Framework
 
