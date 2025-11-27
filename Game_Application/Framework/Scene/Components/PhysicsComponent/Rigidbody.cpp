@@ -40,3 +40,14 @@ void Rigidbody::Update() {
     // 加速度のリセット
     m_Acceleration = math::zero<math::vector3f>();
 }
+
+void Rigidbody::AddPosition(const math::vector3f& p) {
+    GetOwner()->GetTransform().position += p;
+}
+
+void Rigidbody::ZeroVelocityOnAxis(const math::vector3f& push) {
+    // 押し戻しがある軸だけ速度ゼロ
+    if (push.x != 0) m_Velocity.x = 0;
+    if (push.y != 0) m_Velocity.y = 0;
+    if (push.z != 0) m_Velocity.z = 0;
+}

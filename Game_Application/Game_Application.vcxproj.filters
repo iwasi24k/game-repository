@@ -82,6 +82,9 @@
     <Filter Include="Project\Script\Game\Manager">
       <UniqueIdentifier>{bb7bfafd-071a-4ccf-bd61-9128ef6876cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Physics">
+      <UniqueIdentifier>{7247db85-1e89-4d4d-829d-170696d5313b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -209,6 +212,12 @@
     </ClCompile>
     <ClCompile Include="Project\Prefab\Game\WhiteBlockPrefab.cpp">
       <Filter>Project\Prefab\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scene\Components\PhysicsComponent\BoxCollider.cpp">
+      <Filter>Framework\Scene\Components\PhysicsComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scene\Components\PhysicsComponent\PhysicsComponentManager.cpp">
+      <Filter>Framework\Scene\Components\PhysicsComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -362,6 +371,18 @@
     </ClInclude>
     <ClInclude Include="Project\Prefab\Game\WhiteBlockPrefab.h">
       <Filter>Project\Prefab\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene\Components\PhysicsComponent\BoxCollider.h">
+      <Filter>Framework\Scene\Components\PhysicsComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene\Components\PhysicsComponent\ColliderComponent.h">
+      <Filter>Framework\Scene\Components\PhysicsComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene\Components\PhysicsComponent\PhysicsComponentManager.h">
+      <Filter>Framework\Scene\Components\PhysicsComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Physics\AABBShapes.h">
+      <Filter>Framework\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

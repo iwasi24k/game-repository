@@ -53,6 +53,9 @@ namespace Framework {
 		void SetDrag(float drag) { m_Drag = drag; }
         float GetDrag() const { return m_Drag; }
 
+        void AddPosition(const math::vector3f& p);
+        void ZeroVelocityOnAxis(const math::vector3f& push);
+
 	public:
         void Configure(const RigidbodyConfig& config) {
             m_Velocity = config.velocity;
