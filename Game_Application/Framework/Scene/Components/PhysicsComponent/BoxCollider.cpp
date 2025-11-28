@@ -13,26 +13,52 @@
 
 using namespace Framework;
 
-void BoxCollider::Update() {
-    auto& tr = GetOwner()->GetTransform();
+void BoxCollider::FixedUpdate() {
 
-    // ① ローカルAABB をまず構築
-    m_LocalAABB.SetFromCenterAndSize(
-        m_PositionOffset,
-        m_SizeOffset
-    );
+}
 
-    // ② ワールドAABB へ変換：まずスケール適用
-    AABB scaled = m_LocalAABB;
-    math::vector3f halfSize = (m_LocalAABB.max - m_LocalAABB.min) * 0.5f;
-    math::vector3f center = (m_LocalAABB.min + m_LocalAABB.max) * 0.5f;
+void BoxCollider::SetFromTransform(const math::vector3f& position) {
+	auto t = GetOwner()->GetTransform();
+	t.scale = t.scale + m_SizeOffset;
+	t.position = position + m_PositionOffset;
+	m_AABB.SetFromCenterAndSize(t.position, t.scale);
+}
 
-    halfSize = halfSize * tr.scale;
-    center = center * tr.scale;
+bool BoxCollider::Intersect(const ColliderComponent& other) const {
+    if (other.GetType() == ColliderType::Box) {
+        const BoxCollider& box = static_cast<const BoxCollider&>(other);
+        return m_AABB.Intersect(box.m_AABB);
+    }
+    return false;
+}
 
-    scaled.SetFromCenterAndSize(center, halfSize * 2.0f);
+math::vector3f BoxCollider::GetPenetration(const ColliderComponent& other) const {
+    if (other.GetType() == ColliderType::Box) {
+        const BoxCollider& box = static_cast<const BoxCollider&>(other);
+        return m_AABB.GetPenetration(box.m_AABB);
+    }
+    return { 0,0,0 };
+}
 
-    // ③ 位置を適用
-    m_WorldAABB = scaled;
-    m_WorldAABB.Move(tr.position);
+math::vector3f BoxCollider::GetCollisionNormal(const ColliderComponent& other) const {
+	if (other.GetType() == ColliderType::Box) {
+		const BoxCollider& o = static_cast<const BoxCollider&>(other);
+
+		math::vector3f pen = m_AABB.GetPenetration(o.m_AABB);
+
+		float ax = std::fabs(pen.x);
+		float ay = std::fabs(pen.y);
+		float az = std::fabs(pen.z);
+
+		if (ax <= ay && ax <= az) {
+			return math::vector3f{ (pen.x > 0.0f) ? 1.0f : -1.0f, 0.0f, 0.0f };
+		}
+		if (ay <= ax && ay <= az) {
+			return math::vector3f{ 0.0f, (pen.y > 0.0f) ? 1.0f : -1.0f, 0.0f };
+		}
+		// else z が最小
+		return math::vector3f{ 0.0f, 0.0f, (pen.z > 0.0f) ? 1.0f : -1.0f };
+	}
+
+	return ColliderComponent::GetCollisionNormal(other);
 }

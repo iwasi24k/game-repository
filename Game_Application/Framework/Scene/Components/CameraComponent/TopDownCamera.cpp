@@ -24,26 +24,62 @@ void TopDownCamera::Start() {
 		GetOwner()->GetTransform().position = m_TargetObject->GetTransform().position + math::vector3f(0.0f, m_Height, -m_Distance);
 	}
 }
-
 void TopDownCamera::Update() {
-	if(!IsEnabled() || m_TargetTag == "None" || !m_TargetObject) {
-		return;
-	}
+    if (!IsEnabled() || m_TargetTag == "None" || !m_TargetObject)
+        return;
 
-	// カメラの位置を計算
-	const math::vector3f& targetPosition = m_TargetObject->GetTransform().position;
+    auto& transform = GetOwner()->GetTransform();
+    math::vector3f targetPos = m_TargetObject->GetTransform().position;
 
-	math::vector3f desiredPosition = targetPosition + math::vector3f(0.0f, m_Height, -m_Distance);
+    // --- m_Focusだけターゲットに遅れて追従 ---
+    math::vector3f delta = targetPos - m_Focus;
+    m_Focus += delta * Timer::GetInstance().GetDeltaTime() * m_Smooth;
 
-	auto& transform = GetOwner()->GetTransform();
-	auto currentPosition = transform.position;
+    // --- カメラ位置は m_Focus + オフセットで即座に決定 ---
+    math::vector3f offset(0.0f, m_Height, -m_Distance);
 
-	// スムーズに追従
-	math::vector3f newPosition = math::lerp(currentPosition, desiredPosition, Timer::GetInstance().GetDeltaTime() * m_Smooth);
-	transform.position = newPosition;
+    // Yawで横回転、Pitchで上からの角度
+    math::matrix rot = math::matrix::RotationX(m_Rotation.x) * math::matrix::RotationY(m_Rotation.y);
+    math::vector3f camPos = m_Focus + rot.TransformVector(offset);
 
-	math::vector3f targetLookAt = targetPosition;
-	m_View = math::matrix::LookAtLH(transform.position, targetLookAt, math::vector3f(0.0f, 1.0f, 0.0f));
+    transform.position = camPos; // カメラは遅れず追従
 
-	m_ViewProjection = m_View * m_Projection;
+    // --- 注視点は m_Focus ---
+    UpdateView(camPos, m_Focus);
 }
+
+
+
+
+//void TopDownCamera::Update() {
+//	if (!IsEnabled() || m_TargetTag == "None" || !m_TargetObject) {
+//		return;
+//	}
+//
+//	const math::vector3f& targetPos = m_TargetObject->GetTransform().position;
+//
+//	// --- 基本オフセット（真上 + 後ろ）---
+//	math::vector3f offset(0.0f, m_Height, -m_Distance);
+//
+//	// --- Yaw と Pitch を適用 ---
+//	math::matrix rot =
+//		math::matrix::RotationX(m_Rotation.x) *
+//		math::matrix::RotationY(m_Rotation.y);
+//
+//	offset = rot.TransformVector(offset);
+//
+//	// --- 目標位置 ---
+//	math::vector3f desiredPosition = targetPos + offset;
+//
+//	auto& transform = GetOwner()->GetTransform();
+//	auto current = transform.position;
+//
+//	// スムーズ追従
+//	math::vector3f newPos =
+//		math::lerp(current, desiredPosition, Timer::GetInstance().GetDeltaTime() * m_Smooth);
+//
+//	transform.position = newPos;
+//
+//	// --- 注視点はターゲット固定 ---
+//	UpdateView(newPos, targetPos);
+//}

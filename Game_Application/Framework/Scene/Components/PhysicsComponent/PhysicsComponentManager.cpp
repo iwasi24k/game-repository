@@ -11,59 +11,147 @@
 #include "PhysicsComponentManager.h"
 #include "Rigidbody.h"
 #include "BoxCollider.h"
+#include "Framework/Core/Timer.h"
 
 using namespace Framework;
 
 void PhysicsComponentManager::Start(std::vector<std::unique_ptr<GameObject>>& gameObjects) {
-
+    for (auto& obj : gameObjects) {
+        auto* col = obj->GetComponent<ColliderComponent>();
+        if (!col) continue;
+        col->SetFromTransform(obj->GetTransform().position);
+        m_Colliders.push_back(col);
+    }
+    auto c = m_Colliders.size();
 }
 
-void PhysicsComponentManager::Update(std::vector<std::unique_ptr<GameObject>>& gameObjects) {
-    // ▼ A-B / B-A の二重処理を避ける
-    for (size_t i = 0; i < gameObjects.size(); i++) {
-        for (size_t j = i + 1; j < gameObjects.size(); j++) {
-            auto& a = gameObjects[i];
-            auto& b = gameObjects[j];
+void PhysicsComponentManager::FixedUpdate(std::vector<std::unique_ptr<GameObject>>& gameObjects) {
+    // Rigidbody の速度で位置を更新
+    for (auto* col : m_Colliders) {
+        Rigidbody* rb = col->GetOwner()->GetComponent<Rigidbody>();
+        if (!rb) continue;
+        math::vector3f nextPos = rb->GetOwner()->GetTransform().position + rb->GetVelocity() * Timer::GetInstance().GetDeltaTime();
+        rb->GetOwner()->GetTransform().position = nextPos;
+    }
 
-            auto ca = a->GetComponent<BoxCollider>();
-            auto cb = b->GetComponent<BoxCollider>();
-            if (!ca || !cb) continue;
+    // Collider を最新位置に更新
+    for (auto* col : m_Colliders) {
+        col->SetFromTransform(col->GetOwner()->GetTransform().position);
+    }
+    CheckCollisions();
+    ResolveCollisions();
+}
 
-            const AABB& A = ca->GetWorldAABB();
-            const AABB& B = cb->GetWorldAABB();
+void PhysicsComponentManager::OnDestroy() {
+    m_Colliders.clear();
+}
 
-            if (!A.Intersect(B))
-                continue;
+void PhysicsComponentManager::ResolveCollisions() {
+    for (auto* col : m_Colliders) {
+        if (!col || !col->IsEnabled() || col->IsTrigger()) continue;
 
-            // ▼ Rigidbody の取得
-            auto rbA = a->GetComponent<Rigidbody>();
-            auto rbB = b->GetComponent<Rigidbody>();
+        Rigidbody* rb = col->GetOwner()->GetComponent<Rigidbody>();
+        if (!rb) continue;
 
-            // ▼ 押し戻しベクトルを計算
-            math::vector3f push;
-            if (AABB::ComputePush(A, B, push)) {
-                // ▼ Rigidbody が片方だけ → そちらだけ押す
-                if (rbA && !rbB) {
-                    rbA->AddPosition(push);
-                    rbA->ZeroVelocityOnAxis(push);
+        math::vector3f currentPos = rb->GetOwner()->GetTransform().position;
+        float dt = Timer::GetInstance().GetDeltaTime();
+        math::vector3f nextPos = currentPos + rb->GetVelocity() * dt;
+
+        col->SetFromTransform(nextPos);
+
+        for (auto* other : m_Colliders) {
+            if (other == col || !other->IsEnabled()) continue;
+
+            if (!col->Intersect(*other)) continue;
+            
+            math::vector3f normal = col->GetCollisionNormal(*other);
+            float depth = math::dot(col->GetPenetration(*other), normal);
+
+            if (depth > 0.0f) {
+                nextPos += normal * depth;
+
+                float vn = math::dot(rb->GetVelocity(), normal);
+                if (vn < 0.0f) {
+                    rb->SetVelocity(rb->GetVelocity() - normal * vn);//ここにこない
                 }
-                else if (!rbA && rbB) {
-                    rbB->AddPosition(-push);
-                    rbB->ZeroVelocityOnAxis(push);
+                col->SetFromTransform(nextPos);
+            }       
+        }
+
+        rb->GetOwner()->GetTransform().position = nextPos;
+    }
+}
+
+void PhysicsComponentManager::CheckCollisions() {
+    for (size_t i = 0; i < m_Colliders.size(); ++i) {
+        ColliderComponent* col = m_Colliders[i];
+        if (!col || !col->IsEnabled()) continue;
+
+        for (size_t j = i + 1; j < m_Colliders.size(); ++j) {
+            ColliderComponent* other = m_Colliders[j];
+            if (!other || !other->IsEnabled()) continue;
+
+            bool isTrigger = col->IsTrigger() || other->IsTrigger();
+            bool intersect = col->Intersect(*other);
+
+            if (intersect) {
+                if (isTrigger) {
+                    auto& prevA = m_TriggerPairs[col];
+                    auto& prevB = m_TriggerPairs[other];
+
+                    if (prevA.find(other) == prevA.end()) {
+                        col->GetOwner()->OnTriggerEnter(other->GetOwner());
+                        other->GetOwner()->OnTriggerEnter(col->GetOwner());
+
+                        prevA.insert(other);
+                        prevB.insert(col);
+                    }
+                    else {
+                        col->GetOwner()->OnTriggerStay(other->GetOwner());
+                        other->GetOwner()->OnTriggerStay(col->GetOwner());
+                    }
                 }
-                // ▼ 両方動く → 半分ずつ押す
-                else if (rbA && rbB) {
-                    rbA->AddPosition(push * 0.5f);
-                    rbB->AddPosition(-push * 0.5f);
-                    rbA->ZeroVelocityOnAxis(push);
-                    rbB->ZeroVelocityOnAxis(push);
+                else {
+                    auto& prevA = m_CollisionPairs[col];
+                    auto& prevB = m_CollisionPairs[other];
+
+                    if (prevA.find(other) == prevA.end()) {
+                        col->GetOwner()->OnCollisionEnter(other->GetOwner());
+                        other->GetOwner()->OnCollisionEnter(col->GetOwner());
+
+                        prevA.insert(other);
+                        prevB.insert(col);
+                    }
+                    else {
+                        col->GetOwner()->OnCollisionStay(other->GetOwner());
+                        other->GetOwner()->OnCollisionStay(col->GetOwner());
+                    }
                 }
-                // 両方静的なら押し戻しなし
             }
+            else {
+                if (isTrigger) {
+                    auto& prevA = m_TriggerPairs[col];
+                    auto& prevB = m_TriggerPairs[other];
 
-            // ▼ 衝突通知（Enter only）
-            a->OnCollisionEnter(b.get());
-            b->OnCollisionEnter(a.get());
+                    if (prevA.erase(other)) {
+                        prevB.erase(col);
+
+                        col->GetOwner()->OnTriggerExit(other->GetOwner());
+                        other->GetOwner()->OnTriggerExit(col->GetOwner());
+                    }
+                }
+                else {
+                    auto& prevA = m_CollisionPairs[col];
+                    auto& prevB = m_CollisionPairs[other];
+
+                    if (prevA.erase(other)) {
+                        prevB.erase(col);
+
+                        col->GetOwner()->OnCollisionExit(other->GetOwner());
+                        other->GetOwner()->OnCollisionExit(col->GetOwner());
+                    }
+                }
+            }
         }
     }
 }

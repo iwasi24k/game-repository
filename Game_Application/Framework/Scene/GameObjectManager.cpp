@@ -12,11 +12,12 @@
 #include "GameObject.h"
 
 #include "Components/RenderComponent/RenderComponentManager.h"
+#include "Components/PhysicsComponent/PhysicsComponentManager.h"
 
 using namespace Framework;
 
 GameObjectManager::GameObjectManager() {
-	//m_PhysicsManager = std::make_unique<PhysicsManager>();
+	m_PhysicsComponentManager = std::make_unique<PhysicsComponentManager>();
 	m_RenderComponentManager = std::make_unique<RenderComponentManager>();
 }
 GameObjectManager::~GameObjectManager() {}
@@ -71,6 +72,7 @@ void GameObjectManager::Start() {
 	FlushPending();
 	m_RenderComponentManager->Start(m_Objects);
 	for (auto& obj : m_Objects) obj->Start();
+	m_PhysicsComponentManager->Start(m_Objects);
 }
 void GameObjectManager::Update() {
 	FlushPending();
@@ -78,8 +80,8 @@ void GameObjectManager::Update() {
 }
 void GameObjectManager::FixedUpdate() {
 	FlushPending();
-	//m_PhysicsManager->FixedUpdate();
 	for (auto& obj : m_Objects) obj->FixedUpdate();
+	m_PhysicsComponentManager->FixedUpdate(m_Objects);
 }
 void GameObjectManager::LateUpdate() {
 	FlushPending();
@@ -96,12 +98,13 @@ void GameObjectManager::OnDisable() {
 }
 void GameObjectManager::OnDestroy() {
 	for (auto& obj : m_Objects) obj->OnDestroy();
+	m_PhysicsComponentManager->OnDestroy();
 }
 void GameObjectManager::FinalizeInternal() {
 	m_TagMap.clear();
 	m_PendingAdd.clear();
 	m_Objects.clear();
-	//m_PhysicsManager.reset();
+	m_PhysicsComponentManager.reset();
 	m_RenderComponentManager.reset();
 }
 
