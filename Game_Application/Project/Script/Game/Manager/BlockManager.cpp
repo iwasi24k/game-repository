@@ -16,7 +16,7 @@ void BlockManager::Create(GameObjectManager* mgr) {
 		for (int z = -m_BlockCountZ / 2; z <= m_BlockCountZ / 2; ++z) {
 			Prefab& blockPrefab = ((x + z) % 2 == 0) ? static_cast<Prefab&>(whiteBlockPrefab) : static_cast<Prefab&>(blackBlockPrefab);
 			auto block = blockPrefab.Create(m_GameObjectManager);
-			block->GetTransform().position = math::vector3f(static_cast<float>(x * 2.4f), 0.0f, static_cast<float>(z * 2.4f));
+			block->GetTransform().position = math::vector3f(static_cast<float>(x * block->GetTransform().scale.x), 0.0f, static_cast<float>(z * block->GetTransform().scale.x));
 			m_Blocks.push_back(block);
 		}
 	}

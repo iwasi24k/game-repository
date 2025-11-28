@@ -11,8 +11,10 @@
 #include "PlayerPrefab.h"
 
 #include "Script/Game/PlayerScript.h"
+#include "Script/Game/JumpScript.h"
 #include "Components/RenderComponent/ModelComponent.h"
 #include "Components/PhysicsComponent/Rigidbody.h"
+#include "Components/PhysicsComponent/BoxCollider.h"
 #include "Material.h"
 
 using namespace Framework;
@@ -20,8 +22,10 @@ using namespace Framework;
 GameObject* PlayerPrefab::Create(GameObjectManager* mgr) {
     auto obj = mgr->CreateObject("Player");
     obj->AddComponent<PlayerScript>();
+    obj->AddComponent<JumpScript>();
     obj->AddComponent<ModelComponent>();
 	obj->AddComponent<Rigidbody>();
+	obj->AddComponent<BoxCollider>();
 
     Configure(obj);
     return obj;
@@ -30,13 +34,13 @@ GameObject* PlayerPrefab::Create(GameObjectManager* mgr) {
 void PlayerPrefab::Configure(GameObject* obj) {
 
 	// --- Transform Ý’è ---
-	obj->GetTransform().position = { 0.0f, 2.5f, 0.0f };
-	obj->GetTransform().scale = { 0.5f, 0.5f, 0.5f };
+	obj->GetTransform().position = { 0.0f, 3.5f, 0.0f };
+	obj->GetTransform().scale = { 1.0f, 1.0f, 1.0f };
 	obj->GetTransform().rotation = { 0.0f, 0.0f, 0.0f };
 
 	// --- ModelComponent Ý’è ---
 	auto modelComp = obj->GetComponent<ModelComponent>();
-	modelComp->LoadModel(L"Asset/Model/character.fbx");
+	modelComp->LoadModel(L"Asset/Model/block.fbx");
 	//modelComp->SetTexture(0, L"Asset/Texture/test.png");
 	modelComp->LoadShader(L"ModelShader", L"cso-file\\VertexShader.cso", L"cso-file\\PixelShader.cso");
 	Material mat;
@@ -52,9 +56,9 @@ void PlayerPrefab::Configure(GameObject* obj) {
 	auto rb = obj->GetComponent<Rigidbody>();
 	RigidbodyConfig rbConfig;
 	rbConfig.velocity = math::vector3f(0.0f, 0.0f, 0.0f);
-	rbConfig.mass = 1.0f;
-	rbConfig.useGravity = false;
-	rbConfig.gravity = -40.0f;
-	rbConfig.drag = 0.5f;
+	rbConfig.mass = 0.1f;
+	rbConfig.useGravity = true;
+	rbConfig.gravity = -9.8f;
+	rbConfig.drag = 0.05f;
 	rb->Configure(rbConfig);
 }

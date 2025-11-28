@@ -39,7 +39,7 @@ namespace Framework {
 
     public:
         void AddForce(const math::vector3f& force);
-        void Update() override;
+        void FixedUpdate() override;
 
 		// Getter / Setter
 		void SetVelocity(const math::vector3f& velocity) { m_Velocity = velocity; }
@@ -52,9 +52,6 @@ namespace Framework {
 		float GetGravity() const { return m_Gravity; }
 		void SetDrag(float drag) { m_Drag = drag; }
         float GetDrag() const { return m_Drag; }
-
-        void AddPosition(const math::vector3f& p);
-        void ZeroVelocityOnAxis(const math::vector3f& push);
 
 	public:
         void Configure(const RigidbodyConfig& config) {

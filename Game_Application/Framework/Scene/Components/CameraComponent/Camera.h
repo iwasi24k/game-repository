@@ -16,6 +16,7 @@
 
 #include "Behaviour.h"
 #include "MathTransform.h"
+#include "GameObject.h"
 
 namespace Framework {
 
@@ -37,6 +38,7 @@ namespace Framework {
 		float m_FarZ = 1000.0f;
 		float m_OrthoWidth = 10.0f;
 		float m_OrthoHeight = 10.0f;
+		math::vector3f m_Rotation{};
 
 	public:
 		Camera() = default;
@@ -52,6 +54,11 @@ namespace Framework {
 			}
 		}
 		virtual void Update() override = 0;
+		void UpdateView(const math::vector3f& position, const math::vector3f& lookAt) {
+			m_View = math::matrix::LookAtLH(position, lookAt, math::up());
+			m_ViewProjection = m_View * m_Projection;
+		}
+
 		virtual void SetPerspective(float fovY, float aspect, float nearZ, float farZ) {
 			m_ProjectionType = ProjectionType::Perspective;
 			m_FOVY = fovY;
@@ -67,6 +74,31 @@ namespace Framework {
 			m_NearZ = nearZ;
 			m_FarZ = farZ;
 			m_Projection = math::matrix::OrthographicLH(width, height, nearZ, farZ);
+		}
+		virtual void SetPitch(float pitch) { m_Rotation.x = pitch; }
+		virtual void SetYaw(float yaw) { m_Rotation.y = yaw; }
+		virtual void SetRoll(float roll) { m_Rotation.z = roll; }
+
+		// --- 方向ベクトル取得（共通処理）---
+		math::vector3f GetForward() const {
+			math::matrix rotation = math::matrix::Rotation(m_Rotation);
+			math::vector3f forward = rotation.TransformVector(-math::forward());
+			forward.normalize();
+			return forward;
+		}
+
+		math::vector3f GetBackward() const {
+			return -GetForward();
+		}
+
+		math::vector3f GetLeft() const {
+			math::vector3f left = math::up().cross(-GetForward());
+			left.normalize();
+			return left;
+		}
+
+		math::vector3f GetRight() const {
+			return -GetLeft();
 		}
 
 		virtual const math::matrix& GetView() const { return m_View; }

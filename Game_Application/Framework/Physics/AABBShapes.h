@@ -58,27 +58,19 @@ namespace Framework {
         // 衝突したときに、どのくらい重なっているか（押し戻す量）を返す
         // 正の値ならother側に押す、負の値ならthis側に押す、と考えられる
         math::vector3f GetPenetration(const AABB& other) const {
-            float overlapX = std::min(max.x - other.min.x, other.max.x - min.x);
-            float overlapY = std::min(max.y - other.min.y, other.max.y - min.y);
-            float overlapZ = std::min(max.z - other.min.z, other.max.z - min.z);
+            // 各方向の重なり量を計算
+            float dx1 = other.max.x - min.x; // other → this
+            float dx2 = max.x - other.min.x; // this → other
+            float dy1 = other.max.y - min.y;
+            float dy2 = max.y - other.min.y;
+            float dz1 = other.max.z - min.z;
+            float dz2 = max.z - other.min.z;
 
-            // 絶対値が最も小さい軸のみ採用
-            math::vector3f push;
-
-            if (overlapX <= overlapY && overlapX <= overlapZ) {
-                // X 軸
-                push = { (max.x < other.max.x) ? -overlapX : overlapX, 0, 0 };
-            }
-            else if (overlapY <= overlapX && overlapY <= overlapZ) {
-                // Y 軸
-                push = { 0, (max.y < other.max.y) ? -overlapY : overlapY, 0 };
-            }
-            else {
-                // Z 軸
-                push = { 0, 0, (max.z < other.max.z) ? -overlapZ : overlapZ };
-            }
-
-            return push;
+            math::vector3f depth;
+            depth.x = (dx1 < dx2) ? dx1 : -dx2; // 小さい方を採用して押し戻す方向を決定
+            depth.y = (dy1 < dy2) ? dy1 : -dy2;
+            depth.z = (dz1 < dz2) ? dz1 : -dz2;
+            return depth;
         }
 
         // ----------------------------------------
@@ -92,43 +84,6 @@ namespace Framework {
 
         math::vector3f Center() const {
             return (min + max) * 0.5f;
-        }
-
-        static bool ComputePush(const AABB& a, const AABB& b, math::vector3f& outPush) {
-            if (!a.Intersect(b)) {
-                outPush = { 0, 0, 0 };
-                return false;
-            }
-
-            float overlapX = std::min(a.max.x, b.max.x) - std::max(a.min.x, b.min.x);
-            float overlapY = std::min(a.max.y, b.max.y) - std::max(a.min.y, b.min.y);
-            float overlapZ = std::min(a.max.z, b.max.z) - std::max(a.min.z, b.min.z);
-
-            float minOverlap = std::min({ overlapX, overlapY, overlapZ });
-
-            // X軸が最小
-            if (minOverlap == overlapX) {
-                if (a.Center().x < b.Center().x)
-                    outPush = { -overlapX, 0, 0 };
-                else
-                    outPush = { overlapX, 0, 0 };
-            }
-            // Y軸が最小
-            else if (minOverlap == overlapY) {
-                if (a.Center().y < b.Center().y)
-                    outPush = { 0, -overlapY, 0 };
-                else
-                    outPush = { 0, overlapY, 0 };
-            }
-            // Z軸が最小
-            else {
-                if (a.Center().z < b.Center().z)
-                    outPush = { 0, 0, -overlapZ };
-                else
-                    outPush = { 0, 0, overlapZ };
-            }
-
-            return true;
         }
     };
 }

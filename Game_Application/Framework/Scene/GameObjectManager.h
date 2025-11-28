@@ -27,6 +27,7 @@ namespace Framework {
 	class GameObject;
     //class PhysicsManager;
 	class RenderComponentManager;
+	class PhysicsComponentManager;
 
     class GameObjectManager {
     private:
@@ -34,7 +35,7 @@ namespace Framework {
         std::vector<std::unique_ptr<GameObject>> m_PendingAdd;
         std::unordered_map<std::string, GameObject*> m_TagMap;
 
-		//std::unique_ptr<PhysicsManager> m_PhysicsManager;
+		std::unique_ptr<PhysicsComponentManager> m_PhysicsComponentManager;
 		std::unique_ptr<RenderComponentManager> m_RenderComponentManager;
 
     public:

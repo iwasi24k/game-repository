@@ -219,6 +219,9 @@
     <ClCompile Include="Framework\Scene\Components\PhysicsComponent\PhysicsComponentManager.cpp">
       <Filter>Framework\Scene\Components\PhysicsComponent</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Script\Game\JumpScript.cpp">
+      <Filter>Project\Script\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -383,6 +386,9 @@
     </ClInclude>
     <ClInclude Include="Framework\Physics\AABBShapes.h">
       <Filter>Framework\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Game\JumpScript.h">
+      <Filter>Project\Script\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

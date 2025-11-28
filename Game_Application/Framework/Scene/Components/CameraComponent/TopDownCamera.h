@@ -21,6 +21,9 @@ namespace Framework {
 		float height = 10.0f; // カメラの高さ
 		float distance = 10.0f; // カメラとターゲットの距離
 		float smooth = 10.0f; // カメラの追従速度
+		float pitch = 0.0f;
+		float yaw = 0.0f;
+		float roll = 0.0f;
 	};
 
 	class TopDownCamera : public Camera {
@@ -30,6 +33,7 @@ namespace Framework {
 		float m_Height = 10.0f; // カメラの高さ
 		float m_Distance = 10.0f; // カメラとターゲットの距離
 		float m_Smooth = 10.0f; // カメラの追従速度
+		math::vector3f m_Focus{};
 
 	public:
 		void Start() override;
@@ -51,6 +55,7 @@ namespace Framework {
 			m_Height = config.height;
 			m_Distance = config.distance;
 			m_Smooth = config.smooth;
+			m_Rotation = { config.pitch, config.yaw, config.roll };
 		}
 	};
 } // namespace Framework

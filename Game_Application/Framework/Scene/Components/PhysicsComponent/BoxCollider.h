@@ -16,27 +16,38 @@
 
 namespace Framework {
 
+    struct BoxColliderConfig {
+        bool isTrigger = false;
+        math::vector3f posOffset = math::zero<math::vector3f>();
+        math::vector3f sizeOffset = math::zero<math::vector3f>();
+    };
+
     class BoxCollider : public ColliderComponent {
     private:
-        AABB m_LocalAABB;
-        AABB m_WorldAABB;
+        AABB m_AABB;
 
         math::vector3f m_PositionOffset = math::zero<math::vector3f>();
         math::vector3f m_SizeOffset = math::zero<math::vector3f>();
 
     public:
-        void Update() override;
+        void FixedUpdate() override;
 
-        const AABB& GetWorldAABB() const { return m_WorldAABB; }
+        void SetFromTransform(const math::vector3f& position);
+        bool Intersect(const ColliderComponent& other) const override;
+        math::vector3f GetPenetration(const ColliderComponent& other) const override;
+        math::vector3f GetCollisionNormal(const ColliderComponent& other) const override;
+
+        const AABB& GetAABB() const { return m_AABB; }
         void SetPositionOffset(const math::vector3f& posOffset) { m_PositionOffset = posOffset; }
         const math::vector3f& GetPositionOffset() { return m_PositionOffset; }
         void SetSizeOffset(const math::vector3f& sizeOffset) { m_SizeOffset = sizeOffset; }
         const math::vector3f& GetSizeOffset() { return m_SizeOffset; }
-
     public:
-        void Configure(const math::vector3f& posOffset, const math::vector3f& sizeOffset) {
-            m_PositionOffset = posOffset;
-            m_SizeOffset = sizeOffset;
+        void Configure(const BoxColliderConfig& config) {
+            m_Type = ColliderType::Box;
+            m_IsTrigger = config.isTrigger;
+            m_PositionOffset = config.posOffset;
+            m_SizeOffset = config.sizeOffset;
         }
     };
 }
