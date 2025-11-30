@@ -222,6 +222,9 @@
     <ClCompile Include="Project\Script\Game\JumpScript.cpp">
       <Filter>Project\Script\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Script\Game\BlockScript.cpp">
+      <Filter>Project\Script\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -388,6 +391,9 @@
       <Filter>Framework\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Project\Script\Game\JumpScript.h">
+      <Filter>Project\Script\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Game\BlockScript.h">
       <Filter>Project\Script\Game</Filter>
     </ClInclude>
   </ItemGroup>

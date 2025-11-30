@@ -16,6 +16,7 @@
 #include "Script/Game/Manager/BlockManager.h"
 
 using namespace Framework;
+BlockManager blockManager;
 
 bool GameScene::SceneInitialize() {
 
@@ -25,7 +26,6 @@ bool GameScene::SceneInitialize() {
 	PlayerPrefab playerPrefab;
 	playerPrefab.Create(GetGameObjectManager());
 
-	BlockManager blockManager;
 	blockManager.Create(GetGameObjectManager());
 
 	TestPrefab testPrefab;
@@ -43,4 +43,5 @@ void GameScene::SceneFinalize(){
 }
 
 void GameScene::SceneUpdate(){
+	blockManager.Update();
 }

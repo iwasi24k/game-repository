@@ -11,7 +11,6 @@
 #define PLAYER_SCRIPT_H
 
 #include "MonoBehaviour.h"
-#include "Components/RenderComponent/SpriteComponent.h"
 
 class PlayerScript : public Framework::MonoBehaviour {
 public:
