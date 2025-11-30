@@ -41,6 +41,9 @@ void BlockManager::Update() {
 	std::iota(indices.begin(), indices.end(), 0);
 	std::shuffle(indices.begin(), indices.end(), std::mt19937(std::random_device{}()));
 
+	static std::mt19937 mt{ std::random_device{}() };
+	std::uniform_real_distribution<float> dist(0.0f, 1.0f);
+
 	for (int i = 0; i < static_cast<int>(m_Blocks.size()); ++i) {
 		auto block = m_Blocks[indices[i]];
 		auto blockScript = block->GetComponent<BlockScript>();
@@ -49,9 +52,9 @@ void BlockManager::Update() {
 
 		// Œ»İ‚Ì‚‚³‚©‚ç targetY ‚ğŒˆ’è
 		float targetY = 0.0f;
-		float randVal = static_cast<float>(rand()) / RAND_MAX;
-		float probability = 0.6f;
-		float downPos = 0.0f;
+		float randVal = dist(mt);
+		constexpr float probability = 0.6f;
+		constexpr float downPos = 0.0f;
 		float upPos = block->GetTransform().scale.y;
 
 		if (randVal < probability)
