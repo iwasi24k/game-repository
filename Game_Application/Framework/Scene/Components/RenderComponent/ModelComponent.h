@@ -20,7 +20,7 @@
 namespace Framework {
 
 	class Model;
-    class Material;
+    struct Material;
 
     class ModelComponent : public RenderComponent {
 	private:
