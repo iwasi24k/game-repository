@@ -38,6 +38,7 @@ namespace Framework {
         float m_Drag = 0.0f;       // 空気抵抗（速度減衰量）
 
     public:
+        void AddImpulse(const math::vector3f& impulse);
         void AddForce(const math::vector3f& force);
         void FixedUpdate() override;
 

@@ -29,7 +29,7 @@ void JumpScript::Update() {
     if (rb) {
         InputKeyboard& keyboard = InputKeyboard::GetInstance();
 
-        float jumpForce = 75.0f;
+        float jumpForce = 5.0f;
 
         if (m_GroundContacts > 0) {
             m_IsGround = true;
@@ -41,7 +41,7 @@ void JumpScript::Update() {
         }
 
         if (keyboard.IsKeyTriggered(KB::Space) && m_IsGround) {
-            rb->AddForce(math::vector3f(0.0f, jumpForce, 0.0f));
+            rb->AddImpulse(math::vector3f(0.0f, jumpForce, 0.0f));
         }
     }
 }

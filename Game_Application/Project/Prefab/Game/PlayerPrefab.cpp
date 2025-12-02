@@ -56,7 +56,7 @@ void PlayerPrefab::Configure(GameObject* obj) {
 	auto rb = obj->GetComponent<Rigidbody>();
 	RigidbodyConfig rbConfig;
 	rbConfig.velocity = math::vector3f(0.0f, 0.0f, 0.0f);
-	rbConfig.mass = 0.1f;
+	rbConfig.mass = 1.0f;
 	rbConfig.useGravity = true;
 	rbConfig.gravity = -9.8f;
 	rbConfig.drag = 0.05f;
