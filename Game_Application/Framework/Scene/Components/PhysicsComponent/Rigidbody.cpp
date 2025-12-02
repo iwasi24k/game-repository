@@ -14,6 +14,10 @@
 
 using namespace Framework;
 
+void Rigidbody::AddImpulse(const math::vector3f& impulse) {
+    m_Velocity += impulse / m_Mass;
+}
+
 void Rigidbody::AddForce(const math::vector3f& force) {
     m_Acceleration += force / m_Mass;
 }
