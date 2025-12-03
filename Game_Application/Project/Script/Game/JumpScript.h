@@ -20,6 +20,9 @@ private:
     float m_GroundGraceTime = 0.1f;
     float m_GroundTimer = 0.0f;
 
+    float m_Frame = 160.0f;
+    float m_CoolTime = 160.0f;
+
 public:
     void Start() override;
     void Update() override;
