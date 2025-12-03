@@ -225,6 +225,12 @@
     <ClCompile Include="Project\Script\Game\BlockScript.cpp">
       <Filter>Project\Script\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Scene\ObjectManager.cpp">
+      <Filter>Framework\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scene\MonoBehaviour.cpp">
+      <Filter>Framework\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -395,6 +401,12 @@
     </ClInclude>
     <ClInclude Include="Project\Script\Game\BlockScript.h">
       <Filter>Project\Script\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene\ObjectManager.h">
+      <Filter>Framework\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene\ManagerHub.h">
+      <Filter>Framework\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

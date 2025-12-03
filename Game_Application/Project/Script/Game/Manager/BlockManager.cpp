@@ -1,3 +1,12 @@
+//==============================================================================
+// File        : BlockManager.cpp
+//------------------------------------------------------------------------------
+// Author      : ix.U
+// Created     : 2025-11-16
+// Last Update : 2025-12-03
+//------------------------------------------------------------------------------
+//
+//==============================================================================
 #include "pch.h"
 #include <algorithm>
 #include <numeric>
@@ -10,8 +19,8 @@
 
 using namespace Framework;
 
-void BlockManager::Create(GameObjectManager* mgr) {
-    m_GameObjectManager = mgr;
+void BlockManager::Create() {
+    m_GameObjectManager = GetGameObjectManager();
 
 	WhiteBlockPrefab whiteBlockPrefab;
 	BlackBlockPrefab blackBlockPrefab;
@@ -70,4 +79,21 @@ void BlockManager::Update() {
 		--moveCount; // 選んだ分だけ減らす
 		if (moveCount <= 0) break;
 	}
+}
+
+float BlockManager::GetBlockHeightAt(float x, float z) {
+	float maxHeight = 0.0f;
+
+	for (auto& block : m_Blocks) {
+		auto& pos = block->GetTransform().position;
+		auto& scale = block->GetTransform().scale;
+
+		// キャラクター位置がブロックのXZ範囲に入っているか
+		if (x >= pos.x - scale.x / 2 && x <= pos.x + scale.x / 2 &&
+			z >= pos.z - scale.z / 2 && z <= pos.z + scale.z / 2) {
+			// 最大の高さを取得（複数ブロック重なっても安全）
+			maxHeight = std::max(maxHeight, pos.y);
+		}
+	}
+	return maxHeight;
 }
