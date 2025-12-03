@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-08-20
-// Last Update : 2025-11-08
+// Last Update : 2025-12-03
 //------------------------------------------------------------------------------
 // Overview :
 // このファイルは、DirectX 11 におけるシェーダー関連の共通データ構造体を定義します。
@@ -98,6 +98,16 @@ namespace Shader {
 		math::vector4f Color;
 	};
 
+	struct alignas(16) ShadowBuffer {
+		math::vector3f ShadowPosition;
+		float pad0;
+		math::vector2f ShadowSize;
+		float ShadowStrength;
+		float pad1;
+		math::vector3f FieldPosition;
+		float pad2;
+	};
+
 	// サイズチェック（デバッグ用）
 	static_assert(sizeof(Vertex) % 16 == 0, "Vertex must be 16-byte aligned");
 	static_assert(sizeof(InstanceData) % 16 == 0, "InstanceData must be 16-byte aligned");
@@ -105,6 +115,7 @@ namespace Shader {
 	static_assert(sizeof(LightBuffer) % 16 == 0, "LightBuffer must be 16-byte aligned");
 	static_assert(sizeof(MaterialBuffer) % 16 == 0, "MaterialBuffer must be 16-byte aligned");
 	static_assert(sizeof(ColorBuffer) % 16 == 0, "ColorBuffer must be 16-byte aligned");
+	static_assert(sizeof(ShadowBuffer) % 16 == 0, "ShadowBuffer must be 16-byte aligned");
 }
 
 

@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-08-20
-// Last Update : 2025-11-08
+// Last Update : 2025-12-03
 //------------------------------------------------------------------------------
 // Overview :
 // このクラスは DirectX 11 の描画基盤を統括的に制御するレンダラーです。
@@ -18,6 +18,9 @@
 
 #include <memory>
 #include "MathTransform.h"
+#include "ShaderTypes.h"
+#include "Device.h"
+#include "ConstantBufferManager.h"
 
 namespace Framework {
 
@@ -60,6 +63,11 @@ namespace Framework {
 		void SetLight(math::vector4f direction, math::vector4f diffuse, math::vector4f ambient, math::vector4f position, math::vector4f pointLightParam);
 		void SetMaterial(math::vector4f ambient, math::vector4f diffuse, math::vector4f specular, math::vector4f emission, float shininess, bool textureEnable);
 		void SetColor(math::vector4f color);
+
+		template<typename T>
+		void SetBuffer(UINT slot, T data, Shader::ShaderStage stage) {
+			m_ConstantBufferManager->Update(m_Device->GetContext(), data, slot, stage);
+		}
 
 		ID3D11Device* GetDevice() const;
 		ID3D11DeviceContext* GetContext() const;

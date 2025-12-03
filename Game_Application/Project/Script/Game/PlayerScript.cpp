@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-11-16
-// Last Update : 2025-11-16
+// Last Update : 2025-12-03
 //------------------------------------------------------------------------------
 // 
 //==============================================================================
@@ -14,6 +14,9 @@
 #include "Components/CameraComponent/TopDownCamera.h"
 #include "InputKeyboard.h"
 #include "Framework/Core/Timer.h"
+#include "Renderer.h"
+#include "ManagerHub.h"
+#include "Manager/BlockManager.h"
 
 using namespace Framework;
 
@@ -29,17 +32,16 @@ void PlayerScript::Update() {
 
     if (rb) {
         // Example: Move right constantly
-		InputKeyboard& keyboard = InputKeyboard::GetInstance();
+        InputKeyboard& keyboard = InputKeyboard::GetInstance();
         math::vector3f inputDir = math::zero<math::vector3f>();
-		math::vector3f cameraForward = cam->GetForward();
-		math::vector3f cameraBackward = cam->GetBackward();
-		math::vector3f cameraLeft = cam->GetLeft();
-		math::vector3f cameraRight = cam->GetRight();
+        math::vector3f cameraForward = cam->GetForward();
+        math::vector3f cameraBackward = cam->GetBackward();
+        math::vector3f cameraLeft = cam->GetLeft();
+        math::vector3f cameraRight = cam->GetRight();
 
-		auto velocity = rb->GetVelocity();
-		float speed = 3.0f;
-		//float jumpForce = 75.0f;
-        
+        auto velocity = rb->GetVelocity();
+        float speed = 3.0f;
+
         if (keyboard.IsKeyDown(KB::D)) {
             inputDir += cameraRight;
         }
@@ -59,34 +61,18 @@ void PlayerScript::Update() {
         }
         else {
             velocity.x = 0.0f;
-			velocity.z = 0.0f;
+            velocity.z = 0.0f;
         }
-		rb->SetVelocity(velocity);
+        rb->SetVelocity(velocity);
+    }
 
-        //if (m_GroundContacts > 0) {
-        //    m_IsGround = true;
-        //    m_GroundTimer = m_GroundGraceTime;
-        //}
-        //else {
-        //    m_GroundTimer -= Timer::GetInstance().GetDeltaTime();
-        //    if (m_GroundTimer <= 0.0f) m_IsGround = false;
-        //}
+    auto pos = GetOwner()->GetTransform().position;
+    float blockY = GetManagerHub()->FindManager<BlockManager>()->GetBlockHeightAt(pos.x, pos.z);
 
-        //// ƒWƒƒƒ“ƒv
-        //if (keyboard.IsKeyTriggered(KB::Space) && m_IsGround) {
-        //    rb->AddForce(math::vector3f(0.0f, jumpForce, 0.0f));
-        //}
-	}
+    Shader::ShadowBuffer sb{};
+    sb.ShadowPosition = pos;
+    sb.ShadowSize = { 0.95f, 0.95f };
+    sb.ShadowStrength = 1.5f;
+    sb.FieldPosition = { 0.0f, blockY, 0.0f };
+    Renderer::GetInstance().SetBuffer<Shader::ShadowBuffer>(4, sb, Shader::ShaderStage::Pixel);
 }
-
-//void PlayerScript::OnTriggerEnter(Framework::GameObject* other) {
-//    if (other->GetTag() == "Block") {
-//        m_GroundContacts++;
-//    }
-//}
-//
-//void PlayerScript::OnTriggerExit(Framework::GameObject* other) {
-//    if (other->GetTag() == "Block") {
-//        m_GroundContacts--;
-//    }
-//}

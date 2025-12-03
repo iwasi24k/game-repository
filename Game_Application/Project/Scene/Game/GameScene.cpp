@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-11-16
-// Last Update : 2025-11-18
+// Last Update : 2025-12-03
 //------------------------------------------------------------------------------
 // 
 //==============================================================================
@@ -14,9 +14,11 @@
 #include "Prefab/CameraPrefab.h"
 
 #include "Script/Game/Manager/BlockManager.h"
+#include "SceneManager.h"
+#include "Renderer.h"
+#include "ManagerHub.h"
 
 using namespace Framework;
-BlockManager blockManager;
 
 bool GameScene::SceneInitialize() {
 
@@ -26,7 +28,7 @@ bool GameScene::SceneInitialize() {
 	PlayerPrefab playerPrefab;
 	playerPrefab.Create(GetGameObjectManager());
 
-	blockManager.Create(GetGameObjectManager());
+	GetManagerHub()->AddManager<BlockManager>(std::make_unique<BlockManager>());
 
 	TestPrefab testPrefab;
 	testPrefab.Create(GetGameObjectManager());
@@ -43,5 +45,5 @@ void GameScene::SceneFinalize(){
 }
 
 void GameScene::SceneUpdate(){
-	blockManager.Update();
+	
 }

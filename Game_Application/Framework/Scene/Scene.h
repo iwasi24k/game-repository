@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-11-14
-// Last Update : 2025-11-14
+// Last Update : 2025-12-03
 //------------------------------------------------------------------------------
 // Overview :
 // Scene クラスはシーン単位のゲームオブジェクト管理を担い、
@@ -19,12 +19,14 @@
 #define SCENE_H
 
 #include "GameObjectManager.h"
+#include "ManagerHub.h"
 
 namespace Framework {
 
 	class Scene {
 	private:
 		std::unique_ptr<GameObjectManager> m_GameObjectManager;
+		std::unique_ptr<ManagerHub> m_ManagerHub;
 
 	public:
 		Scene();
@@ -35,6 +37,7 @@ namespace Framework {
 		virtual void SceneUpdate() = 0;
 
 		GameObjectManager* GetGameObjectManager() const;
+		ManagerHub* GetManagerHub() const;
 
 	private:
 		void Awake();

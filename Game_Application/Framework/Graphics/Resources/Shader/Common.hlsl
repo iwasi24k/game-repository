@@ -4,7 +4,7 @@
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-11-08
-// Last Update : 2025-11-08
+// Last Update : 2025-12-03
 //------------------------------------------------------------------------------
 // 
 //==============================================================================
@@ -49,6 +49,17 @@ cbuffer MaterialBuffer : register(b2)
 cbuffer ColorBuffer : register(b3)
 {
     float4 Color; // íPêFï`âÊóp
+}
+
+cbuffer ShadowBuffer : register(b4)
+{
+    float3 ShadowPosition;
+    float pad0;
+    float2 ShadowSize;
+    float ShadowStrength;
+    float pad1;
+    float3 FieldPosition;
+    float pad2;
 }
 
 // -------------------------------

@@ -182,6 +182,8 @@
     <ClCompile Include="Framework\Scene\Components\RenderComponent\SpriteComponent.cpp" />
     <ClCompile Include="Framework\Scene\GameObject.cpp" />
     <ClCompile Include="Framework\Scene\GameObjectManager.cpp" />
+    <ClCompile Include="Framework\Scene\MonoBehaviour.cpp" />
+    <ClCompile Include="Framework\Scene\ObjectManager.cpp" />
     <ClCompile Include="Framework\Scene\Prefab\CameraPrefab.cpp" />
     <ClCompile Include="Framework\Scene\Scene.cpp" />
     <ClCompile Include="Framework\Scene\SceneManager.cpp" />
@@ -241,7 +243,9 @@
     <ClInclude Include="Framework\Scene\Components\RenderComponent\SpriteComponent.h" />
     <ClInclude Include="Framework\Scene\GameObject.h" />
     <ClInclude Include="Framework\Scene\GameObjectManager.h" />
+    <ClInclude Include="Framework\Scene\ManagerHub.h" />
     <ClInclude Include="Framework\Scene\MonoBehaviour.h" />
+    <ClInclude Include="Framework\Scene\ObjectManager.h" />
     <ClInclude Include="Framework\Scene\Prefab.h" />
     <ClInclude Include="Framework\Scene\Prefab\CameraPrefab.h" />
     <ClInclude Include="Framework\Scene\Scene.h" />
