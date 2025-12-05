@@ -10,9 +10,9 @@
 #ifndef PLAYER_SCRIPT_H
 #define PLAYER_SCRIPT_H
 
-#include "MonoBehaviour.h"
+#include "GameBehaviour.h"
 
-class PlayerScript : public Framework::MonoBehaviour {
+class PlayerScript : public Framework::GameBehaviour {
 public:
     void Start() override;
     void Update() override;

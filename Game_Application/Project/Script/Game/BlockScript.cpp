@@ -31,6 +31,11 @@ void BlockScript::Update() {
 
 	switch (m_State) {
 	case BlockState::Warning:
+		if (!m_IsWarning) {
+			m_State = BlockState::Moving;
+			return;
+		}
+
 		m_WarningTimer += dt;
 
 		sinValue = (sinf(m_WarningTimer * 8.0f) * 0.5f + 0.5f);

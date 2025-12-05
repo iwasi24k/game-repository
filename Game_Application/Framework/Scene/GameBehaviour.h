@@ -1,9 +1,9 @@
 //==============================================================================
-// File        : MonoBehaviour.h
+// File        : GameBehaviour.h
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-08-20
-// Last Update : 2025-12-03
+// Last Update : 2025-12-05
 //------------------------------------------------------------------------------
 // 
 //==============================================================================
@@ -17,7 +17,7 @@ namespace Framework {
     class Scene;
     class ManagerHub;
 
-    class MonoBehaviour : public Behaviour {
+    class GameBehaviour : public Behaviour {
     public:
         // --- user API ---
         Scene* GetScene();
