@@ -16,7 +16,7 @@
 
 #include <Windows.h>
 
-#define IS_WINDOW_MODE (TRUE)
+#define IS_WINDOW_MODE (FALSE)
 
 namespace Framework {
 
