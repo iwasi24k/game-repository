@@ -32,4 +32,25 @@ void TitleCamera::Start() {
     UpdateView(camPos, m_Focus);
 }
 void TitleCamera::Update() {
+    math::matrix rot =
+        math::matrix::RotationX(m_Rotation.x) *
+        math::matrix::RotationY(m_Rotation.y);
+
+    // --- 前方向(Z-)を回転させてカメラの向きに ---
+    math::vector3f forward = rot.TransformVector({ 0, 0, -1 });
+
+    static float timeAccumulator = 0.0f;
+    timeAccumulator += Framework::Timer::GetInstance().GetDeltaTime();
+
+    // --- 注視点（m_Focus）から一定距離後ろに配置 ---
+    float oscillationSpeed = 0.1f; // 速度（秒あたりの変化量）
+    float oscillationRange = 1.0f; // 変化幅（±2ユニットなど）
+    float distance = m_Distance + sinf(timeAccumulator * oscillationSpeed) * oscillationRange;
+
+    math::vector3f camPos = m_Focus - forward * distance;
+
+    GetOwner()->GetTransform().position = camPos;
+
+    // --- View 更新 ---
+    UpdateView(camPos, m_Focus);
 }

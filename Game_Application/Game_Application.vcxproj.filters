@@ -264,6 +264,18 @@
     <ClCompile Include="Project\Script\Title\Manager\TitleBlockManager.cpp">
       <Filter>Project\Script\Title\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Script\Title\BgBlockScript.cpp">
+      <Filter>Project\Script\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Script\Title\Manager\BgBlockManager.cpp">
+      <Filter>Project\Script\Title\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Prefab\Title\BlockPrefab.cpp">
+      <Filter>Project\Prefab\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Prefab\Title\GameStartPrefab.cpp">
+      <Filter>Project\Prefab\Title</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -461,6 +473,21 @@
     </ClInclude>
     <ClInclude Include="Project\Script\Title\Manager\TitleBlockManager.h">
       <Filter>Project\Script\Title\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Title\Manager\BgBlockManager.h">
+      <Filter>Project\Script\Title\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Title\BgBlockScript.h">
+      <Filter>Project\Script\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Title\BlockPrefab.h">
+      <Filter>Project\Prefab\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Title\GameStartPrefab.h">
+      <Filter>Project\Prefab\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Core\Screen.h">
+      <Filter>Framework\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -48,7 +48,7 @@ void WhiteBlockPrefab::Configure(GameObject* obj) {
 	mat.Shininess = 32.0f;
 	modelComp->SetMaterial(mat);
 	modelComp->SetLight(
-		{ -0.3f, -1.0f, -0.2f, 0.0f },   // 平行光方向
+		{ -1.0f, 1.0f, 0.5f, 0.0f },   // 平行光方向
 		{ 1.5f, 1.5f, 1.5f, 1.0f },      // 拡散光強め
 		{ 0.5f, 0.5f, 0.5f, 1.0f },      // 環境光少し強め
 		{ 0,0,0,1 },                     // ポイント光位置（今回は使わない）

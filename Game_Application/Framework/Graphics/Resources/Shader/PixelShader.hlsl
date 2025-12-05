@@ -93,7 +93,8 @@ float4 main(VSPS_Default input) : SV_TARGET
     float3 normal = normalize(input.Normal);
 
     // 太陽光方向
-    float3 lightDir = normalize(float3(0.5f, 1.0f, 0.8f));
+    float3 lightDir = normalize(LightData.Direction.xyz);
+    //float3 lightDir = normalize(float3(0.5f, 1.0f, 0.8f));
     float3 viewDir = normalize(float3(0.0f, 0.0f, -1.0f));
 
     // 上向き補正（太陽光感アップ）
