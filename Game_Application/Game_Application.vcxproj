@@ -211,6 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Core\Application.h" />
+    <ClInclude Include="Framework\Core\Screen.h" />
     <ClInclude Include="Framework\Core\Timer.h" />
     <ClInclude Include="Framework\Core\Window.h" />
     <ClInclude Include="Framework\Graphics\Model\Material.h" />

@@ -35,36 +35,6 @@ using namespace DirectX;
 #pragma comment (lib, "winmm.lib")
 #include <mmsystem.h>
 
-#define IS_WINDOW_MODE (TRUE)
-
-namespace Framework {
-
-	class Screen {
-		UINT m_Width = 1280;
-		UINT m_Height = 720;
-		UINT m_FullWidth = 1280;
-		UINT m_FullHeight = 720;
-
-		Screen() {
-			m_FullWidth = GetSystemMetrics(SM_CXSCREEN);
-			m_FullHeight = GetSystemMetrics(SM_CYSCREEN);
-		}
-		~Screen() = default;
-		Screen(const Screen&) = delete;
-		Screen& operator=(const Screen&) = delete;
-
-	public:
-		static Screen& GetInstance() {
-			static Screen instance;
-			return instance;
-		}
-		float GetScreenWidth()  const { return static_cast<float>(IS_WINDOW_MODE ? m_Width : m_FullWidth); }
-		float GetScreenHeight() const { return static_cast<float>(IS_WINDOW_MODE ? m_Height : m_FullHeight); }
-	};
-}
-
-#define SCREEN_WIDTH (Framework::Screen::GetInstance().GetScreenWidth())
-#define SCREEN_HEIGHT (Framework::Screen::GetInstance().GetScreenHeight())
-
+#include "Framework/Core/Screen.h"
 
 #endif // PCH_H
