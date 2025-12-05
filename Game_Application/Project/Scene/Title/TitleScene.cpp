@@ -10,7 +10,7 @@
 #include "pch.h"
 #include "TitleScene.h"
 
-#include "Script/Game/Manager/BlockManager.h"
+#include "Script/Title/Manager/TitleBlockManager.h"
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ManagerHub.h"
@@ -26,7 +26,7 @@ bool TitleScene::SceneInitialize() {
 	TitleCameraPrefab cameraPrefab;
 	auto camera = cameraPrefab.Create(GetGameObjectManager());
 
-	GetManagerHub()->AddManager<BlockManager>(std::make_unique<BlockManager>());
+	GetManagerHub()->AddManager<TitleBlockManager>(std::make_unique<TitleBlockManager>());
 
 	TitleLogoPrefab testPrefab;
 	testPrefab.Create(GetGameObjectManager());

@@ -94,6 +94,9 @@
     <Filter Include="Project\Prefab\Title">
       <UniqueIdentifier>{ba5f334b-ea54-4795-85e6-5eb099f255b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Script\Title\Manager">
+      <UniqueIdentifier>{caa958a5-c1de-4b7b-a127-43586eb5eae7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -237,9 +240,6 @@
     <ClCompile Include="Framework\Scene\ObjectManager.cpp">
       <Filter>Framework\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\Scene\MonoBehaviour.cpp">
-      <Filter>Framework\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Project\Scene\Title\TitleScene.cpp">
       <Filter>Project\Scene\Title</Filter>
     </ClCompile>
@@ -251,6 +251,18 @@
     </ClCompile>
     <ClCompile Include="Project\Prefab\Title\TitleLogoPrefab.cpp">
       <Filter>Project\Prefab\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scene\GameBehaviour.cpp">
+      <Filter>Framework\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Prefab\Title\TitleWhiteBlockPrefab.cpp">
+      <Filter>Project\Prefab\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Prefab\Title\TitleBlackBlockPrefab.cpp">
+      <Filter>Project\Prefab\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Script\Title\Manager\TitleBlockManager.cpp">
+      <Filter>Project\Script\Title\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -357,9 +369,6 @@
     <ClInclude Include="Framework\Scene\Behaviour.h">
       <Filter>Framework\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\Scene\MonoBehaviour.h">
-      <Filter>Framework\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Project\Scene\Game\GameScene.h">
       <Filter>Project\Scene\Game</Filter>
     </ClInclude>
@@ -440,6 +449,18 @@
     </ClInclude>
     <ClInclude Include="Project\Prefab\Title\TitleLogoPrefab.h">
       <Filter>Project\Prefab\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene\GameBehaviour.h">
+      <Filter>Framework\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Title\TitleWhiteBlockPrefab.h">
+      <Filter>Project\Prefab\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Title\TitleBlackBlockPrefab.h">
+      <Filter>Project\Prefab\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Title\Manager\TitleBlockManager.h">
+      <Filter>Project\Script\Title\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

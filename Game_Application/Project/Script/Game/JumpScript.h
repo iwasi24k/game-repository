@@ -10,10 +10,10 @@
 #ifndef JUMP_SCRIPT_H
 #define JUMP_SCRIPT_H
 
-#include "MonoBehaviour.h"
+#include "GameBehaviour.h"
 #include "Components/RenderComponent/SpriteComponent.h"
 
-class JumpScript : public Framework::MonoBehaviour {
+class JumpScript : public Framework::GameBehaviour {
 private:
     int m_GroundContacts = 0;
     bool m_IsGround = false;
