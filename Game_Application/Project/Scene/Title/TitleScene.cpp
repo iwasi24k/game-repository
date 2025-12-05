@@ -11,6 +11,7 @@
 #include "TitleScene.h"
 
 #include "Script/Title/Manager/TitleBlockManager.h"
+#include "Script/Title/Manager/BgBlockManager.h"
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ManagerHub.h"
@@ -18,6 +19,7 @@
 #include "InputKeyboard.h"
 #include "Prefab/Title/TitleCameraPrefab.h"
 #include "Prefab/Title/TitleLogoPrefab.h"
+#include "Prefab/Title/GameStartPrefab.h"
 
 using namespace Framework;
 
@@ -28,8 +30,13 @@ bool TitleScene::SceneInitialize() {
 
 	GetManagerHub()->AddManager<TitleBlockManager>(std::make_unique<TitleBlockManager>());
 
-	TitleLogoPrefab testPrefab;
-	testPrefab.Create(GetGameObjectManager());
+	TitleLogoPrefab titlePrefab;
+	titlePrefab.Create(GetGameObjectManager());
+
+	GameStartPrefab gameStartPrefab;
+	gameStartPrefab.Create(GetGameObjectManager());
+
+	GetManagerHub()->AddManager<BgBlockManager>(std::make_unique<BgBlockManager>());
 
 	return true;
 }

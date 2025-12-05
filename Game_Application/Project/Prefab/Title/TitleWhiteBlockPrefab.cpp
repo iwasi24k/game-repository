@@ -38,7 +38,7 @@ void TitleWhiteBlockPrefab::Configure(GameObject* obj) {
 	auto modelComp = obj->GetComponent<ModelComponent>();
 	modelComp->LoadModel(L"Asset/Model/block.fbx");
 	//modelComp->SetTexture(0, L"Asset/Texture/test.png");
-	modelComp->LoadShader(L"ModelShader", L"cso-file\\VertexShader.cso", L"cso-file\\PixelShader.cso");
+	modelComp->LoadShader(L"ModelShader", L"cso-file\\BlockVS.cso", L"cso-file\\BlockPS.cso");
 	Material mat;
 	mat.Ambient = { 0.5f, 0.5f, 0.5f, 1.0f };
 	mat.Diffuse = { 0.9f, 0.9f, 0.9f, 1.0f };
@@ -47,7 +47,7 @@ void TitleWhiteBlockPrefab::Configure(GameObject* obj) {
 	mat.Shininess = 32.0f;
 	modelComp->SetMaterial(mat);
 	modelComp->SetLight(
-		{ -0.3f, -1.0f, -0.2f, 0.0f },   // 平行光方向
+		{ 0.5f, 1.0f, 0.8f, 0.0f },   // 平行光方向
 		{ 1.5f, 1.5f, 1.5f, 1.0f },      // 拡散光強め
 		{ 0.5f, 0.5f, 0.5f, 1.0f },      // 環境光少し強め
 		{ 0,0,0,1 },                     // ポイント光位置（今回は使わない）
