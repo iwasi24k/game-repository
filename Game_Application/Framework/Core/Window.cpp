@@ -36,15 +36,19 @@ bool Window::Initialize(HINSTANCE hInstance, int nCmdShow) {
 
     if (!RegisterClassEx(&wc)) { return false; }
 
+    DWORD style = IS_WINDOW_MODE ? WS_OVERLAPPEDWINDOW : WS_POPUP;
     RECT rect = { 0, 0, (LONG)SCREEN_WIDTH, (LONG)SCREEN_HEIGHT };
-    AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, FALSE);
+    AdjustWindowRect(&rect, style, FALSE);
+
+    int x = IS_WINDOW_MODE ? CW_USEDEFAULT : 0;
+    int y = IS_WINDOW_MODE ? CW_USEDEFAULT : 0;
 
     m_hWnd = CreateWindowEx(
         0,
         CLASS_NAME,
         WINDOW_NAME,
-        WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, CW_USEDEFAULT,
+        style,
+        x, y,
         rect.right - rect.left, rect.bottom - rect.top,
         nullptr, nullptr, hInstance, nullptr
     );

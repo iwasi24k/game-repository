@@ -13,7 +13,7 @@ public:
 		return obj;
 	}
 	void Configure(Framework::GameObject* obj) override {
-		obj->GetTransform().position = { 170.0f, 100.0f, 1.0f };
+		obj->GetTransform().position = { SCREEN_WIDTH / 8, SCREEN_HEIGHT / 8, 1.0f };
 		obj->GetTransform().scale = { SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, 1.0f };
 		obj->GetTransform().rotation = { 1.0f, 1.0f, 0.0f };
 
