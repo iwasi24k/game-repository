@@ -85,6 +85,15 @@
     <Filter Include="Framework\Physics">
       <UniqueIdentifier>{7247db85-1e89-4d4d-829d-170696d5313b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Scene\Title">
+      <UniqueIdentifier>{aa5a5a91-40af-4a43-928d-54c8371d7cf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Script\Title">
+      <UniqueIdentifier>{1df94ab2-8ea8-4576-8f7f-f340112d1c2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Prefab\Title">
+      <UniqueIdentifier>{ba5f334b-ea54-4795-85e6-5eb099f255b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -230,6 +239,18 @@
     </ClCompile>
     <ClCompile Include="Framework\Scene\MonoBehaviour.cpp">
       <Filter>Framework\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\Title\TitleScene.cpp">
+      <Filter>Project\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Script\Title\TitleCamera.cpp">
+      <Filter>Project\Script\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Prefab\Title\TitleCameraPrefab.cpp">
+      <Filter>Project\Prefab\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Prefab\Title\TitleLogoPrefab.cpp">
+      <Filter>Project\Prefab\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -407,6 +428,18 @@
     </ClInclude>
     <ClInclude Include="Framework\Scene\ManagerHub.h">
       <Filter>Framework\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\Title\TitleScene.h">
+      <Filter>Project\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Title\TitleCamera.h">
+      <Filter>Project\Script\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Title\TitleCameraPrefab.h">
+      <Filter>Project\Prefab\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Title\TitleLogoPrefab.h">
+      <Filter>Project\Prefab\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
