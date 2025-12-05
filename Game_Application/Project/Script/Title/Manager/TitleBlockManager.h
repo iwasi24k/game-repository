@@ -19,8 +19,8 @@ private:
     Framework::GameObjectManager* m_GameObjectManager = nullptr;
     std::vector<Framework::GameObject*> m_Blocks;
 
-    const int m_BlockCountX = 15;
-    const int m_BlockCountZ = 15;
+    const int m_BlockCountX = 19;
+    const int m_BlockCountZ = 19;
 
     float m_Timer = 0.0f;
     float m_Interval = 5.0f;  // A•b‚²‚Æ

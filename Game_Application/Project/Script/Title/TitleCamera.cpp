@@ -43,8 +43,8 @@ void TitleCamera::Update() {
     timeAccumulator += Framework::Timer::GetInstance().GetDeltaTime();
 
     // --- 注視点（m_Focus）から一定距離後ろに配置 ---
-    float oscillationSpeed = 0.1f; // 速度（秒あたりの変化量）
-    float oscillationRange = 1.0f; // 変化幅（±2ユニットなど）
+    float oscillationSpeed = 0.3f; // 速度（秒あたりの変化量）
+    float oscillationRange = 2.0f; // 変化幅（±2ユニットなど）
     float distance = m_Distance + sinf(timeAccumulator * oscillationSpeed) * oscillationRange;
 
     math::vector3f camPos = m_Focus - forward * distance;
