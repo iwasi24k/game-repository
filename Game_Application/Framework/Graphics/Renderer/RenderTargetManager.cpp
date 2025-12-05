@@ -33,8 +33,13 @@ bool RenderTargetManager::Initialize(ID3D11Device* device, ID3D11DeviceContext* 
     depthDesc.Height = SCREEN_HEIGHT;
     depthDesc.MipLevels = 1;
     depthDesc.ArraySize = 1;
-    depthDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+    depthDesc.Format = DXGI_FORMAT_D32_FLOAT; // DXGI_FORMAT_D24_UNORM_S8_UINT(Use Stencil)
     depthDesc.SampleDesc.Count = 4;
+
+    UINT quality = 0;
+    device->CheckMultisampleQualityLevels(DXGI_FORMAT_D32_FLOAT, 4, &quality);
+    depthDesc.SampleDesc.Quality = quality - 1;
+
     depthDesc.Usage = D3D11_USAGE_DEFAULT;
     depthDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 

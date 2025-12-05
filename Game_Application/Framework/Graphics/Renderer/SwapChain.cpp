@@ -28,7 +28,7 @@ bool SwapChain::Initialize(HWND hWnd, ID3D11Device* device) {
     sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
     sd.OutputWindow = hWnd;
     sd.SampleDesc.Count = 4;
-    sd.Windowed = TRUE;
+    sd.Windowed = IS_WINDOW_MODE;
     sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 
     ComPtr<IDXGIDevice> dxgiDevice;
