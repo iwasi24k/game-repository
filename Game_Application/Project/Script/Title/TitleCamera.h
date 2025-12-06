@@ -23,7 +23,7 @@ struct TitleCameraConfig {
 
 class TitleCamera : public Framework::Camera {
 private:
-	math::vector3f m_Focus = { 0, 0, 0 };   // 初期値をタイトル中央に
+	math::vector3f m_Focus = { 7, 0, 7 };   // 初期値をタイトル中央に
 	float m_Distance = 100.0f;
 
 public:

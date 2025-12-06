@@ -18,7 +18,7 @@ class BgBlockManager : public Framework::ObjectManager {
 private:
     std::vector<Framework::GameObject*> m_Blocks;
 
-    static constexpr int kMaxBlock = 50;
+    static constexpr int kMaxBlock = 60;
     float m_SpawnInterval = 0.2f; // 秒単位
     float m_SpawnTimer = 0.0f;  // 経過タイマー
 

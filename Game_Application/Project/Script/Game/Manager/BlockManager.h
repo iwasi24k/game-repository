@@ -19,8 +19,8 @@ private:
     Framework::GameObjectManager* m_GameObjectManager = nullptr;
     std::vector<Framework::GameObject*> m_Blocks;
 
-    const int m_BlockCountX = 15;
-    const int m_BlockCountZ = 15;
+    const int m_BlockCountX = 23;
+    const int m_BlockCountZ = 23;
 
     float m_Timer = 0.0f;
     float m_Interval = 5.0f;  // A•b‚²‚Æ
@@ -33,6 +33,7 @@ public:
     void Update() override;
 
     float GetBlockHeightAt(float x, float z);
+    float GetBlockHeightAt(const math::transform<math::vector3f>& transform);
 };
 
 #endif // BLOCK_MANAGER_H

@@ -139,7 +139,20 @@ float4 main(VSPS_Default input) : SV_TARGET
 
     // 高さ補正
     float heightAboveGround = input.WorldPosition.y - FieldPosition.y;
-    shadowAlpha *= saturate(1.0 - heightAboveGround / 2.0f);
+    float verticalFactor = saturate(normal.y); // 上面 = 1、側面 = 0
+    shadowAlpha *= verticalFactor; // 側面には影をほぼ付けない
+
+    shadowAlpha *= saturate(1.25 + heightAboveGround / 2.0);
+    
+    float shadowHeight = ShadowPosition.y - FieldPosition.y;
+    heightFactor = 1.0 - saturate(shadowHeight / 10.0);
+    shadowAlpha *= heightFactor;
+
+    // 地面より高い部分には影を付けない
+    if (input.WorldPosition.y > FieldPosition.y + 1.6f)
+    {
+        shadowAlpha = 0.0f;
+    }
 
     // ライティング合成
     float3 finalColor = ambient + diffuse + specular;
