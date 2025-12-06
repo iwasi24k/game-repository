@@ -62,7 +62,7 @@ void BlockManager::Update() {
 		// 現在の高さから targetY を決定
 		float targetY = 0.0f;
 		float randVal = dist(mt);
-		constexpr float probability = 0.6f;
+		constexpr float probability = 0.7f;
 		constexpr float downPos = 0.0f;
 		float upPos = block->GetTransform().scale.y;
 
@@ -91,6 +91,23 @@ float BlockManager::GetBlockHeightAt(float x, float z) {
 		// キャラクター位置がブロックのXZ範囲に入っているか
 		if (x >= pos.x - scale.x / 2 && x <= pos.x + scale.x / 2 &&
 			z >= pos.z - scale.z / 2 && z <= pos.z + scale.z / 2) {
+			// 最大の高さを取得（複数ブロック重なっても安全）
+			maxHeight = std::max(maxHeight, pos.y);
+		}
+	}
+	return maxHeight;
+}
+
+float BlockManager::GetBlockHeightAt(const math::transform<math::vector3f>& transform) {
+	float maxHeight = 0.0f;
+
+	for (auto& block : m_Blocks) {
+		auto& pos = block->GetTransform().position;
+		auto& scale = block->GetTransform().scale;
+
+		// キャラクター位置がブロックのXZ範囲に入っているか
+		if (transform.position.x + transform.scale.x / 2.2 >= pos.x - scale.x / 2 && transform.position.x - transform.scale.x / 2.2 <= pos.x + scale.x / 2 &&
+			transform.position.z + transform.scale.z / 2.2 >= pos.z - scale.z / 2 && transform.position.z - transform.scale.z / 2.2 <= pos.z + scale.z / 2) {
 			// 最大の高さを取得（複数ブロック重なっても安全）
 			maxHeight = std::max(maxHeight, pos.y);
 		}

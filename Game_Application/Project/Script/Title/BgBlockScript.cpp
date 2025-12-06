@@ -90,12 +90,15 @@ float BgBlockScript::Hermite(float p0, float p1, float p2, float p3, float t) {
 }
 
 void BgBlockScript::Start() {
-    m_MaxY = 25.0f;
-    m_MinY = -15.0f;
-    m_FallSpeed = 2.0f;
+    m_MaxY = 26.0f;
+    m_MinY = -10.0f;
     m_MinR = 30.0f;
-    m_MaxR = 35.0f;
-    float rotSpeed = 1.5f;
+    m_MaxR = 45.0f;
+    float rotSpeed = 1.0f;
+
+    float minFall = 1.5f;
+    float maxFall = 2.0f;
+    m_FallSpeed = Random(minFall, maxFall);
 
     // 初期位置をドーナツ状にランダム配置
     auto& pos = GetOwner()->GetTransform().position;
@@ -111,6 +114,12 @@ void BgBlockScript::Start() {
     m_HermiteMid1X = pos.x + Random(-hermite, hermite);
     m_HermiteMid2X = pos.x + Random(-hermite, hermite);
     m_HermiteEndX = pos.x + Random(-hermite, hermite);
+
+    auto& blockScale = GetOwner()->GetTransform().scale;
+    float minScale = 0.5f;
+    float maxScale = 1.5f;
+    float randomScale = Random(minScale, maxScale);
+    for (auto& scale : blockScale) scale = randomScale;
 
     // ランダム回転
     m_RotSpeed = { Random(-rotSpeed, rotSpeed), Random(-rotSpeed, rotSpeed), Random(-rotSpeed, rotSpeed) };

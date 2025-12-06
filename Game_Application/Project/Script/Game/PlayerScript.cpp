@@ -67,12 +67,12 @@ void PlayerScript::Update() {
     }
 
     auto pos = GetOwner()->GetTransform().position;
-    float blockY = GetManagerHub()->FindManager<BlockManager>()->GetBlockHeightAt(pos.x, pos.z);
+    float blockY = GetManagerHub()->FindManager<BlockManager>()->GetBlockHeightAt(GetOwner()->GetTransform());
 
     Shader::ShadowBuffer sb{};
     sb.ShadowPosition = pos;
-    sb.ShadowSize = { 0.95f, 0.95f };
-    sb.ShadowStrength = 1.5f;
+    sb.ShadowSize = { 0.8f, 0.8f };
+    sb.ShadowStrength = 0.5f;
     sb.FieldPosition = { 0.0f, blockY, 0.0f };
     Renderer::GetInstance().SetBuffer<Shader::ShadowBuffer>(4, sb, Shader::ShaderStage::Pixel);
 }
