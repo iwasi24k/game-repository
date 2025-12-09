@@ -37,7 +37,7 @@ namespace Framework {
         math::vector3f GetPenetration(const ColliderComponent& other) const override;
         math::vector3f GetCollisionNormal(const ColliderComponent& other) const override;
 
-        const AABB& GetAABB() const { return m_AABB; }
+        const AABB& GetAABB() const override { return m_AABB; }
         void SetPositionOffset(const math::vector3f& posOffset) { m_PositionOffset = posOffset; }
         const math::vector3f& GetPositionOffset() { return m_PositionOffset; }
         void SetSizeOffset(const math::vector3f& sizeOffset) { m_SizeOffset = sizeOffset; }

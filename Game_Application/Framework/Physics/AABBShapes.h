@@ -54,6 +54,22 @@ namespace Framework {
                 (max.z >= other.min.z && min.z <= other.max.z);
         }
 
+        bool FastIntersect(const AABB& other) const {
+            float dx = max.x - other.min.x;
+            float dx2 = other.max.x - min.x;
+            if (dx < 0.0f || dx2 < 0.0f) return false;
+
+            float dy = max.y - other.min.y;
+            float dy2 = other.max.y - min.y;
+            if (dy < 0.0f || dy2 < 0.0f) return false;
+
+            float dz = max.z - other.min.z;
+            float dz2 = other.max.z - min.z;
+            if (dz < 0.0f || dz2 < 0.0f) return false;
+
+            return true;
+        }
+
         // ----------------------------------------
         // 衝突したときに、どのくらい重なっているか（押し戻す量）を返す
         // 正の値ならother側に押す、負の値ならthis側に押す、と考えられる

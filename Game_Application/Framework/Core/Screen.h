@@ -16,7 +16,11 @@
 
 #include <Windows.h>
 
+#if _DEBUG
+#define IS_WINDOW_MODE (TRUE)
+#else
 #define IS_WINDOW_MODE (FALSE)
+#endif
 
 namespace Framework {
 
