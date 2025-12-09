@@ -39,6 +39,8 @@ void RenderComponentManager::Draw(std::vector<std::unique_ptr<GameObject>>& game
 
     for (const auto& obj : gameObjects) {
         if (!obj->IsActive()) continue;
+        if(!mainCamera->IsSphereVisible(obj->GetTransform().position, obj->GetTransform().scale.x))
+			continue;
 
         // ModelComponent
         if (auto model = obj->GetComponent<ModelComponent>()) {

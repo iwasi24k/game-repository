@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-11-18
-// Last Update : 2025-11-18
+// Last Update : 2025-12-08
 //------------------------------------------------------------------------------
 // Overview :
 // Camera クラスはシーン内の視点（カメラ）を管理するコンポーネントです。
@@ -40,6 +40,8 @@ namespace Framework {
 		float m_OrthoHeight = 10.0f;
 		math::vector3f m_Rotation{};
 
+		math::vector4f m_FrustumPlanes[6]; // 左, 右, 下, 上, 近, 遠
+
 	public:
 		Camera() = default;
 		virtual ~Camera() = default;
@@ -57,6 +59,7 @@ namespace Framework {
 		void UpdateView(const math::vector3f& position, const math::vector3f& lookAt) {
 			m_View = math::matrix::LookAtLH(position, lookAt, math::up());
 			m_ViewProjection = m_View * m_Projection;
+			ExtractFrustumPlanes();
 		}
 
 		virtual void SetPerspective(float fovY, float aspect, float nearZ, float farZ) {
@@ -105,6 +108,8 @@ namespace Framework {
 		virtual const math::matrix& GetProjection() const { return m_Projection; }
 		virtual math::matrix GetViewProjection() const { return m_ViewProjection; }
 
+		virtual void ExtractFrustumPlanes();
+		virtual bool IsSphereVisible(const math::vector3f& center, float radius) const;
 	};
 } // namespace Framework
 
