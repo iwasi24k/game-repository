@@ -276,6 +276,9 @@
     <ClCompile Include="Project\Prefab\Title\GameStartPrefab.cpp">
       <Filter>Project\Prefab\Title</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Scene\Components\CameraComponent\Camera.cpp">
+      <Filter>Framework\Scene\Components\CameraComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
