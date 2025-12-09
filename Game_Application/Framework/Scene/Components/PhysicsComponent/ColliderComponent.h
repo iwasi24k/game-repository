@@ -13,6 +13,7 @@
 
 #include "Behaviour.h"
 #include "MathTransform.h"
+#include "Framework/Physics/AABBShapes.h"
 
 namespace Framework {
 
@@ -39,6 +40,7 @@ namespace Framework {
 
         [[nodiscard]] ColliderType GetType() const noexcept { return m_Type; }
         [[nodiscard]] bool IsTrigger() const noexcept { return m_IsTrigger; }
+        [[nodiscard]] virtual const AABB& GetAABB() const = 0;
     };
 }
 

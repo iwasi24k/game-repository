@@ -76,3 +76,13 @@ void PlayerScript::Update() {
     sb.FieldPosition = { 0.0f, blockY, 0.0f };
     Renderer::GetInstance().SetBuffer<Shader::ShadowBuffer>(4, sb, Shader::ShaderStage::Pixel);
 }
+
+void PlayerScript::OnTriggerEnter(Framework::GameObject* other)
+{
+    other;
+}
+
+void PlayerScript::OnTriggerExit(Framework::GameObject* other)
+{
+    other;
+}
