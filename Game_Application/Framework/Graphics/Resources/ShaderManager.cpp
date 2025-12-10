@@ -82,6 +82,8 @@ bool ShaderManager::LoadShaderFile(const std::wstring& path, std::vector<char>& 
 }
 
 void ShaderManager::LoadVS(const std::wstring& name, const std::wstring& vsPath, Shader::VertexLayoutType layoutType) {
+    if (m_VertexShaders.contains(name)) return;
+
     std::vector<char> vsData;
     if (!LoadShaderFile(vsPath, vsData)) return;
 
@@ -102,6 +104,8 @@ void ShaderManager::LoadVS(const std::wstring& name, const std::wstring& vsPath,
 }
 
 void ShaderManager::LoadPS(const std::wstring& name, const std::wstring& psPath) {
+    if (m_PixelShaders.contains(name)) return;
+
     std::vector<char> psData;
     if (!LoadShaderFile(psPath, psData)) return;
 
