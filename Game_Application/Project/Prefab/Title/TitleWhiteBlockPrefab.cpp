@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-12-05
-// Last Update : 2025-12-05
+// Last Update : 2025-12-11
 //------------------------------------------------------------------------------
 // 
 //==============================================================================
@@ -38,7 +38,7 @@ void TitleWhiteBlockPrefab::Configure(GameObject* obj) {
 	auto modelComp = obj->GetComponent<ModelComponent>();
 	modelComp->LoadModel(L"Asset/Model/block.fbx");
 	//modelComp->SetTexture(0, L"Asset/Texture/test.png");
-	modelComp->LoadShader(L"ModelShader", L"cso-file\\BlockVS.cso", L"cso-file\\BlockPS.cso");
+	modelComp->LoadShader(L"ModelShader", L"cso-file\\VertexShader.cso", L"cso-file\\PixelShader.cso");
 	Material mat;
 	mat.Ambient = { 0.5f, 0.5f, 0.5f, 1.0f };
 	mat.Diffuse = { 0.9f, 0.9f, 0.9f, 1.0f };
