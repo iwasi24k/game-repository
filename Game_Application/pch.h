@@ -35,6 +35,9 @@ using namespace DirectX;
 #pragma comment (lib, "winmm.lib")
 #include <mmsystem.h>
 
+#include "RandomAPI.h"
+using namespace ix_util;
+
 #include "Framework/Core/Screen.h"
 
 #endif // PCH_H

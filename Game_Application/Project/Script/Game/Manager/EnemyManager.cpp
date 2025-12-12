@@ -14,6 +14,7 @@
 #include "EnemyManager.h"
 #include "Framework/Core/Timer.h"
 #include "Prefab/Game/EnemyPrefab.h"
+#include "Script/Game/EnemyRespawn.h"
 
 using namespace Framework;
 
@@ -22,7 +23,9 @@ void EnemyManager::Create() {
 
 	EnemyPrefab enemyPrefab;
 	for (int i = 0; i < kEnemyMax; ++i) {
-		enemyPrefab.Create(gameObject);
+		auto obj = enemyPrefab.Create(gameObject);
+		auto enemy = obj->GetComponent<EnemyRespawn>();
+		enemy->Spawn(10.0f);
 	}
 
 }

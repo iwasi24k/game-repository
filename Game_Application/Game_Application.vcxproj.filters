@@ -291,7 +291,9 @@
     <ClCompile Include="Project\Script\Game\Manager\EnemyManager.cpp">
       <Filter>Project\Script\Game\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Script\Game\EnemyRespawn.cpp" />
+    <ClCompile Include="Project\Script\Game\EnemyRespawn.cpp">
+      <Filter>Project\Script\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -519,6 +521,9 @@
     </ClInclude>
     <ClInclude Include="Project\Script\Game\EnemyRespawn.h">
       <Filter>Project\Script\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Core\RandomAPI.h">
+      <Filter>Framework\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

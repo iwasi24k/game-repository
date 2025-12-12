@@ -14,6 +14,7 @@
 
 // --- my library ---
 #include "DebugTool.h"
+#include "RandomAPI.h"
 
 // --- core ---
 #include "Window.h"
@@ -52,6 +53,7 @@ bool Application::Initialize(HINSTANCE hInstance, int nCmdShow) {
 
 	// --- timer initialize ---
     Timer::GetInstance().Initialize();
+    rand_api::initialize();
 
 	// --- window initialize ---
     m_Window = std::make_unique<Window>();

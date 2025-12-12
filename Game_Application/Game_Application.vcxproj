@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include;$(ProjectDir)Framework\Math;$(ProjectDir)Framework\Graphics\Resources;$(ProjectDir)Framework\Graphics\Renderer;$(ProjectDir)ExternalLibrary\DirectXTex\Include;$(ProjectDir)Framework\Graphics\Sprite;$(ProjectDir)Framework\Graphics\Texture;$(ProjectDir)Framework\Graphics\Resources\Shader;$(ProjectDir)ExternalLibrary;$(ProjectDir)Framework\Graphics\Model;$(ProjectDir)Framework\Input;$(ProjectDir)Framework\Scene;$(ProjectDir)Project</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include;$(ProjectDir)Framework\Math;$(ProjectDir)Framework\Graphics\Resources;$(ProjectDir)Framework\Graphics\Renderer;$(ProjectDir)ExternalLibrary\DirectXTex\Include;$(ProjectDir)Framework\Graphics\Sprite;$(ProjectDir)Framework\Graphics\Texture;$(ProjectDir)Framework\Graphics\Resources\Shader;$(ProjectDir)ExternalLibrary;$(ProjectDir)Framework\Graphics\Model;$(ProjectDir)Framework\Input;$(ProjectDir)Framework\Scene;$(ProjectDir)Project;$(ProjectDir)Framework\Core</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -129,7 +129,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include;$(ProjectDir)Framework\Math;$(ProjectDir)Framework\Graphics\Resources;$(ProjectDir)Framework\Graphics\Renderer;$(ProjectDir)ExternalLibrary\DirectXTex\Include;$(ProjectDir)Framework\Graphics\Sprite;$(ProjectDir)Framework\Graphics\Texture;$(ProjectDir)Framework\Graphics\Resources\Shader;$(ProjectDir)ExternalLibrary;$(ProjectDir)Framework\Graphics\Model;$(ProjectDir)Framework\Input;$(ProjectDir)Framework\Scene;$(ProjectDir)Project</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Framework\MyLibrary\DebugTool\include;$(ProjectDir)Framework\Math;$(ProjectDir)Framework\Graphics\Resources;$(ProjectDir)Framework\Graphics\Renderer;$(ProjectDir)ExternalLibrary\DirectXTex\Include;$(ProjectDir)Framework\Graphics\Sprite;$(ProjectDir)Framework\Graphics\Texture;$(ProjectDir)Framework\Graphics\Resources\Shader;$(ProjectDir)ExternalLibrary;$(ProjectDir)Framework\Graphics\Model;$(ProjectDir)Framework\Input;$(ProjectDir)Framework\Scene;$(ProjectDir)Project;$(ProjectDir)Framework\Core</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -221,6 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Core\Application.h" />
+    <ClInclude Include="Framework\Core\RandomAPI.h" />
     <ClInclude Include="Framework\Core\Screen.h" />
     <ClInclude Include="Framework\Core\Timer.h" />
     <ClInclude Include="Framework\Core\Window.h" />

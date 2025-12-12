@@ -15,6 +15,7 @@
 #include "Components/PhysicsComponent/BoxCollider.h"
 #include "Material.h"
 #include "Script/Game/EnemyScript.h"
+#include "Script/Game/EnemyRespawn.h"
 #include "Script/Game/ShadowScript.h"
 
 using namespace Framework;
@@ -25,6 +26,7 @@ GameObject* EnemyPrefab::Create(GameObjectManager* mgr) {
 	obj->AddComponent<Rigidbody>();
 	obj->AddComponent<BoxCollider>();
 	obj->AddComponent<EnemyScript>();
+	obj->AddComponent<EnemyRespawn>();
 	//obj->AddComponent<ShadowScript>();
 
 	Configure(obj);
