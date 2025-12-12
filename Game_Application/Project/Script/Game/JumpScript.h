@@ -20,8 +20,8 @@ private:
     float m_GroundGraceTime = 0.1f;
     float m_GroundTimer = 0.0f;
 
-    float m_Frame = 160.0f;
-    float m_CoolTime = 160.0f;
+    const float kCoolTime = 0.8f;
+    float m_CoolTimer = kCoolTime;
 
 public:
     void Start() override;
