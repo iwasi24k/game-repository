@@ -19,7 +19,7 @@ using namespace Framework;
 
 void JumpScript::Start() {
     // Initialization code here
-
+    m_CoolTimer = 0.0f;
 }
 
 void JumpScript::Update() {
@@ -40,14 +40,14 @@ void JumpScript::Update() {
         if (m_GroundTimer <= 0.0f) m_IsGround = false;
     }
 
-    m_Frame++;
-    if (m_Frame > m_CoolTime) {
-
+    m_CoolTimer -= Timer::GetInstance().GetDeltaTime();
+    if (m_CoolTimer <= 0.0f) {
         if (keyboard.IsKeyTriggered(KB::Space) && m_IsGround) {
             rb->AddImpulse(math::vector3f(0.0f, jumpForce, 0.0f));
-            m_Frame = 0.0f;
+            m_CoolTimer = kCoolTime; // •b’PˆÊ
         }
     }
+
 }
 
 void JumpScript::OnTriggerEnter(Framework::GameObject* other) {
