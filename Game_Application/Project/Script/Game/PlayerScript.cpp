@@ -65,16 +65,6 @@ void PlayerScript::Update() {
         }
         rb->SetVelocity(velocity);
     }
-
-    auto pos = GetOwner()->GetTransform().position;
-    float blockY = GetManagerHub()->FindManager<BlockManager>()->GetBlockHeightAt(GetOwner()->GetTransform());
-
-    Shader::ShadowBuffer sb{};
-    sb.ShadowPosition = pos;
-    sb.ShadowSize = { 0.8f, 0.8f };
-    sb.ShadowStrength = 0.5f;
-    sb.FieldPosition = { 0.0f, blockY, 0.0f };
-    Renderer::GetInstance().SetBuffer<Shader::ShadowBuffer>(4, sb, Shader::ShaderStage::Pixel);
 }
 
 void PlayerScript::OnTriggerEnter(Framework::GameObject* other)

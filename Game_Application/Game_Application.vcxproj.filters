@@ -279,6 +279,19 @@
     <ClCompile Include="Framework\Scene\Components\CameraComponent\Camera.cpp">
       <Filter>Framework\Scene\Components\CameraComponent</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Prefab\Game\EnemyPrefab.cpp">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Script\Game\EnemyScript.cpp">
+      <Filter>Project\Script\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Script\Game\ShadowScript.cpp">
+      <Filter>Project\Script\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Script\Game\Manager\EnemyManager.cpp">
+      <Filter>Project\Script\Game\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Script\Game\EnemyRespawn.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -491,6 +504,21 @@
     </ClInclude>
     <ClInclude Include="Framework\Core\Screen.h">
       <Filter>Framework\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Game\EnemyPrefab.h">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Game\EnemyScript.h">
+      <Filter>Project\Script\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Game\ShadowScript.h">
+      <Filter>Project\Script\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Game\Manager\EnemyManager.h">
+      <Filter>Project\Script\Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Game\EnemyRespawn.h">
+      <Filter>Project\Script\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

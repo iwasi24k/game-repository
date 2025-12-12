@@ -9,9 +9,11 @@
 //==============================================================================
 #include "pch.h"
 #include "GameScene.h"
-#include "Prefab/Game/PlayerPrefab.h"
-#include "Prefab/Game/TestPrefab.h"
+
 #include "Prefab/CameraPrefab.h"
+#include "Prefab/Game/PlayerPrefab.h"
+#include "Prefab/Game/EnemyPrefab.h"
+#include "Prefab/Game/TestPrefab.h"
 
 #include "Script/Game/Manager/BlockManager.h"
 #include "SceneManager.h"
@@ -27,6 +29,10 @@ bool GameScene::SceneInitialize() {
 
 	PlayerPrefab playerPrefab;
 	playerPrefab.Create(GetGameObjectManager());
+
+	EnemyPrefab enemyPrefab;
+	enemyPrefab.Create(GetGameObjectManager());
+	enemyPrefab.Create(GetGameObjectManager())->GetTransform().position.x = 20.0f;
 
 	GetManagerHub()->AddManager<BlockManager>(std::make_unique<BlockManager>());
 
