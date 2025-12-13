@@ -10,7 +10,6 @@
 #ifndef BG_BLOCK_SCRIPT_H
 #define BG_BLOCK_SCRIPT_H
 
-#include <random>
 #include "GameBehaviour.h"
 #include "Material.h"
 
@@ -40,12 +39,6 @@ public:
     void FallStartTime(float time) { m_MaxTime = time; }
 
 private:
-    inline float Random(float a, float b) {
-        static std::random_device rd;
-        static std::mt19937 gen(rd());
-        std::uniform_real_distribution<float> dist(a, b);
-        return dist(gen);
-    }
     float Hermite(float p0, float p1, float p2, float p3, float t);
 };
 

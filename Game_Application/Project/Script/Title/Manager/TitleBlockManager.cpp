@@ -10,7 +10,6 @@
 #include "pch.h"
 #include <algorithm>
 #include <numeric>
-#include <random>
 #include "TitleBlockManager.h"
 #include "Prefab/Title/TitleWhiteBlockPrefab.h"
 #include "Prefab/Title/TitleBlackBlockPrefab.h"
@@ -37,46 +36,44 @@ void TitleBlockManager::Create() {
 }
 
 void TitleBlockManager::Update() {
-	float dt = Framework::Timer::GetInstance().GetDeltaTime();
+	float dt = Timer::GetInstance().GetDeltaTime();
 	m_Timer += dt;
 
 	if (m_Timer < m_Interval) return;
 	m_Timer = 0.0f;
 
-	// ランダムに動かすブロックを選択
-	int moveCount = rand() % (m_MoveCountMax - m_MoveCountMin + 1) + m_MoveCountMin;
+	// ランダムに動かすブロック数
+	int moveCount = rand_api::integer(m_MoveCountMin, m_MoveCountMax);
 
+	// インデックスをシャッフル
 	std::vector<int> indices(m_Blocks.size());
 	std::iota(indices.begin(), indices.end(), 0);
-	std::shuffle(indices.begin(), indices.end(), std::mt19937(std::random_device{}()));
+	std::shuffle(indices.begin(), indices.end(), rand_api::get_engine());
 
-	static std::mt19937 mt{ std::random_device{}() };
-	std::uniform_real_distribution<float> dist(0.0f, 1.0f);
+	constexpr float probability = 0.6f;
+	constexpr float downPos = 0.0f;
 
 	for (int i = 0; i < static_cast<int>(m_Blocks.size()); ++i) {
 		auto block = m_Blocks[indices[i]];
 		auto blockScript = block->GetComponent<BlockScript>();
+
 		if (!blockScript || blockScript->IsMoving() != BlockState::Idle)
 			continue;
 
 		// 現在の高さから targetY を決定
-		float targetY = 0.0f;
-		float randVal = dist(mt);
-		constexpr float probability = 0.6f;
-		constexpr float downPos = 0.0f;
 		float upPos = block->GetTransform().scale.y;
 
-		if (randVal < probability)
-			targetY = downPos; // 下 60%
-		else
-			targetY = upPos; // 上 40%
+		float targetY = rand_api::chance(probability)
+			? downPos   // 下 60%
+			: upPos;    // 上 40%
 
 		// すでに targetY にいる場合はスキップ
 		if (fabs(block->GetTransform().position.y - targetY) < 0.01f)
 			continue;
 
 		blockScript->StartWarning(targetY, false);
-		--moveCount; // 選んだ分だけ減らす
+
+		--moveCount;
 		if (moveCount <= 0) break;
 	}
 }
