@@ -98,12 +98,12 @@ void BgBlockScript::Start() {
 
     float minFall = 1.5f;
     float maxFall = 2.0f;
-    m_FallSpeed = Random(minFall, maxFall);
+    m_FallSpeed = rand_api::real(minFall, maxFall);
 
     // 初期位置をドーナツ状にランダム配置
     auto& pos = GetOwner()->GetTransform().position;
-    float r = Random(m_MinR, m_MaxR);
-    float theta = Random(0.0f, 2.0f * 3.14159f);
+    float r = rand_api::real(m_MinR, m_MaxR);
+    float theta = rand_api::real(0.0f, 2.0f * 3.14159f);
     pos.x = r * cos(theta);
     pos.y = m_MaxY;
     pos.z = r * sin(theta);
@@ -111,23 +111,23 @@ void BgBlockScript::Start() {
     // Hermite補間用のX座標を初期設定
     float hermite = 20.0f;
     m_HermiteStartX = pos.x;
-    m_HermiteMid1X = pos.x + Random(-hermite, hermite);
-    m_HermiteMid2X = pos.x + Random(-hermite, hermite);
-    m_HermiteEndX = pos.x + Random(-hermite, hermite);
+    m_HermiteMid1X = pos.x + rand_api::real(-hermite, hermite);
+    m_HermiteMid2X = pos.x + rand_api::real(-hermite, hermite);
+    m_HermiteEndX = pos.x + rand_api::real(-hermite, hermite);
 
     auto& blockScale = GetOwner()->GetTransform().scale;
     float minScale = 0.5f;
     float maxScale = 1.5f;
-    float randomScale = Random(minScale, maxScale);
+    float randomScale = rand_api::real(minScale, maxScale);
     for (auto& scale : blockScale) scale = randomScale;
 
     // ランダム回転
-    m_RotSpeed = { Random(-rotSpeed, rotSpeed), Random(-rotSpeed, rotSpeed), Random(-rotSpeed, rotSpeed) };
+    m_RotSpeed = { rand_api::real(-rotSpeed, rotSpeed), rand_api::real(-rotSpeed, rotSpeed), rand_api::real(-rotSpeed, rotSpeed) };
 
     // 色ランダム
     auto modelComp = GetOwner()->GetComponent<ModelComponent>();
     if (modelComp) {
-        float c = Random(0.0f, 1.0f) < 0.5f ? 0.35f : 0.9f;
+        float c = rand_api::real(0.0f, 1.0f) < 0.5f ? 0.35f : 0.9f;
         Material mat;
         mat.Ambient = { 0.2f,0.2f,0.2f,1.0f };
         mat.Diffuse = { c, c, c, 1.0f };
@@ -162,18 +162,18 @@ void BgBlockScript::Update() {
         pos.y = m_MaxY;
 
         // Z座標はドーナツ状にランダム再生成
-        float r = Random(m_MinR, m_MaxR);
-        float theta = Random(0.0f, 2.0f * 3.14159f);
+        float r = rand_api::real(m_MinR, m_MaxR);
+        float theta = rand_api::real(0.0f, 2.0f * 3.14159f);
         pos.z = r * sin(theta);
         m_HermiteStartX = r * cos(theta);
 
         // 新しいHermite補間点設定
-        m_HermiteMid1X = m_HermiteStartX + Random(-2.0f, 2.0f);
-        m_HermiteMid2X = m_HermiteStartX + Random(-2.0f, 2.0f);
-        m_HermiteEndX = m_HermiteStartX + Random(-2.0f, 2.0f);
+        m_HermiteMid1X = m_HermiteStartX + rand_api::real(-2.0f, 2.0f);
+        m_HermiteMid2X = m_HermiteStartX + rand_api::real(-2.0f, 2.0f);
+        m_HermiteEndX = m_HermiteStartX + rand_api::real(-2.0f, 2.0f);
 
         // 新しい回転
         float rotSpeed = 1.5f;
-        m_RotSpeed = { Random(-rotSpeed, rotSpeed), Random(-rotSpeed, rotSpeed), Random(-rotSpeed, rotSpeed) };
+        m_RotSpeed = { rand_api::real(-rotSpeed, rotSpeed), rand_api::real(-rotSpeed, rotSpeed), rand_api::real(-rotSpeed, rotSpeed) };
     }
 }
