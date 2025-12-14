@@ -20,6 +20,7 @@
 #include "Prefab/Title/TitleCameraPrefab.h"
 #include "Prefab/Title/TitleLogoPrefab.h"
 #include "Prefab/Title/GameStartPrefab.h"
+#include "Prefab/Title/TitleBgPrefab.h"
 
 using namespace Framework;
 
@@ -27,6 +28,9 @@ bool TitleScene::SceneInitialize() {
 
 	TitleCameraPrefab cameraPrefab;
 	auto camera = cameraPrefab.Create(GetGameObjectManager());
+
+	TitleBgPrefab titleBgPrefab;
+	titleBgPrefab.Create(GetGameObjectManager());
 
 	GetManagerHub()->AddManager<TitleBlockManager>(std::make_unique<TitleBlockManager>());
 

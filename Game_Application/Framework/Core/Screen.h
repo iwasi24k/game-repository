@@ -48,7 +48,13 @@ namespace Framework {
 	};
 }
 
+// screen position : left 0.0 / right SCREEN_WIDTH
 #define SCREEN_WIDTH (Framework::Screen::GetInstance().GetScreenWidth())
+// screen position : top 0.0 / bottom SCREEN_HEIGHT
 #define SCREEN_HEIGHT (Framework::Screen::GetInstance().GetScreenHeight())
+// screen position : left 0.0 / right SCREEN_WIDTH
+#define SCREEN_CENTER_W (SCREEN_WIDTH / 2)
+// screen position : top 0.0 / bottom SCREEN_HEIGHT
+#define SCREEN_CENTER_H (SCREEN_HEIGHT / 2)
 
 #endif // SCREEN_H
