@@ -200,6 +200,7 @@
     <ClCompile Include="Project\Prefab\Game\WhiteBlockPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Title\BlockPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Title\GameStartPrefab.cpp" />
+    <ClCompile Include="Project\Prefab\Title\TitleBgPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Title\TitleBlackBlockPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Title\TitleCameraPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Title\TitleLogoPrefab.cpp" />
@@ -214,6 +215,7 @@
     <ClCompile Include="Project\Script\Game\Manager\EnemyManager.cpp" />
     <ClCompile Include="Project\Script\Game\PlayerScript.cpp" />
     <ClCompile Include="Project\Script\Game\ShadowScript.cpp" />
+    <ClCompile Include="Project\Script\Title\AnimationScript2D.cpp" />
     <ClCompile Include="Project\Script\Title\BgBlockScript.cpp" />
     <ClCompile Include="Project\Script\Title\Manager\BgBlockManager.cpp" />
     <ClCompile Include="Project\Script\Title\Manager\TitleBlockManager.cpp" />
@@ -278,6 +280,7 @@
     <ClInclude Include="Project\Prefab\Game\WhiteBlockPrefab.h" />
     <ClInclude Include="Project\Prefab\Title\BlockPrefab.h" />
     <ClInclude Include="Project\Prefab\Title\GameStartPrefab.h" />
+    <ClInclude Include="Project\Prefab\Title\TitleBgPrefab.h" />
     <ClInclude Include="Project\Prefab\Title\TitleBlackBlockPrefab.h" />
     <ClInclude Include="Project\Prefab\Title\TitleCameraPrefab.h" />
     <ClInclude Include="Project\Prefab\Title\TitleLogoPrefab.h" />
@@ -292,6 +295,7 @@
     <ClInclude Include="Project\Script\Game\Manager\EnemyManager.h" />
     <ClInclude Include="Project\Script\Game\PlayerScript.h" />
     <ClInclude Include="Project\Script\Game\ShadowScript.h" />
+    <ClInclude Include="Project\Script\Title\AnimationScript2D.h" />
     <ClInclude Include="Project\Script\Title\BgBlockScript.h" />
     <ClInclude Include="Project\Script\Title\Manager\BgBlockManager.h" />
     <ClInclude Include="Project\Script\Title\Manager\TitleBlockManager.h" />

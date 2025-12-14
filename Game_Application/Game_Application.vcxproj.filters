@@ -294,6 +294,12 @@
     <ClCompile Include="Project\Script\Game\EnemyRespawn.cpp">
       <Filter>Project\Script\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Script\Title\AnimationScript2D.cpp">
+      <Filter>Project\Script\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Prefab\Title\TitleBgPrefab.cpp">
+      <Filter>Project\Prefab\Title</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -524,6 +530,12 @@
     </ClInclude>
     <ClInclude Include="Framework\Core\RandomAPI.h">
       <Filter>Framework\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Title\AnimationScript2D.h">
+      <Filter>Project\Script\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Title\TitleBgPrefab.h">
+      <Filter>Project\Prefab\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

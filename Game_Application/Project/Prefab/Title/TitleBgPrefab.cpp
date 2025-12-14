@@ -1,5 +1,5 @@
 //==============================================================================
-// File        : GameStartPrefab.cpp
+// File        : TitleBgPrefab.cpp
 //------------------------------------------------------------------------------
 // Author      : ix.U
 // Created     : 2025-12-05
@@ -8,37 +8,31 @@
 // 
 //==============================================================================
 #include "pch.h"
-#include "GameStartPrefab.h"
+#include "TitleBgPrefab.h"
 #include "Components/RenderComponent/SpriteComponent.h"
-#include "GameObject.h"
-#include "Script/Title/AnimationScript2D.h"
 
 using namespace Framework;
 
-GameObject* GameStartPrefab::Create(GameObjectManager* mgr) {
+GameObject* TitleBgPrefab::Create(Framework::GameObjectManager* mgr) {
 	auto obj = mgr->CreateObject("GameStart");
 	obj->AddComponent<SpriteComponent>();
-	obj->AddComponent<AnimationScript2D>();
 
 	Configure(obj);
 	return obj;
 }
 
-void GameStartPrefab::Configure(GameObject* obj) {
+void TitleBgPrefab::Configure(GameObject* obj) {
 
 	// --- Transform Ý’è ---
-	obj->GetTransform().position = { SCREEN_CENTER_W * 1.03f, SCREEN_CENTER_H * 1.5f, 1.0f };
-	obj->GetTransform().scale = { SCREEN_CENTER_W * 0.43f, SCREEN_CENTER_H * 0.2f, 1.0f };
+	obj->GetTransform().position = { SCREEN_CENTER_W, SCREEN_CENTER_H, 1.0f };
+	obj->GetTransform().scale = { SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f };
 	obj->GetTransform().rotation = { 1.0f, 1.0f, 0.0f };
 
 	auto spriteComp = obj->GetComponent<SpriteComponent>();
 	if (spriteComp) {
-		spriteComp->LoadSprite(L"Asset\\Texture\\Start.png", Framework::SpriteDrawMode::Instance);
-		spriteComp->SetLayer(10.0f);
+		spriteComp->LoadSprite(L"Asset\\Texture\\Bg.png", Framework::SpriteDrawMode::Instance);
+		spriteComp->SetLayer(0.0f);
 		spriteComp->SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
 		spriteComp->LoadShader(L"SpriteShader", L"cso-file\\SpriteVS.cso", L"cso-file\\SpritePS.cso");
 	}
-
-	auto anim2d = obj->GetComponent<AnimationScript2D>();
-	anim2d->SetColor(1.5f, 0.75f, 1.0f);
 }
