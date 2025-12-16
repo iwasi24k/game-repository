@@ -15,7 +15,29 @@ jobs:
           git fetch origin main
           git diff origin/main...HEAD > diff.txt
 
-      - name: AI Review (placeholder)
+      - name: Comment PR with AI Review
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "=== AI Review Result ==="
-          cat diff.txt
+          DIFF=$(cat diff.txt)
+
+          REVIEW=$(curl -s https://api.openai.com/v1/chat/completions \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $OPENAI_API_KEY" \
+            -d "{
+              \"model\": \"gpt-4.1-mini\",
+              \"messages\": [
+                {
+                  \"role\": \"system\",
+                  \"content\": \"あなたはシニアソフトウェアエンジニアです。以下のプルリクエストの差分コードをレビューし、問題点・改善点・潜在的なバグを簡潔かつ建設的に指摘してください。\"
+                },
+                {
+                  \"role\": \"user\",
+                  \"content\": \"$DIFF\"
+                }
+              ]
+            }" | jq -r '.choices[0].message.content')
+
+          gh pr comment ${{ github.event.pull_request.number }} \
+            --body \"### 🤖 AI Code Review\n\n$REVIEW\"
