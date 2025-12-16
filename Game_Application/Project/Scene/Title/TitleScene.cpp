@@ -16,7 +16,7 @@
 #include "Renderer.h"
 #include "ManagerHub.h"
 #include "Scene/Game/GameScene.h"
-#include "InputKeyboard.h"
+#include "InputMouse.h"
 #include "Prefab/Title/TitleCameraPrefab.h"
 #include "Prefab/Title/TitleLogoPrefab.h"
 #include "Prefab/Title/GameStartPrefab.h"
@@ -49,7 +49,7 @@ void TitleScene::SceneFinalize() {
 }
 
 void TitleScene::SceneUpdate() {
-	if (InputKeyboard::GetInstance().IsKeyTriggered(KB::Enter)) {
+	if (InputMouse::GetInstance().IsMouseClicked(MB::Left)) {
 		SceneManager::GetInstance().LoadScene(std::make_unique<GameScene>());
 	}
 }

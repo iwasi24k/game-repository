@@ -13,7 +13,6 @@
 #include "Prefab/CameraPrefab.h"
 #include "Prefab/Game/PlayerPrefab.h"
 #include "Prefab/Game/EnemyPrefab.h"
-#include "Prefab/Game/TestPrefab.h"
 
 #include "Script/Game/Manager/BlockManager.h"
 #include "SceneManager.h"
@@ -35,14 +34,6 @@ bool GameScene::SceneInitialize() {
 	enemyPrefab.Create(GetGameObjectManager())->GetTransform().position.x = 20.0f;
 
 	GetManagerHub()->AddManager<BlockManager>(std::make_unique<BlockManager>());
-
-	TestPrefab testPrefab;
-	testPrefab.Create(GetGameObjectManager());
-	auto test = testPrefab.Create(GetGameObjectManager());
-	test->GetTransform().position.x *= 3;
-	auto tr = test->GetComponent<SpriteComponent>();
-	tr->SetColor({ 1.0f, 0.0f, 0.0f, 0.5f });
-	tr->SetUV(0.5f, 0.5f, 1.0f, 1.0f);
 
     return true;
 }
