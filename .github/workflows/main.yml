@@ -2,18 +2,29 @@ name: AI PR Review
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    branches:
+      - develop
+    types: [opened, synchronize, ready_for_review]
 
 jobs:
   review:
+    if: >
+      github.event.pull_request.draft == false &&
+      !contains(github.event.pull_request.title, '[skip ai]')
+
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pull-requests: write
+
     steps:
       - uses: actions/checkout@v4
 
       - name: Get diff
         run: |
-          git fetch origin main
-          git diff origin/main...HEAD > diff.txt
+          git fetch origin develop
+          git diff origin/develop...HEAD > diff.txt
 
       - name: Comment PR with AI Review
         env:
@@ -21,6 +32,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           DIFF=$(cat diff.txt)
+
+          if [ -z "$DIFF" ]; then
+            echo "No diff found. Skip AI review."
+            exit 0
+          fi
 
           REVIEW=$(curl -s https://api.openai.com/v1/chat/completions \
             -H "Content-Type: application/json" \
@@ -40,4 +56,4 @@ jobs:
             }" | jq -r '.choices[0].message.content')
 
           gh pr comment ${{ github.event.pull_request.number }} \
-            --body \"### 🤖 AI Code Review\n\n$REVIEW\"
+            --body "### 🤖 AI Code Review\n\n$REVIEW"
