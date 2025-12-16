@@ -24,7 +24,7 @@ jobs:
       - name: Get diff
         run: |
           git fetch origin develop
-          git diff origin/develop...HEAD > diff.txt
+          git diff origin/develop > diff.txt
 
       - name: Comment PR with AI Review
         env:
