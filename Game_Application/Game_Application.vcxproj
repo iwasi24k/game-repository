@@ -276,6 +276,7 @@
     <ClInclude Include="Project\Prefab\Game\BlackBlockPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\EnemyPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\PlayerPrefab.h" />
+    <ClInclude Include="Project\Prefab\Game\TestPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\WhiteBlockPrefab.h" />
     <ClInclude Include="Project\Prefab\Title\BlockPrefab.h" />
     <ClInclude Include="Project\Prefab\Title\GameStartPrefab.h" />

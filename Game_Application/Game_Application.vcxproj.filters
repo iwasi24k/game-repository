@@ -408,6 +408,9 @@
     <ClInclude Include="Project\Scene\Game\GameScene.h">
       <Filter>Project\Scene\Game</Filter>
     </ClInclude>
+    <ClInclude Include="Project\Prefab\Game\TestPrefab.h">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClInclude>
     <ClInclude Include="Project\Script\Game\PlayerScript.h">
       <Filter>Project\Script\Game</Filter>
     </ClInclude>
