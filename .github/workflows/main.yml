@@ -2,15 +2,13 @@ name: AI PR Review
 
 on:
   pull_request:
-    branches:
-      - develop
     types: [opened, synchronize, ready_for_review]
 
 jobs:
   review:
     if: >
       github.event.pull_request.draft == false &&
-      !contains(github.event.pull_request.title, '[skip ai]')
+      !contains(toLower(github.event.pull_request.title), '[skip ai]')
     runs-on: ubuntu-latest
 
     permissions:
@@ -21,15 +19,20 @@ jobs:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       OPENAI_MODEL: gpt-5-mini
-      MAX_DIFF_SIZE: 200000  # バイト単位
+      MAX_DIFF_SIZE: 200000
+      MAX_COMMENT_SIZE: 60000
 
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup GH CLI
+        uses: actions/setup-gh-cli@v3
+
       - name: Prepare diff
         run: |
-          git fetch origin develop
-          git diff origin/develop > diff.txt
+          BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
+          git fetch origin $BASE_BRANCH
+          git diff origin/$BASE_BRANCH...HEAD > diff.txt
 
           if [ ! -s diff.txt ]; then
             echo "No diff found. Skip AI review."
@@ -37,48 +40,76 @@ jobs:
           fi
 
           if [ $(wc -c < diff.txt) -gt $MAX_DIFF_SIZE ]; then
-            head -c $MAX_DIFF_SIZE diff.txt > diff_trunc.txt
-            DIFF_FILE=diff_trunc.txt
+            echo "Diff too large, skipping AI review."
+            echo "DIFF_SKIPPED=true" >> $GITHUB_ENV
           else
-            DIFF_FILE=diff.txt
+            echo "DIFF_FILE=diff.txt" >> $GITHUB_ENV
           fi
 
-          echo "Using diff file: $DIFF_FILE"
-          echo "DIFF_FILE=$DIFF_FILE" >> $GITHUB_ENV
+      - name: Check if diff was skipped
+        run: |
+          if [ "${DIFF_SKIPPED}" = "true" ]; then
+            gh pr comment ${{ github.event.pull_request.number }} \
+              --body "AIレビューは差分が大きすぎるためスキップされました。"
+            exit 0
+          fi
 
       - name: Create payload
         run: |
           SYSTEM_PROMPT="あなたはシニアソフトウェアエンジニアです。以下のプルリクエストの差分コードをレビューし、問題点・改善点・潜在的なバグを簡潔に指摘してください。"
-          jq -n --arg model "$OPENAI_MODEL" \
-                --arg system "$SYSTEM_PROMPT" \
-                --arg user "$(cat $DIFF_FILE)" \
-                '{model:$model,messages:[{role:"system",content:$system},{role:"user",content:$user}]}' > payload.json
+          jq -n --rawfile user "$DIFF_FILE" \
+            --arg model "$OPENAI_MODEL" \
+            --arg system "$SYSTEM_PROMPT" \
+            '{model:$model,messages:[{role:"system",content:$system},{role:"user",content:$user}]}' \
+            > payload.json
 
-      - name: Call OpenAI API
+      - name: Call OpenAI API with backoff
         run: |
-          HTTP_STATUS=$(curl -sS --retry 3 --retry-delay 2 --max-time 60 \
-            -X POST "https://api.openai.com/v1/chat/completions" \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $OPENAI_API_KEY" \
-            -o response.json \
-            -w "%{http_code}" \
-            -d @payload.json)
+          RETRIES=5
+          BACKOFF=2
+          for i in $(seq 1 $RETRIES); do
+            HTTP_STATUS=$(curl -sS --max-time 120 \
+              -X POST "https://api.openai.com/v1/chat/completions" \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $OPENAI_API_KEY" \
+              -o response.json \
+              -w "%{http_code}" \
+              -d @payload.json)
+
+            if [ "$HTTP_STATUS" -eq 200 ]; then
+              break
+            fi
+
+            echo "Attempt $i failed (HTTP $HTTP_STATUS), retrying in $BACKOFF seconds..."
+            sleep $BACKOFF
+            BACKOFF=$((BACKOFF*2))
+          done
 
           if [ "$HTTP_STATUS" -ne 200 ]; then
-            echo "OpenAI API request failed with status $HTTP_STATUS"
-            head -n 50 response.json
-            exit 1
+            echo "OpenAI API request failed after $RETRIES attempts (HTTP $HTTP_STATUS)"
+            gh pr comment ${{ github.event.pull_request.number }} \
+              --body "AIレビューが失敗しました（HTTP $HTTP_STATUS）。"
+            exit 0
           fi
 
       - name: Extract review
         run: |
-          REVIEW=$(jq -r '.choices[0].message.content' response.json)
-          if [ -z "$REVIEW" ] || [ "$REVIEW" = "null" ]; then
-            echo "No valid review returned from API."
-            exit 1
+          REVIEW=$(jq -r '.choices | if length>0 then map(.message.content) | join("\n\n") else empty end' response.json)
+          if [ -z "$REVIEW" ]; then
+            gh pr comment ${{ github.event.pull_request.number }} \
+              --body "AIレビューが空のためコメントできませんでした。"
+            exit 0
           fi
           echo "$REVIEW" > review.txt
 
-      - name: Comment PR
+      - name: Comment PR (split if too long)
         run: |
-          gh pr comment ${{ github.event.pull_request.number }} --body-file review.txt
+          if [ $(wc -c < review.txt) -gt $MAX_COMMENT_SIZE ]; then
+            echo "Review too long, splitting into multiple comments..."
+            split -b $MAX_COMMENT_SIZE review.txt review_part_
+            for f in review_part_*; do
+              gh pr comment ${{ github.event.pull_request.number }} --body-file $f
+            done
+          else
+            gh pr comment ${{ github.event.pull_request.number }} --body-file review.txt
+          fi
