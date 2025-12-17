@@ -11,7 +11,6 @@ jobs:
     if: >
       github.event.pull_request.draft == false &&
       !contains(github.event.pull_request.title, '[skip ai]')
-
     runs-on: ubuntu-latest
 
     permissions:
@@ -31,13 +30,16 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          DIFF=$(cat diff.txt)
-
-          if [ -z "$DIFF" ]; then
+          # diff が空ならスキップ
+          if [ ! -s diff.txt ]; then
             echo "No diff found. Skip AI review."
             exit 0
           fi
 
+          # diff を安全に JSON エスケープ
+          DIFF_ESCAPED=$(jq -Rs '.' < diff.txt)
+
+          # OpenAI API 呼び出し
           REVIEW=$(curl -s https://api.openai.com/v1/chat/completions \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $OPENAI_API_KEY" \
@@ -50,10 +52,11 @@ jobs:
                 },
                 {
                   \"role\": \"user\",
-                  \"content\": \"$DIFF\"
+                  \"content\": $DIFF_ESCAPED
                 }
               ]
             }" | jq -r '.choices[0].message.content')
 
+          # PR にコメント
           gh pr comment ${{ github.event.pull_request.number }} \
             --body "### 🤖 AI Code Review\n\n$REVIEW"
