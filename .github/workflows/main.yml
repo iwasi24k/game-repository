@@ -33,14 +33,17 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # diff が空ならスキップ
           if [ ! -s diff.txt ]; then
             echo "No diff found. Skip AI review."
             exit 0
           fi
 
+          # diff を JSON エスケープ
           DIFF_ESCAPED=$(jq -Rs '.' < diff.txt)
 
-          RESPONSE=$(curl -s -w "%{http_code}" -o response.json \
+          # OpenAI API に送信して結果を response.json に保存
+          HTTP_STATUS=$(curl -s -o response.json -w "%{http_code}" -X POST "https://api.openai.com/v1/chat/completions" \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $OPENAI_API_KEY" \
             -d "{
@@ -51,13 +54,16 @@ jobs:
               ]
             }")
 
-          STATUS=$(tail -n1 <<< "$RESPONSE")
-          if [ "$STATUS" -ne 200 ]; then
-            echo "OpenAI API request failed with status $STATUS"
+          # HTTP ステータスが 200 以外ならエラー
+          if [ "$HTTP_STATUS" -ne 200 ]; then
+            echo "OpenAI API request failed with status $HTTP_STATUS"
+            cat response.json
             exit 1
           fi
 
+          # レビュー結果を取得
           REVIEW=$(jq -r '.choices[0].message.content' response.json)
 
+          # PR にコメント
           gh pr comment $PR_NUMBER \
             --body "### 🤖 AI Code Review\n\n$REVIEW"
