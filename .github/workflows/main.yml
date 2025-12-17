@@ -18,52 +18,67 @@ jobs:
       pull-requests: write
 
     env:
-      PR_NUMBER: ${{ github.event.pull_request.number }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      OPENAI_MODEL: gpt-5-mini
+      MAX_DIFF_SIZE: 200000  # バイト単位
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Get diff
+      - name: Prepare diff
         run: |
           git fetch origin develop
           git diff origin/develop > diff.txt
 
-      - name: Comment PR with AI Review
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # diff が空ならスキップ
           if [ ! -s diff.txt ]; then
             echo "No diff found. Skip AI review."
             exit 0
           fi
 
-          # diff を JSON エスケープ
-          DIFF_ESCAPED=$(jq -Rs '.' < diff.txt)
+          if [ $(wc -c < diff.txt) -gt $MAX_DIFF_SIZE ]; then
+            head -c $MAX_DIFF_SIZE diff.txt > diff_trunc.txt
+            DIFF_FILE=diff_trunc.txt
+          else
+            DIFF_FILE=diff.txt
+          fi
 
-          # OpenAI API に送信して結果を response.json に保存
-          HTTP_STATUS=$(curl -s -o response.json -w "%{http_code}" -X POST "https://api.openai.com/v1/chat/completions" \
+          echo "Using diff file: $DIFF_FILE"
+          echo "DIFF_FILE=$DIFF_FILE" >> $GITHUB_ENV
+
+      - name: Create payload
+        run: |
+          SYSTEM_PROMPT="あなたはシニアソフトウェアエンジニアです。以下のプルリクエストの差分コードをレビューし、問題点・改善点・潜在的なバグを簡潔に指摘してください。"
+          jq -n --arg model "$OPENAI_MODEL" \
+                --arg system "$SYSTEM_PROMPT" \
+                --arg user "$(cat $DIFF_FILE)" \
+                '{model:$model,messages:[{role:"system",content:$system},{role:"user",content:$user}]}' > payload.json
+
+      - name: Call OpenAI API
+        run: |
+          HTTP_STATUS=$(curl -sS --retry 3 --retry-delay 2 --max-time 60 \
+            -X POST "https://api.openai.com/v1/chat/completions" \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $OPENAI_API_KEY" \
-            -d "{
-              \"model\": \"gpt-5-mini\",
-              \"messages\": [
-                {\"role\": \"system\", \"content\": \"あなたはシニアソフトウェアエンジニアです。以下のプルリクエストの差分コードをレビューし、問題点・改善点・潜在的なバグを簡潔かつ建設的に指摘してください。\"},
-                {\"role\": \"user\", \"content\": $DIFF_ESCAPED}
-              ]
-            }")
+            -o response.json \
+            -w "%{http_code}" \
+            -d @payload.json)
 
-          # HTTP ステータスが 200 以外ならエラー
           if [ "$HTTP_STATUS" -ne 200 ]; then
             echo "OpenAI API request failed with status $HTTP_STATUS"
-            cat response.json
+            head -n 50 response.json
             exit 1
           fi
 
-          # レビュー結果を取得
+      - name: Extract review
+        run: |
           REVIEW=$(jq -r '.choices[0].message.content' response.json)
+          if [ -z "$REVIEW" ] || [ "$REVIEW" = "null" ]; then
+            echo "No valid review returned from API."
+            exit 1
+          fi
+          echo "$REVIEW" > review.txt
 
-          # PR にコメント
-          gh pr comment $PR_NUMBER \
-            --body "### 🤖 AI Code Review\n\n$REVIEW"
+      - name: Comment PR
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} --body-file review.txt
