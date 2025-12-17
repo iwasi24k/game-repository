@@ -15,15 +15,13 @@
 class EnemyRespawn : public Framework::GameBehaviour {
 private:
 	bool m_IsSpawn = false;
-	float m_SpawnTimer = 0.0f;
 
 public:
 	void Start() override;
 	void Update() override;
 
-	void Spawn(float time) { 
+	void Spawn() { 
 		m_IsSpawn = true;
-		m_SpawnTimer = time; 
 	}
 };
 

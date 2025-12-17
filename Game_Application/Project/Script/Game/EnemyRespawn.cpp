@@ -10,19 +10,21 @@
 #include "pch.h"
 #include "EnemyRespawn.h"
 #include "Framework/Core/Timer.h"
+#include "GameObject.h"
 
 using namespace Framework;
 
 void EnemyRespawn::Start() {
-	m_IsSpawn = false;
-	m_SpawnTimer = 0.0f;
 }
 
 void EnemyRespawn::Update() {
 	if (!m_IsSpawn) return;
-	m_SpawnTimer -= Timer::GetInstance().GetDeltaTime();
-	if (m_SpawnTimer > 0.0f) return;
 	
-	float range = 10.0f;
-	rand_api::real(-range, range);
+	float range = 20.0f;
+	math::vector3f pos = math::zero<math::vector3f>();
+	pos.x = rand_api::real(-range, range);
+	pos.y = 15.0f;
+	pos.z = rand_api::real(-range, range);
+	GetOwner()->GetTransform().position = pos;
+	m_IsSpawn = false;
 }
