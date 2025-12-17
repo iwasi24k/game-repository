@@ -25,7 +25,7 @@ void EnemyManager::Create() {
 	for (int i = 0; i < kEnemyMax; ++i) {
 		auto obj = enemyPrefab.Create(gameObject);
 		auto enemy = obj->GetComponent<EnemyRespawn>();
-		enemy->Spawn(10.0f);
+		enemy->Spawn();
 	}
 
 }

@@ -18,6 +18,7 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ManagerHub.h"
+#include "Script/Game/Manager/EnemyManager.h"
 
 using namespace Framework;
 
@@ -29,9 +30,10 @@ bool GameScene::SceneInitialize() {
 	PlayerPrefab playerPrefab;
 	playerPrefab.Create(GetGameObjectManager());
 
-	EnemyPrefab enemyPrefab;
-	enemyPrefab.Create(GetGameObjectManager());
-	enemyPrefab.Create(GetGameObjectManager())->GetTransform().position.x = 20.0f;
+	//EnemyPrefab enemyPrefab;
+	//enemyPrefab.Create(GetGameObjectManager());
+	//enemyPrefab.Create(GetGameObjectManager())->GetTransform().position.x = 20.0f;
+	GetManagerHub()->AddManager<EnemyManager>(std::make_unique<EnemyManager>());
 
 	GetManagerHub()->AddManager<BlockManager>(std::make_unique<BlockManager>());
 

@@ -18,7 +18,7 @@ class EnemyManager : public Framework::ObjectManager {
 private:
     Framework::GameObjectManager* m_GameObjectManager = nullptr;
 
-    static constexpr int kEnemyMax = 10;
+    static constexpr int kEnemyMax = 5;
 
     float m_Timer = 0.0f;
     float m_Interval = 5.0f;  // A•b‚²‚Æ
