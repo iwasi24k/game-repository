@@ -17,6 +17,9 @@ jobs:
       contents: read
       pull-requests: write
 
+    env:
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -39,24 +42,29 @@ jobs:
           # diff を安全に JSON エスケープ
           DIFF_ESCAPED=$(jq -Rs '.' < diff.txt)
 
-          # OpenAI API 呼び出し
-          REVIEW=$(curl -s https://api.openai.com/v1/chat/completions \
+          # OpenAI API 呼び出しと HTTP ステータス取得
+          HTTP_STATUS=$(curl -s -o response.json -w "%{http_code}" \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $OPENAI_API_KEY" \
             -d "{
               \"model\": \"gpt-4.1-mini\",
               \"messages\": [
-                {
-                  \"role\": \"system\",
-                  \"content\": \"あなたはシニアソフトウェアエンジニアです。以下のプルリクエストの差分コードをレビューし、問題点・改善点・潜在的なバグを簡潔かつ建設的に指摘してください。\"
-                },
-                {
-                  \"role\": \"user\",
-                  \"content\": $DIFF_ESCAPED
-                }
+                {\"role\": \"system\", \"content\": \"あなたはシニアソフトウェアエンジニアです。以下のプルリクエストの差分コードをレビューし、問題点・改善点・潜在的なバグを簡潔かつ建設的に指摘してください。\"},
+                {\"role\": \"user\", \"content\": $DIFF_ESCAPED}
               ]
-            }" | jq -r '.choices[0].message.content')
+            }")
+
+          # API が失敗した場合はレスポンスを出力して終了
+          if [ "$HTTP_STATUS" -ne 200 ]; then
+            echo "OpenAI API request failed with status $HTTP_STATUS"
+            cat response.json
+            exit 1
+          fi
+
+          # レビュー結果を抽出
+          REVIEW=$(jq -r '.choices[0].message.content' response.json)
 
           # PR にコメント
-          gh pr comment ${{ github.event.pull_request.number }} \
+          gh pr comment $PR_NUMBER \
             --body "### 🤖 AI Code Review\n\n$REVIEW"
+
