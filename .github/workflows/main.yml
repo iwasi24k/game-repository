@@ -47,7 +47,7 @@ jobs:
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $OPENAI_API_KEY" \
             -d "{
-              \"model\": \"gpt-4.1-mini\",
+              \"model\": \"gpt-5-mini\",
               \"messages\": [
                 {\"role\": \"system\", \"content\": \"あなたはシニアソフトウェアエンジニアです。以下のプルリクエストの差分コードをレビューし、問題点・改善点・潜在的なバグを簡潔かつ建設的に指摘してください。\"},
                 {\"role\": \"user\", \"content\": $DIFF_ESCAPED}
