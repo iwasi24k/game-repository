@@ -300,6 +300,12 @@
     <ClCompile Include="Project\Prefab\Title\TitleBgPrefab.cpp">
       <Filter>Project\Prefab\Title</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Prefab\Game\SkillPrefab.cpp">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Script\Game\EnemySkillScript.cpp">
+      <Filter>Project\Script\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -533,6 +539,12 @@
     </ClInclude>
     <ClInclude Include="Project\Prefab\Title\TitleBgPrefab.h">
       <Filter>Project\Prefab\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Game\SkillPrefab.h">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Game\EnemySkillScript.h">
+      <Filter>Project\Script\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
