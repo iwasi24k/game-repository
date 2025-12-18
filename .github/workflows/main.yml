@@ -24,9 +24,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup GH CLI
-        uses: actions/setup-gh-cli@v3
-
       - name: Prepare diff
         run: |
           BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
