@@ -50,13 +50,13 @@ void JumpScript::Update() {
 
 }
 
-void JumpScript::OnTriggerEnter(Framework::GameObject* other) {
+void JumpScript::OnCollisionEnter(Framework::GameObject* other) {
     if (other->GetTag() == "Block") {
         m_GroundContacts++;
     }
 }
 
-void JumpScript::OnTriggerExit(Framework::GameObject* other) {
+void JumpScript::OnCollisionExit(Framework::GameObject* other) {
     if (other->GetTag() == "Block") {
         m_GroundContacts--;
     }
