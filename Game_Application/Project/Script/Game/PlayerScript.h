@@ -16,9 +16,6 @@ class PlayerScript : public Framework::GameBehaviour {
 public:
     void Start() override;
     void Update() override;
-
-    void OnTriggerEnter(Framework::GameObject* other) override;
-    void OnTriggerExit(Framework::GameObject* other) override;
 };
 
 #endif // PLAYER_SCRIPT_H

@@ -63,7 +63,7 @@ void PhysicsComponentManager::ResolveCollisions() {
         col->SetFromTransform(nextPos);
 
         for (auto* other : m_Colliders) {
-            if (other == col || !other->IsEnabled()) continue;
+            if (other == col || !other->IsEnabled() || other->IsTrigger()) continue;
 
             if (!col->Intersect(*other)) continue;
             

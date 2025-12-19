@@ -66,13 +66,3 @@ void PlayerScript::Update() {
         rb->SetVelocity(velocity);
     }
 }
-
-void PlayerScript::OnTriggerEnter(Framework::GameObject* other)
-{
-    other;
-}
-
-void PlayerScript::OnTriggerExit(Framework::GameObject* other)
-{
-    other;
-}

@@ -60,8 +60,8 @@ void BlackBlockPrefab::Configure(GameObject* obj) {
 	blockScript->SetMaterial(mat);
 
 	// --- BoxCollider Ý’è ---
-	auto bc = obj->GetComponent<BoxCollider>();
-	BoxColliderConfig bcConfig;
-	bcConfig.isTrigger = true;
-	bc->Configure(bcConfig);
+	//auto bc = obj->GetComponent<BoxCollider>();
+	//BoxColliderConfig bcConfig;
+	//bcConfig.isTrigger = true;
+	//bc->Configure(bcConfig);
 }
