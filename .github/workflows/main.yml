@@ -8,9 +8,8 @@ jobs:
   review:
     if: >
       github.event.pull_request.draft == false &&
-      !contains(toLower(github.event.pull_request.title), '[skip ai]')
+      !contains(github.event.pull_request.title, '[skip ai]')
     runs-on: ubuntu-latest
-
     permissions:
       contents: read
       pull-requests: write
@@ -24,15 +23,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup GH CLI
-        uses: actions/setup-gh-cli@v3
+        with:
+          fetch-depth: 0
 
       - name: Prepare diff
         run: |
           BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
           git fetch origin $BASE_BRANCH
-          git diff origin/$BASE_BRANCH...HEAD > diff.txt
+          git diff origin/$BASE_BRANCH..HEAD > diff.txt
 
           if [ ! -s diff.txt ]; then
             echo "No diff found. Skip AI review."
