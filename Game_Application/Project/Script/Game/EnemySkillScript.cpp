@@ -16,15 +16,15 @@
 using namespace Framework;
 
 void EnemySkillScript::Start() {
-	float frame = rand_api::real(240.0f, 360.0f);
-	m_InitialFrame = frame;
+	float time = rand_api::real(4.0f, 8.0f);
+	m_InitialTime = time;
 }
 
 void EnemySkillScript::Update() {
 	if (!m_GameObject) return;
 
-	if (m_InitialFrame >= 0.0f) {
-		m_InitialFrame--;
+	if (m_InitialTime >= 0.0f) {
+		m_InitialTime -= Timer::GetInstance().GetDeltaTime();
 		return;
 	}
 	switch (m_SkillState) {
@@ -79,45 +79,42 @@ void EnemySkillScript::OnTriggerEnter(GameObject* other) {
 }
 
 void EnemySkillScript::EnemyMoveAnimation() {
-	float speed = 3.0f;
 	float dt = Timer::GetInstance().GetDeltaTime();
 
 	auto& pos = GetOwner()->GetTransform().position;
 
-	pos += m_MoveDir * speed * dt;
+	pos += m_MoveDir * kMoveSpeed * dt;
 }
 
 void EnemySkillScript::EnemyActionAnimation() {
-	float speed = 2.5f;
+	auto modelComp = GetOwner()->GetComponent<ModelComponent>();
+	if (!modelComp) MSG_ERRF(L"not found [ModelComponent]");
+
 	float dt = Timer::GetInstance().GetDeltaTime();
 
 	auto& scale = GetOwner()->GetTransform().scale;
-	float maxScale = 3.0f;
 	float current = scale.x;
 
 	// --- すでに最大値に達している場合は即リセット ---
-	if (current >= maxScale) {
+	if (current >= kActionMaxScale) {
 		m_IsAction = false;
 		auto& pos = GetOwner()->GetTransform().position;
 		pos = m_GameObject->GetTransform().position;
 		scale = { 0.25f, 0.25f, 0.25f };
 
-		auto modelComp = GetOwner()->GetComponent<ModelComponent>();
 		math::vector4f reset = { 1.0f, 1.0f, 1.0f, 1.0f };
 		modelComp->SetDiffuse(reset);
 		m_IsHit = false;
 		return;
 	}
 
-	current += speed * dt;
-	current = std::min(current, maxScale);
+	current += kActionSpeed * dt;
+	current = std::min(current, kActionMaxScale);
 	scale = { current, current , current };
 
-	float alpha = 1.0f - (current / maxScale);
+	float alpha = 1.0f - (current / kActionMaxScale);
 	alpha = std::clamp(alpha, 0.0f, 1.0f);
 
-	auto modelComp = GetOwner()->GetComponent<ModelComponent>();
-	if (!modelComp) MSG_ERRF(L"not found [ModelComponent]");
 	math::vector4f diffuse = { 1.0f, 1.0f, 1.0f, alpha };
 	modelComp->SetDiffuse(diffuse);
 }

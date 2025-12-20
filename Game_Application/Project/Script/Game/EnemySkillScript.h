@@ -28,7 +28,11 @@ private:
 	bool m_IsAction = false;
 	bool m_IsHit = false;
 
-	float m_InitialFrame = 180.0f;
+	float m_InitialTime = 6.0f;
+
+	static constexpr float kMoveSpeed = 3.0f;
+	static constexpr float kActionSpeed = 2.5f;
+	static constexpr float kActionMaxScale = 3.0f;
 
 public:
 	void Start() override;
