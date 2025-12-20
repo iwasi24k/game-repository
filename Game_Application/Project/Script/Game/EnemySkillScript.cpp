@@ -10,11 +10,12 @@
 #include "pch.h"
 #include "EnemySkillScript.h"
 #include "Timer.h"
+#include "Components/RenderComponent/ModelComponent.h"
 
 using namespace Framework;
 
 void EnemySkillScript::Start() {
-
+	GetOwner()->GetTransform().position = m_GameObject->GetTransform().position;
 }
 
 void EnemySkillScript::Update() {
@@ -45,7 +46,8 @@ void EnemySkillScript::Update() {
 		break;
 
 	case EnemySkillState::Action:
-		if (m_IsAction) {
+		EnemyActionAnimation();
+		if (!m_IsAction) {
 			m_SkillState = EnemySkillState::Idle;
 		}
 		break;
@@ -60,6 +62,8 @@ void EnemySkillScript::SkillActivation() {
 	m_IsActivation = true;
 	m_ActionPosition = GetOwner()->GetTransform().position;
 	m_TargetPosition = FindObject("Player")->GetTransform().position;
+
+	m_MoveDir = math::normalize(m_TargetPosition - m_ActionPosition);
 }
 
 void EnemySkillScript::OnTriggerEnter(GameObject* other) {
@@ -69,19 +73,46 @@ void EnemySkillScript::OnTriggerEnter(GameObject* other) {
 }
 
 void EnemySkillScript::EnemyMoveAnimation() {
-	float speed = 2.0f;
+	float speed = 3.0f;
 	float dt = Timer::GetInstance().GetDeltaTime();
 
 	auto& pos = GetOwner()->GetTransform().position;
 
-	math::vector3f dir = m_TargetPosition - pos;
-	float length = math::length(dir);
+	pos += m_MoveDir * speed * dt;
+}
 
-	if (length < 0.01f) {
-		m_IsHit = true;
-		pos = m_TargetPosition;
+void EnemySkillScript::EnemyActionAnimation() {
+	float speed = 2.5f;
+	float dt = Timer::GetInstance().GetDeltaTime();
+
+	auto& scale = GetOwner()->GetTransform().scale;
+	float maxScale = 3.0f;
+	float current = scale.x;
+
+	// --- すでに最大値に達している場合は即リセット ---
+	if (current >= maxScale) {
+		m_IsAction = false;
+		auto& pos = GetOwner()->GetTransform().position;
+		pos = m_GameObject->GetTransform().position;
+		scale = { 0.25f, 0.25f, 0.25f };
+
+		auto modelComp = GetOwner()->GetComponent<ModelComponent>();
+		math::vector4f reset = { 1.0f, 1.0f, 1.0f, 1.0f };
+		modelComp->SetDiffuse(reset);
+		m_IsHit = false;
 		return;
 	}
-	dir = math::normalize(dir);
-	pos += dir * speed * dt;
+
+	current += speed * dt;
+	current = std::min(current, maxScale);
+	scale = { current, current , current };
+
+	// 透明度計算
+	float alpha = 1.0f - (current / maxScale);
+	alpha = std::clamp(alpha, 0.0f, 1.0f);
+
+	// マテリアル反映
+	auto modelComp = GetOwner()->GetComponent<ModelComponent>();
+	math::vector4f diffuse = { 1.0f, 1.0f, 1.0f, alpha };
+	modelComp->SetDiffuse(diffuse);
 }

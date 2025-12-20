@@ -37,7 +37,7 @@ void EnemyPrefab::Configure(GameObject* obj) {
 
 	// --- Transform ê›íË ---
 	obj->GetTransform().position = { 0.0f, 5.0f, 0.0f };
-	obj->GetTransform().scale = { 1.0f, 1.0f, 1.0f };
+	obj->GetTransform().scale = { 0.5f, 0.5f, 0.5f };
 	obj->GetTransform().rotation = { 0.0f, 0.0f, 0.0f };
 
 	// --- ModelComponent ê›íË ---

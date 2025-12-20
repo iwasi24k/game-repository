@@ -22,6 +22,7 @@ private:
 
 	math::vector3f m_ActionPosition = math::zero<math::vector3f>();
 	math::vector3f m_TargetPosition = math::zero<math::vector3f>();
+	math::vector3f m_MoveDir = math::zero<math::vector3f>();
 
 	bool m_IsActivation = false;
 	bool m_IsAction = false;
@@ -38,6 +39,7 @@ public:
 
 private:
 	void EnemyMoveAnimation();
+	void EnemyActionAnimation();
 };
 
 #endif // ENEMY_RESPAWN_H
