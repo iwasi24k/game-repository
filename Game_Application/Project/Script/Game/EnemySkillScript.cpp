@@ -84,6 +84,13 @@ void EnemySkillScript::EnemyMoveAnimation() {
 	auto& pos = GetOwner()->GetTransform().position;
 
 	pos += m_MoveDir * kMoveSpeed * dt;
+
+	if (m_MoveTime <= 0.0f) {
+		m_MoveTime = kMaxMoveTime;
+		m_IsHit = true;
+		return;
+	}
+	m_MoveTime -= dt;
 }
 
 void EnemySkillScript::EnemyActionAnimation() {

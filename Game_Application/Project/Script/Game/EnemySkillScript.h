@@ -34,6 +34,9 @@ private:
 	static constexpr float kActionSpeed = 2.5f;
 	static constexpr float kActionMaxScale = 3.0f;
 
+	static constexpr float kMaxMoveTime = 7.0f;
+	float m_MoveTime = kMaxMoveTime;
+
 public:
 	void Start() override;
 	void Update() override;
