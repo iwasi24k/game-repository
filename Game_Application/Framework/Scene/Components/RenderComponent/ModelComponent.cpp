@@ -39,6 +39,13 @@ void ModelComponent::SetMaterial(const Material& mat) {
 	}
 }
 
+void ModelComponent::SetDiffuse(const math::vector4f& diffuse) {
+    for (auto& m : m_OverrideMaterials) {
+        if (!m) m = Material{};
+        m->Diffuse = diffuse;
+    }
+}
+
 void ModelComponent::SetTexture(UINT slot, const std::wstring& texturePath) {
 	auto texture = TextureManager::GetInstance().LoadTexture(texturePath);
 

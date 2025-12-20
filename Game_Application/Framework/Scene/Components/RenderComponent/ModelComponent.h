@@ -34,6 +34,7 @@ namespace Framework {
         void LoadModel(const std::wstring& path);
         void SetLayer(float layer);
         void SetMaterial(const Material& mat);
+        void SetDiffuse(const math::vector4f& diffuse);
         void SetTexture(UINT slot, const std::wstring& texturePath);
 
 		void SetLight(math::vector4f direction, math::vector4f diffuse, math::vector4f ambient, math::vector4f position, math::vector4f pointLightParam);

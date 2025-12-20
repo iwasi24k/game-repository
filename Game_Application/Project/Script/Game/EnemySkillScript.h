@@ -22,10 +22,20 @@ private:
 
 	math::vector3f m_ActionPosition = math::zero<math::vector3f>();
 	math::vector3f m_TargetPosition = math::zero<math::vector3f>();
+	math::vector3f m_MoveDir = math::zero<math::vector3f>();
 
 	bool m_IsActivation = false;
 	bool m_IsAction = false;
 	bool m_IsHit = false;
+
+	float m_InitialTime = 6.0f;
+
+	static constexpr float kMoveSpeed = 3.0f;
+	static constexpr float kActionSpeed = 2.5f;
+	static constexpr float kActionMaxScale = 3.0f;
+
+	static constexpr float kMaxMoveTime = 7.0f;
+	float m_MoveTime = kMaxMoveTime;
 
 public:
 	void Start() override;
@@ -38,6 +48,7 @@ public:
 
 private:
 	void EnemyMoveAnimation();
+	void EnemyActionAnimation();
 };
 
 #endif // ENEMY_RESPAWN_H
