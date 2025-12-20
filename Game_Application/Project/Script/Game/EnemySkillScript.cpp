@@ -11,16 +11,22 @@
 #include "EnemySkillScript.h"
 #include "Timer.h"
 #include "Components/RenderComponent/ModelComponent.h"
+#include "DebugTool.h"
 
 using namespace Framework;
 
 void EnemySkillScript::Start() {
-	GetOwner()->GetTransform().position = m_GameObject->GetTransform().position;
+	float frame = rand_api::real(240.0f, 360.0f);
+	m_InitialFrame = frame;
 }
 
 void EnemySkillScript::Update() {
 	if (!m_GameObject) return;
 
+	if (m_InitialFrame >= 0.0f) {
+		m_InitialFrame--;
+		return;
+	}
 	switch (m_SkillState) {
 	case EnemySkillState::Idle:
 		GetOwner()->GetTransform().position = m_GameObject->GetTransform().position;
@@ -107,12 +113,11 @@ void EnemySkillScript::EnemyActionAnimation() {
 	current = std::min(current, maxScale);
 	scale = { current, current , current };
 
-	// 透明度計算
 	float alpha = 1.0f - (current / maxScale);
 	alpha = std::clamp(alpha, 0.0f, 1.0f);
 
-	// マテリアル反映
 	auto modelComp = GetOwner()->GetComponent<ModelComponent>();
+	if (!modelComp) MSG_ERRF(L"not found [ModelComponent]");
 	math::vector4f diffuse = { 1.0f, 1.0f, 1.0f, alpha };
 	modelComp->SetDiffuse(diffuse);
 }

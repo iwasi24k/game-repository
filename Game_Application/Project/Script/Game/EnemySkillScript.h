@@ -28,6 +28,8 @@ private:
 	bool m_IsAction = false;
 	bool m_IsHit = false;
 
+	float m_InitialFrame = 180.0f;
+
 public:
 	void Start() override;
 	void Update() override;
