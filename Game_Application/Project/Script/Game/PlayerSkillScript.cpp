@@ -13,6 +13,7 @@
 #include "Components/RenderComponent/ModelComponent.h"
 #include "DebugTool.h"
 #include "InputMouse.h"
+#include "CombatProcessing.h"
 
 using namespace Framework;
 
@@ -27,8 +28,13 @@ void PlayerSkillScript::Update() {
 	case PlayerSkillState::Idle:
 		GetOwner()->GetTransform().position = m_GameObject->GetTransform().position;
 
+		if(m_CoolTime < kMaxCoolTime) {
+			m_CoolTime += Timer::GetInstance().GetDeltaTime();
+			return;
+		}
 		if (InputMouse::GetInstance().IsMouseClicked(MB::Left)) {
 			SkillActivation();
+			m_CoolTime = 0.0f;
 		}
 
 		if (m_IsActivation) {
@@ -53,7 +59,7 @@ void PlayerSkillScript::SkillActivation() {
 
 void PlayerSkillScript::OnTriggerEnter(GameObject* other) {
 	if (other->GetTag() == "Enemy") {
-		
+		other->GetComponent<CombatProcessing>()->Attack();
 	}
 }
 
@@ -65,8 +71,9 @@ void PlayerSkillScript::PlayerActionAnimation() {
 
 	auto& scale = GetOwner()->GetTransform().scale;
 	float current = scale.y;
+	float threshold = kActionMaxScale * 0.9f;
 
-	if (current >= kActionMaxScale) {
+	if (current >= threshold) {
 		m_IsAction = false;
 		auto& pos = GetOwner()->GetTransform().position;
 		pos = m_GameObject->GetTransform().position;
@@ -77,14 +84,13 @@ void PlayerSkillScript::PlayerActionAnimation() {
 		return;
 	}
 
-	current += kActionSpeed * dt;
-	current = std::min(current, kActionMaxScale);
+	current = std::lerp(current, kActionMaxScale, kActionSpeed * dt);
 
 	// scale yŽ²‚Ì‚ÝŠg‘å(cUŒ‚‚ð‘z’è)
 	scale = { 5.0f, current , 5.0f };
 
 	float t = current / kActionMaxScale;
-	float alpha = std::lerp(0.75f, 0.0f, t);
+	float alpha = std::lerp(1.0f, 0.0f, t);
 
 	math::vector4f diffuse = { kDefaultColor.x, kDefaultColor.y, kDefaultColor.z, alpha };
 	modelComp->SetDiffuse(diffuse);

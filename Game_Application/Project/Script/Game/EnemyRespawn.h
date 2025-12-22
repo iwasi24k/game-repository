@@ -15,6 +15,7 @@
 class EnemyRespawn : public Framework::GameBehaviour {
 private:
 	bool m_IsSpawn = false;
+	float m_Timer = 0.0f;
 
 public:
 	void Start() override;
@@ -22,6 +23,7 @@ public:
 
 	void Spawn() { 
 		m_IsSpawn = true;
+		m_Timer = 0.0f;
 	}
 };
 

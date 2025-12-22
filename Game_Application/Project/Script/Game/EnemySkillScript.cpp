@@ -12,6 +12,7 @@
 #include "Timer.h"
 #include "Components/RenderComponent/ModelComponent.h"
 #include "DebugTool.h"
+#include "CombatProcessing.h"
 
 using namespace Framework;
 
@@ -73,8 +74,12 @@ void EnemySkillScript::SkillActivation() {
 }
 
 void EnemySkillScript::OnTriggerEnter(GameObject* other) {
-	if (other->GetTag() == "Player" || other->GetTag() == "Block") {
+	if (other->GetTag() == "Block") {
 		m_IsHit = true;
+	}
+	if(other->GetTag() == "Player") {
+		m_IsHit = true;
+		other->GetComponent<CombatProcessing>()->Attack();
 	}
 }
 
@@ -101,9 +106,9 @@ void EnemySkillScript::EnemyActionAnimation() {
 
 	auto& scale = GetOwner()->GetTransform().scale;
 	float current = scale.x;
+	float threshold = kActionMaxScale * 0.8f;
 
-	// --- すでに最大値に達している場合は即リセット ---
-	if (current >= kActionMaxScale) {
+	if (current >= threshold) {
 		m_IsAction = false;
 		auto& pos = GetOwner()->GetTransform().position;
 		pos = m_GameObject->GetTransform().position;
@@ -115,8 +120,7 @@ void EnemySkillScript::EnemyActionAnimation() {
 		return;
 	}
 
-	current += kActionSpeed * dt;
-	current = std::min(current, kActionMaxScale);
+	current = std::lerp(current, kActionMaxScale, kActionSpeed * dt);
 	scale = { current, current , current };
 
 	float t = current / kActionMaxScale; // 0 -> 1

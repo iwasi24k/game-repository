@@ -17,6 +17,7 @@
 #include "Components/PhysicsComponent/BoxCollider.h"
 #include "Material.h"
 #include "Script/Game/ShadowScript.h"
+#include "Script/Game/CombatProcessing.h"
 
 using namespace Framework;
 
@@ -28,6 +29,7 @@ GameObject* PlayerPrefab::Create(GameObjectManager* mgr) {
 	obj->AddComponent<Rigidbody>();
 	obj->AddComponent<BoxCollider>();
 	obj->AddComponent<ShadowScript>();
+	obj->AddComponent<CombatProcessing>();
 
     Configure(obj);
     return obj;
@@ -43,7 +45,6 @@ void PlayerPrefab::Configure(GameObject* obj) {
 	// --- ModelComponent Ý’è ---
 	auto modelComp = obj->GetComponent<ModelComponent>();
 	modelComp->LoadModel(L"Asset/Model/block.fbx");
-	//modelComp->SetTexture(0, L"Asset/Texture/test.png");
 	modelComp->LoadShader(L"ModelShader", L"cso-file\\VertexShader.cso", L"cso-file\\PixelShader.cso");
 	Material mat;
 	mat.Ambient = { 0.2f, 0.2f, 0.2f, 1.0f };
@@ -63,4 +64,8 @@ void PlayerPrefab::Configure(GameObject* obj) {
 	rbConfig.gravity = -9.8f;
 	rbConfig.drag = 0.05f;
 	rb->Configure(rbConfig);
+
+	auto cp = obj->GetComponent<CombatProcessing>();
+	cp->SetHitPoint(5);
+	cp->SetAttackCooldown(2.0f);
 }

@@ -31,7 +31,7 @@ private:
 	float m_InitialTime = 6.0f;
 
 	static constexpr float kMoveSpeed = 3.0f;
-	static constexpr float kActionSpeed = 2.5f;
+	static constexpr float kActionSpeed = 2.0f;
 	static constexpr float kActionMaxScale = 3.0f;
 
 	static constexpr float kMaxMoveTime = 7.0f;
