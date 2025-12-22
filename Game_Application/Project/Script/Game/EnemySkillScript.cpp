@@ -109,7 +109,7 @@ void EnemySkillScript::EnemyActionAnimation() {
 		pos = m_GameObject->GetTransform().position;
 		scale = { 0.25f, 0.25f, 0.25f };
 
-		math::vector4f reset = { 1.0f, 1.0f, 1.0f, 1.0f };
+		math::vector4f reset = kDefaultColor;
 		modelComp->SetDiffuse(reset);
 		m_IsHit = false;
 		return;
@@ -119,9 +119,9 @@ void EnemySkillScript::EnemyActionAnimation() {
 	current = std::min(current, kActionMaxScale);
 	scale = { current, current , current };
 
-	float alpha = 1.0f - (current / kActionMaxScale);
-	alpha = std::clamp(alpha, 0.0f, 1.0f);
+	float t = current / kActionMaxScale; // 0 -> 1
+	float alpha = std::lerp(1.0f, 0.0f, t); // 1.0 -> 0.0
 
-	math::vector4f diffuse = { 1.0f, 1.0f, 1.0f, alpha };
+	math::vector4f diffuse = { kActionColor.x, kActionColor.y, kActionColor.z, alpha };
 	modelComp->SetDiffuse(diffuse);
 }

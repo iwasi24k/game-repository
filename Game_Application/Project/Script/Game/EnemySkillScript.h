@@ -37,6 +37,9 @@ private:
 	static constexpr float kMaxMoveTime = 7.0f;
 	float m_MoveTime = kMaxMoveTime;
 
+	static constexpr math::vector4f kDefaultColor = { 0.9f, 0.9f, 0.9f, 1.0f };
+	static constexpr math::vector3f kActionColor = { 0.95f, 0.25f, 0.25f };
+
 public:
 	void Start() override;
 	void Update() override;
