@@ -66,7 +66,6 @@ void PlayerSkillScript::PlayerActionAnimation() {
 	auto& scale = GetOwner()->GetTransform().scale;
 	float current = scale.y;
 
-	// --- ‚·‚Å‚ÉÅ‘å’l‚É’B‚µ‚Ä‚¢‚éê‡‚Í‘¦ƒŠƒZƒbƒg ---
 	if (current >= kActionMaxScale) {
 		m_IsAction = false;
 		auto& pos = GetOwner()->GetTransform().position;
@@ -80,10 +79,12 @@ void PlayerSkillScript::PlayerActionAnimation() {
 
 	current += kActionSpeed * dt;
 	current = std::min(current, kActionMaxScale);
+
+	// scale yŽ²‚Ì‚ÝŠg‘å(cUŒ‚‚ð‘z’è)
 	scale = { 5.0f, current , 5.0f };
 
-	float t = current / kActionMaxScale; // 0 -> 1
-	float alpha = std::lerp(0.75f, 0.0f, t); // 1.0 -> 0.0
+	float t = current / kActionMaxScale;
+	float alpha = std::lerp(0.75f, 0.0f, t);
 
 	math::vector4f diffuse = { kDefaultColor.x, kDefaultColor.y, kDefaultColor.z, alpha };
 	modelComp->SetDiffuse(diffuse);
