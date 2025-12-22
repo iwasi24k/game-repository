@@ -40,6 +40,7 @@ void ModelComponent::SetMaterial(const Material& mat) {
 }
 
 void ModelComponent::SetDiffuse(const math::vector4f& diffuse) {
+    m_Diffuse = diffuse;
     for (auto& m : m_OverrideMaterials) {
         if (!m) m = Material{};
         m->Diffuse = diffuse;

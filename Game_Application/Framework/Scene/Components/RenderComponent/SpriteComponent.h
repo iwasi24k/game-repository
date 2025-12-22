@@ -49,6 +49,7 @@ namespace Framework {
         void OnDestroy() override;
 
         float GetLayer() const { return m_Layer; }
+        const math::vector4f& GetColor() const { return m_Color; }
     };
 }
 
