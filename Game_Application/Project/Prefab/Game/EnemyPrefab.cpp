@@ -17,6 +17,7 @@
 #include "Script/Game/EnemyScript.h"
 #include "Script/Game/EnemyRespawn.h"
 #include "Script/Game/ShadowScript.h"
+#include "Script/Game/CombatProcessing.h"
 
 using namespace Framework;
 
@@ -28,6 +29,8 @@ GameObject* EnemyPrefab::Create(GameObjectManager* mgr) {
 	obj->AddComponent<EnemyScript>();
 	obj->AddComponent<EnemyRespawn>();
 	//obj->AddComponent<ShadowScript>();
+	obj->AddComponent<CombatProcessing>();
+
 
 	Configure(obj);
 	return obj;
@@ -36,7 +39,7 @@ GameObject* EnemyPrefab::Create(GameObjectManager* mgr) {
 void EnemyPrefab::Configure(GameObject* obj) {
 
 	// --- Transform Ý’è ---
-	obj->GetTransform().position = { 0.0f, 5.0f, 0.0f };
+	obj->GetTransform().position = { 0.0f, 15.0f, 0.0f };
 	obj->GetTransform().scale = { 0.5f, 0.5f, 0.5f };
 	obj->GetTransform().rotation = { 0.0f, 0.0f, 0.0f };
 
@@ -66,4 +69,7 @@ void EnemyPrefab::Configure(GameObject* obj) {
 	BoxColliderConfig bc;
 	bc.sizeOffset = { 0.2f, 0.1f , 0.2f};
 	boxCollider->Configure(bc);
+
+	auto cp = obj->GetComponent<CombatProcessing>();
+	cp->SetHitPoint(2);
 }

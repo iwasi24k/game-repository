@@ -19,6 +19,14 @@ void EnemyRespawn::Start() {
 
 void EnemyRespawn::Update() {
 	if (!m_IsSpawn) return;
+
+	m_Timer += Timer::GetInstance().GetDeltaTime();
+	float size = std::lerp(0.5f, 0.0f, m_Timer);
+	GetOwner()->GetTransform().scale = math::vector3f(size, size, size);
+	
+	if (size > 0.01f) return;
+
+	GetOwner()->GetTransform().scale = math::vector3f(0.5f, 0.5f, 0.5f);
 	
 	float range = 20.0f;
 	math::vector3f pos = math::zero<math::vector3f>();

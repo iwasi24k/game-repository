@@ -1,30 +1,32 @@
 //==============================================================================
-// File        : EnemyRespawn.h
+// File        : CombatProcessing.h
 //------------------------------------------------------------------------------
 // Author      : ix.U
-// Created     : 2025-12-11
-// Last Update : 2025-12-11
+// Created     : 2025-12-22
+// Last Update : 2025-12-22
 //------------------------------------------------------------------------------
 // 
 //==============================================================================
-#ifndef ENEMY_RESPAWN_H
-#define ENEMY_RESPAWN_H
+#ifndef COMBAT_PROCESSING_H
+#define COMBAT_PROCESSING_H
 
 #include "GameBehaviour.h"
+#include "GameObject.h"
 
-class EnemyRespawn : public Framework::GameBehaviour {
+class CombatProcessing : public Framework::GameBehaviour {
 private:
-	bool m_IsSpawn = false;
-	float m_Timer = 0.0f;
+	int m_HitPoint = 0;
+	bool m_IsAttack = false;
+	float m_AttackTimer = 0.0f;
 
 public:
 	void Start() override;
 	void Update() override;
 
-	void Spawn() { 
-		m_IsSpawn = true;
-		m_Timer = 0.0f;
-	}
+	void Attack();
+
+	void SetHitPoint(int hp) { m_HitPoint = hp; }
+	int GetHitPoint() const { return m_HitPoint; }
 };
 
-#endif // ENEMY_RESPAWN_H
+#endif // COMBAT_PROCESSING_H

@@ -23,10 +23,13 @@ private:
 	bool m_IsActivation = false;
 	bool m_IsAction = false;
 
-	static constexpr float kActionSpeed = 20.0f;
-	static constexpr float kActionMaxScale = 10.0f;
+	static constexpr float kActionSpeed = 4.0f;
+	static constexpr float kActionMaxScale = 7.0f;
 
 	static constexpr math::vector4f kDefaultColor = { 0.5f, 0.5f, 0.5f, 1.0f };
+
+	static constexpr float kMaxCoolTime = 2.5f;
+	float m_CoolTime = 0.0f;
 
 public:
 	void Start() override;

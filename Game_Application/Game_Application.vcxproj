@@ -209,6 +209,7 @@
     <ClCompile Include="Project\Scene\Game\GameScene.cpp" />
     <ClCompile Include="Project\Scene\Title\TitleScene.cpp" />
     <ClCompile Include="Project\Script\Game\BlockScript.cpp" />
+    <ClCompile Include="Project\Script\Game\CombatProcessing.cpp" />
     <ClCompile Include="Project\Script\Game\EnemyRespawn.cpp" />
     <ClCompile Include="Project\Script\Game\EnemyScript.cpp" />
     <ClCompile Include="Project\Script\Game\EnemySkillScript.cpp" />
@@ -291,6 +292,7 @@
     <ClInclude Include="Project\Scene\Game\GameScene.h" />
     <ClInclude Include="Project\Scene\Title\TitleScene.h" />
     <ClInclude Include="Project\Script\Game\BlockScript.h" />
+    <ClInclude Include="Project\Script\Game\CombatProcessing.h" />
     <ClInclude Include="Project\Script\Game\EnemyRespawn.h" />
     <ClInclude Include="Project\Script\Game\EnemyScript.h" />
     <ClInclude Include="Project\Script\Game\EnemySkillScript.h" />
