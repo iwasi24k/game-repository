@@ -29,6 +29,7 @@ namespace Framework {
 		std::wstring m_ShaderName;
 		math::matrix m_WorldMatrix = math::matrix::Identity();
         std::vector<std::optional<Material>> m_OverrideMaterials;
+        math::vector4f m_Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
 
     public:
         void LoadModel(const std::wstring& path);
@@ -47,6 +48,7 @@ namespace Framework {
         void Draw(const math::matrix& view, const math::matrix& proj) override;
 
 		float GetLayer() const { return m_Layer; }
+        const math::vector4f& GetDiffuse() const { return  m_Diffuse; }
     };
 }
 

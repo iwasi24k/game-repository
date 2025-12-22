@@ -306,6 +306,9 @@
     <ClCompile Include="Project\Script\Game\EnemySkillScript.cpp">
       <Filter>Project\Script\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Script\Game\PlayerSkillScript.cpp">
+      <Filter>Project\Script\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -544,6 +547,9 @@
       <Filter>Project\Prefab\Game</Filter>
     </ClInclude>
     <ClInclude Include="Project\Script\Game\EnemySkillScript.h">
+      <Filter>Project\Script\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Game\PlayerSkillScript.h">
       <Filter>Project\Script\Game</Filter>
     </ClInclude>
   </ItemGroup>
