@@ -19,6 +19,8 @@
 #include "Renderer.h"
 #include "ManagerHub.h"
 #include "Script/Game/Manager/EnemyManager.h"
+#include "Prefab/Game/SkillPrefab.h"
+#include "Script/Game/PlayerSkillScript.h"
 
 using namespace Framework;
 
@@ -30,6 +32,9 @@ bool GameScene::SceneInitialize() {
 	PlayerPrefab playerPrefab;
 	playerPrefab.Create(GetGameObjectManager());
 
+	SkillPrefab skillPrefab;
+	auto playerSkill = skillPrefab.Create(GetGameObjectManager());
+	playerSkill->AddComponent<PlayerSkillScript>();
 	//EnemyPrefab enemyPrefab;
 	//enemyPrefab.Create(GetGameObjectManager());
 	//enemyPrefab.Create(GetGameObjectManager())->GetTransform().position.x = 20.0f;
