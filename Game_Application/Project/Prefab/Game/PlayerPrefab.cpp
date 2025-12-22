@@ -67,4 +67,5 @@ void PlayerPrefab::Configure(GameObject* obj) {
 
 	auto cp = obj->GetComponent<CombatProcessing>();
 	cp->SetHitPoint(5);
+	cp->SetAttackCooldown(2.0f);
 }

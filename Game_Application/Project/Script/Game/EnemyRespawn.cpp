@@ -21,7 +21,8 @@ void EnemyRespawn::Update() {
 	if (!m_IsSpawn) return;
 
 	m_Timer += Timer::GetInstance().GetDeltaTime();
-	float size = std::lerp(0.5f, 0.0f, m_Timer);
+	float t = std::clamp(m_Timer, 0.0f, 1.0f);
+	float size = std::lerp(0.5f, 0.0f, t);
 	GetOwner()->GetTransform().scale = math::vector3f(size, size, size);
 	
 	if (size > 0.01f) return;

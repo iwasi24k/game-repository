@@ -72,4 +72,5 @@ void EnemyPrefab::Configure(GameObject* obj) {
 
 	auto cp = obj->GetComponent<CombatProcessing>();
 	cp->SetHitPoint(2);
+	cp->SetAttackCooldown(1.0f);
 }

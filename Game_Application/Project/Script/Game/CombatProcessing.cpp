@@ -16,15 +16,15 @@ using namespace Framework;
 
 void CombatProcessing::Start() {
 	m_AttackTimer = 0.0f;
-	m_IsAttack = false;
+	m_IsAttacking = false;
 }
 
 void CombatProcessing::Update() {
 	m_AttackTimer += Timer::GetInstance().GetDeltaTime();
-	if (!m_IsAttack) return;
+	if (!m_IsAttacking) return;
 
 	m_AttackTimer = 0.0f;
-	m_IsAttack = false;
+	m_IsAttacking = false;
 	m_HitPoint--;
 
 	if(m_HitPoint <= 0) {
@@ -41,8 +41,12 @@ void CombatProcessing::Update() {
 }
 
 void CombatProcessing::Attack() {
-	if (m_AttackTimer < 1.0f)
-		m_IsAttack = false;
-	else
-		m_IsAttack = true;
+	m_IsAttacking = TryAttack();
+}
+
+bool CombatProcessing::TryAttack() {
+	if (m_AttackTimer >= m_AttackCooldown) {
+		return true; 
+	}
+	return false;
 }
