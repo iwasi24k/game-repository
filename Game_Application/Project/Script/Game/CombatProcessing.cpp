@@ -30,11 +30,11 @@ void CombatProcessing::Update() {
 	if(m_HitPoint <= 0) {
 		m_HitPoint = 0;
 		if (GetOwner()->GetTag() == "Player") {
-
+			//  Player destruction handling. Currently not implemented.
 		}
 		else {
 			GetOwner()->GetComponent<EnemyRespawn>()->Spawn();
-			m_HitPoint = 2;
+			m_HitPoint = m_MaxHitPoint;
 			m_AttackTimer = -1.5f;
 		}
 	}

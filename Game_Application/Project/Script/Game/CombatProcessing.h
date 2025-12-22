@@ -15,6 +15,7 @@
 
 class CombatProcessing : public Framework::GameBehaviour {
 private:
+	int m_MaxHitPoint = 1;
 	int m_HitPoint = 0;
 	bool m_IsAttacking = false;
 	float m_AttackTimer = 0.0f;
@@ -28,7 +29,10 @@ public:
 	bool TryAttack();
 
 	void SetAttackCooldown(float cooldown) { m_AttackCooldown = cooldown; }
-	void SetHitPoint(int hp) { m_HitPoint = hp; }
+	void SetHitPoint(int hp) { 
+		m_MaxHitPoint = hp;
+		m_HitPoint = hp; 
+	}
 	int GetHitPoint() const { return m_HitPoint; }
 };
 
