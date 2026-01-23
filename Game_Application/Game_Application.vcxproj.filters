@@ -97,6 +97,9 @@
     <Filter Include="Project\Script\Title\Manager">
       <UniqueIdentifier>{caa958a5-c1de-4b7b-a127-43586eb5eae7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Global">
+      <UniqueIdentifier>{3ca523ea-fa2d-4be3-9ef3-187d2fe3a90a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -557,6 +560,9 @@
     </ClInclude>
     <ClInclude Include="Project\Script\Game\CombatProcessing.h">
       <Filter>Project\Script\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Global\GlobalGameData.h">
+      <Filter>Project\Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
