@@ -21,10 +21,13 @@
 #include "Script/Game/Manager/EnemyManager.h"
 #include "Prefab/Game/SkillPrefab.h"
 #include "Script/Game/PlayerSkillScript.h"
+#include "Global/GlobalGameData.h"
+#include <Scene/Title/TitleScene.h>
 
 using namespace Framework;
 
 bool GameScene::SceneInitialize() {
+	Global::GlobalGameData::GetInstance().SetGameFinished(false);
 
 	CameraPrefab cameraPrefab;
 	cameraPrefab.Create(GetGameObjectManager());
@@ -35,9 +38,7 @@ bool GameScene::SceneInitialize() {
 	SkillPrefab skillPrefab;
 	auto playerSkill = skillPrefab.Create(GetGameObjectManager());
 	playerSkill->AddComponent<PlayerSkillScript>();
-	//EnemyPrefab enemyPrefab;
-	//enemyPrefab.Create(GetGameObjectManager());
-	//enemyPrefab.Create(GetGameObjectManager())->GetTransform().position.x = 20.0f;
+
 	GetManagerHub()->AddManager<EnemyManager>(std::make_unique<EnemyManager>());
 
 	GetManagerHub()->AddManager<BlockManager>(std::make_unique<BlockManager>());
@@ -49,5 +50,7 @@ void GameScene::SceneFinalize(){
 }
 
 void GameScene::SceneUpdate(){
-	
+	if (Global::GlobalGameData::GetInstance().IsGameFinished()) {
+		SceneManager::GetInstance().LoadScene(std::make_unique<TitleScene>());
+	}
 }
