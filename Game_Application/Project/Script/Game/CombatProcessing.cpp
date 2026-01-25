@@ -11,6 +11,7 @@
 #include "CombatProcessing.h"
 #include "Timer.h"
 #include "EnemyRespawn.h"
+#include "Global/GlobalGameData.h"
 
 using namespace Framework;
 
@@ -31,6 +32,7 @@ void CombatProcessing::Update() {
 		m_HitPoint = 0;
 		if (GetOwner()->GetTag() == "Player") {
 			//  Player destruction handling. Currently not implemented.
+			Global::GlobalGameData::GetInstance().SetGameFinished(true);
 		}
 		else {
 			GetOwner()->GetComponent<EnemyRespawn>()->Spawn();

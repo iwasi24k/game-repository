@@ -279,6 +279,7 @@
     <ClInclude Include="Framework\Scene\Scene.h" />
     <ClInclude Include="Framework\Scene\SceneManager.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Project\Global\GlobalGameData.h" />
     <ClInclude Include="Project\Prefab\Game\BlackBlockPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\EnemyPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\PlayerPrefab.h" />
