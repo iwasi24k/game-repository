@@ -25,11 +25,11 @@ void PlayerHpManager::Create() {
 	HitPointPrefab hitPointPrefab;
 	hitPointPrefab.Create(GetGameObjectManager());
 
-	PlayerHpPrefab timerPrefab;
+	PlayerHpPrefab playerHpPrefab;
 	for (int i = 0; i < m_CombatProcessing->GetHitPoint(); ++i) {
-		auto timerObj = timerPrefab.Create(GetGameObjectManager());
-		timerObj->GetTransform().position.x += i * (timerObj->GetTransform().scale.x) * 2.0f;
-		m_HitPoints.push_back(timerObj);
+		auto playerHpObj = playerHpPrefab.Create(GetGameObjectManager());
+		playerHpObj->GetTransform().position.x += i * (playerHpObj->GetTransform().scale.x) * 2.0f;
+		m_HitPoints.push_back(playerHpObj);
 	}
 }
 

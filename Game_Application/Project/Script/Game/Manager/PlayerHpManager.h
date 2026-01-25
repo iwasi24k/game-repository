@@ -13,7 +13,6 @@
 #include <vector>
 #include "GameObject.h"
 #include "ObjectManager.h"
-#include "Global/Prefab/ScorePrefab.h"
 #include "Script/Game/CombatProcessing.h"
 
 class PlayerHpManager : public Framework::ObjectManager {

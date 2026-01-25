@@ -29,7 +29,7 @@ void HitPointPrefab::Configure(GameObject* obj) {
 
 	auto spriteComp = obj->GetComponent<SpriteComponent>();
 	if (spriteComp) {
-		spriteComp->LoadSprite(L"Asset\\Texture\\HPF.png", SpriteDrawMode::Instance);
+		spriteComp->LoadSprite(L"Asset\\Texture\\HP.png", SpriteDrawMode::Instance);
 		spriteComp->SetLayer(1.0f);
 		spriteComp->SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
 		spriteComp->LoadShader(L"SpriteShader", L"cso-file\\SpriteVS.cso", L"cso-file\\SpritePS.cso");
