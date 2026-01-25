@@ -20,6 +20,9 @@
 
 #include <Windows.h>
 #include <random>
+#include <optional>
+#include <algorithm>
+
 #include "MathTransform.h"
 
 namespace ix_util {
@@ -74,6 +77,24 @@ namespace ix_util {
         }
         IX_NODISCARD static math::vector4f vector4(const math::vector4f& a, const math::vector4f& b) {
             return { real(a.x, b.x), real(a.y, b.y), real(a.z, b.z), real(a.w, b.w) };
+        }
+
+        // integer (multiple of N)
+        template<int Multiple>
+        IX_NODISCARD static int integer_multiple(int a, int b, int fallback = 0) {
+            static_assert(2 <= Multiple && Multiple <= 9, "Multiple must be 2..9");
+
+            if (a > b) std::swap(a, b);
+
+            int first = ((a + Multiple - 1) / Multiple) * Multiple;
+            int last = (b / Multiple) * Multiple;
+
+            if (first > last)
+                return fallback;
+
+            int count = (last - first) / Multiple + 1;
+            std::uniform_int_distribution<int> dist(0, count - 1);
+            return first + dist(m_Engine) * Multiple;
         }
 	};
 }
