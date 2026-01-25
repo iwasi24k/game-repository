@@ -38,6 +38,7 @@ void CombatProcessing::Update() {
 			GetOwner()->GetComponent<EnemyRespawn>()->Spawn();
 			m_HitPoint = m_MaxHitPoint;
 			m_AttackTimer = -1.5f;
+			Global::GlobalGameData::GetInstance().AddScore(10);
 		}
 	}
 }

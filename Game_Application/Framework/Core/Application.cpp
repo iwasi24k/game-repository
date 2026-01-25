@@ -34,7 +34,6 @@
 // --- scene ---
 #include "SceneManager.h"
 #include "Scene/Title/TitleScene.h"
-#include <Scene/Result/ResultScene.h>
 
 using namespace Framework;
 
@@ -128,7 +127,7 @@ bool Application::Init() {
     ModelManager::GetInstance().Initialize();
     SpriteManager::GetInstance().Initialize();
 
-	SceneManager::GetInstance().LoadScene(std::make_unique<ResultScene>());
+	SceneManager::GetInstance().LoadScene(std::make_unique<TitleScene>());
 
     return true;
 }

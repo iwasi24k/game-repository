@@ -15,6 +15,7 @@
 #include "Scene/Title/TitleScene.h"
 #include "Prefab/CameraPrefab.h"
 #include "Prefab/Result/ResultBgPrefab.h"
+#include "Script/Result/Manager/ResultScoreManager.h"
 
 using namespace Framework;
 
@@ -25,6 +26,8 @@ bool ResultScene::SceneInitialize()
 
 	ResultBgPrefab resultBgPrefab;
 	resultBgPrefab.Create(GetGameObjectManager());
+
+	GetManagerHub()->AddManager<ResultScoreManager>(std::make_unique<ResultScoreManager>());
 
     return true;
 }
