@@ -106,6 +106,21 @@
     <Filter Include="Project\Global">
       <UniqueIdentifier>{3ca523ea-fa2d-4be3-9ef3-187d2fe3a90a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Script\Result">
+      <UniqueIdentifier>{5311d20b-a07b-4058-933d-92e2470634e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Script\Result\Manager">
+      <UniqueIdentifier>{6b2683eb-0558-43fa-bd2b-665efa7f7cf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Global\Script">
+      <UniqueIdentifier>{208d4260-3216-40db-a07a-339948dd5f17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Global\Script\Manager">
+      <UniqueIdentifier>{c221b56a-7f28-4edb-9458-8af362893872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Global\Prefab">
+      <UniqueIdentifier>{8dc9b826-60c8-4f77-be19-efade4707501}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -326,6 +341,30 @@
     </ClCompile>
     <ClCompile Include="Project\Prefab\Result\ResultBgPrefab.cpp">
       <Filter>Project\Prefab\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Script\Result\Manager\ResultScoreManager.cpp">
+      <Filter>Project\Script\Result\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Global\Script\Manager\ScoreManager.cpp">
+      <Filter>Project\Global\Script\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Global\Prefab\ScorePrefab.cpp">
+      <Filter>Project\Global\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Script\Game\Manager\TimerManager.cpp">
+      <Filter>Project\Script\Game\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Prefab\Game\TimerPrefab.cpp">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Prefab\Game\PlayerHpPrefab.cpp">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Script\Game\Manager\PlayerHpManager.cpp">
+      <Filter>Project\Script\Game\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Prefab\Game\HitPointPrefab.cpp">
+      <Filter>Project\Prefab\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -581,6 +620,30 @@
     </ClInclude>
     <ClInclude Include="Project\Global\GlobalGameData.h">
       <Filter>Project\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Result\Manager\ResultScoreManager.h">
+      <Filter>Project\Script\Result\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Global\Script\Manager\ScoreManager.h">
+      <Filter>Project\Global\Script\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Global\Prefab\ScorePrefab.h">
+      <Filter>Project\Global\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Game\Manager\TimerManager.h">
+      <Filter>Project\Script\Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Game\TimerPrefab.h">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Game\PlayerHpPrefab.h">
+      <Filter>Project\Prefab\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Script\Game\Manager\PlayerHpManager.h">
+      <Filter>Project\Script\Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Prefab\Game\HitPointPrefab.h">
+      <Filter>Project\Prefab\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
