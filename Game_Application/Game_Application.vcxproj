@@ -200,6 +200,7 @@
     <ClCompile Include="Project\Prefab\Game\EnemyPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Game\PlayerPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Game\SkillPrefab.cpp" />
+    <ClCompile Include="Project\Prefab\Game\TimerPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Game\WhiteBlockPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Result\ResultBgPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Title\BlockPrefab.cpp" />
@@ -220,6 +221,7 @@
     <ClCompile Include="Project\Script\Game\JumpScript.cpp" />
     <ClCompile Include="Project\Script\Game\Manager\BlockManager.cpp" />
     <ClCompile Include="Project\Script\Game\Manager\EnemyManager.cpp" />
+    <ClCompile Include="Project\Script\Game\Manager\TimerManager.cpp" />
     <ClCompile Include="Project\Script\Game\PlayerScript.cpp" />
     <ClCompile Include="Project\Script\Game\PlayerSkillScript.cpp" />
     <ClCompile Include="Project\Script\Game\ShadowScript.cpp" />
@@ -289,6 +291,7 @@
     <ClInclude Include="Project\Prefab\Game\EnemyPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\PlayerPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\SkillPrefab.h" />
+    <ClInclude Include="Project\Prefab\Game\TimerPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\WhiteBlockPrefab.h" />
     <ClInclude Include="Project\Prefab\Result\ResultBgPrefab.h" />
     <ClInclude Include="Project\Prefab\Title\BlockPrefab.h" />
@@ -309,6 +312,7 @@
     <ClInclude Include="Project\Script\Game\JumpScript.h" />
     <ClInclude Include="Project\Script\Game\Manager\BlockManager.h" />
     <ClInclude Include="Project\Script\Game\Manager\EnemyManager.h" />
+    <ClInclude Include="Project\Script\Game\Manager\TimerManager.h" />
     <ClInclude Include="Project\Script\Game\PlayerScript.h" />
     <ClInclude Include="Project\Script\Game\PlayerSkillScript.h" />
     <ClInclude Include="Project\Script\Game\ShadowScript.h" />

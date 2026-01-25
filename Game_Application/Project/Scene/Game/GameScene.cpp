@@ -24,6 +24,7 @@
 #include "Global/GlobalGameData.h"
 #include "Scene/Result/ResultScene.h"
 #include "Global/Script/Manager/ScoreManager.h"
+#include "Script/Game/Manager/TimerManager.h"
 
 using namespace Framework;
 
@@ -46,6 +47,8 @@ bool GameScene::SceneInitialize() {
 	GetManagerHub()->AddManager<BlockManager>(std::make_unique<BlockManager>());
 
 	GetManagerHub()->AddManager<ScoreManager>(std::make_unique<ScoreManager>());
+
+	GetManagerHub()->AddManager<TimerManager>(std::make_unique<TimerManager>());
 
     return true;
 }
