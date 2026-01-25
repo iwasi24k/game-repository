@@ -22,12 +22,14 @@
 #include "Prefab/Game/SkillPrefab.h"
 #include "Script/Game/PlayerSkillScript.h"
 #include "Global/GlobalGameData.h"
-#include <Scene/Title/TitleScene.h>
+#include "Scene/Result/ResultScene.h"
+#include "Global/Script/Manager/ScoreManager.h"
 
 using namespace Framework;
 
 bool GameScene::SceneInitialize() {
 	Global::GlobalGameData::GetInstance().SetGameFinished(false);
+	Global::GlobalGameData::GetInstance().ResetScore();
 
 	CameraPrefab cameraPrefab;
 	cameraPrefab.Create(GetGameObjectManager());
@@ -43,6 +45,8 @@ bool GameScene::SceneInitialize() {
 
 	GetManagerHub()->AddManager<BlockManager>(std::make_unique<BlockManager>());
 
+	GetManagerHub()->AddManager<ScoreManager>(std::make_unique<ScoreManager>());
+
     return true;
 }
 
@@ -51,6 +55,6 @@ void GameScene::SceneFinalize(){
 
 void GameScene::SceneUpdate(){
 	if (Global::GlobalGameData::GetInstance().IsGameFinished()) {
-		SceneManager::GetInstance().LoadScene(std::make_unique<TitleScene>());
+		SceneManager::GetInstance().LoadScene(std::make_unique<ResultScene>());
 	}
 }

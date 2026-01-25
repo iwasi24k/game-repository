@@ -32,6 +32,7 @@ namespace Global {
 
 		void AddScore(int score) { m_Score += score; }
 		int GetScore() const { return m_Score; }
+		void ResetScore() { m_Score = 0; }
 	};
 }
 

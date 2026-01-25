@@ -194,6 +194,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Project\Global\Prefab\ScorePrefab.cpp" />
+    <ClCompile Include="Project\Global\Script\Manager\ScoreManager.cpp" />
     <ClCompile Include="Project\Prefab\Game\BlackBlockPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Game\EnemyPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Game\PlayerPrefab.cpp" />
@@ -221,6 +223,7 @@
     <ClCompile Include="Project\Script\Game\PlayerScript.cpp" />
     <ClCompile Include="Project\Script\Game\PlayerSkillScript.cpp" />
     <ClCompile Include="Project\Script\Game\ShadowScript.cpp" />
+    <ClCompile Include="Project\Script\Result\Manager\ResultScoreManager.cpp" />
     <ClCompile Include="Project\Script\Title\AnimationScript2D.cpp" />
     <ClCompile Include="Project\Script\Title\BgBlockScript.cpp" />
     <ClCompile Include="Project\Script\Title\Manager\BgBlockManager.cpp" />
@@ -280,6 +283,8 @@
     <ClInclude Include="Framework\Scene\SceneManager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Project\Global\GlobalGameData.h" />
+    <ClInclude Include="Project\Global\Prefab\ScorePrefab.h" />
+    <ClInclude Include="Project\Global\Script\Manager\ScoreManager.h" />
     <ClInclude Include="Project\Prefab\Game\BlackBlockPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\EnemyPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\PlayerPrefab.h" />
@@ -307,6 +312,7 @@
     <ClInclude Include="Project\Script\Game\PlayerScript.h" />
     <ClInclude Include="Project\Script\Game\PlayerSkillScript.h" />
     <ClInclude Include="Project\Script\Game\ShadowScript.h" />
+    <ClInclude Include="Project\Script\Result\Manager\ResultScoreManager.h" />
     <ClInclude Include="Project\Script\Title\AnimationScript2D.h" />
     <ClInclude Include="Project\Script\Title\BgBlockScript.h" />
     <ClInclude Include="Project\Script\Title\Manager\BgBlockManager.h" />
