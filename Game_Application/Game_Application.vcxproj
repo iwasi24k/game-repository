@@ -199,6 +199,7 @@
     <ClCompile Include="Project\Prefab\Game\PlayerPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Game\SkillPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Game\WhiteBlockPrefab.cpp" />
+    <ClCompile Include="Project\Prefab\Result\ResultBgPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Title\BlockPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Title\GameStartPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Title\TitleBgPrefab.cpp" />
@@ -207,6 +208,7 @@
     <ClCompile Include="Project\Prefab\Title\TitleLogoPrefab.cpp" />
     <ClCompile Include="Project\Prefab\Title\TitleWhiteBlockPrefab.cpp" />
     <ClCompile Include="Project\Scene\Game\GameScene.cpp" />
+    <ClCompile Include="Project\Scene\Result\ResultScene.cpp" />
     <ClCompile Include="Project\Scene\Title\TitleScene.cpp" />
     <ClCompile Include="Project\Script\Game\BlockScript.cpp" />
     <ClCompile Include="Project\Script\Game\CombatProcessing.cpp" />
@@ -283,6 +285,7 @@
     <ClInclude Include="Project\Prefab\Game\PlayerPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\SkillPrefab.h" />
     <ClInclude Include="Project\Prefab\Game\WhiteBlockPrefab.h" />
+    <ClInclude Include="Project\Prefab\Result\ResultBgPrefab.h" />
     <ClInclude Include="Project\Prefab\Title\BlockPrefab.h" />
     <ClInclude Include="Project\Prefab\Title\GameStartPrefab.h" />
     <ClInclude Include="Project\Prefab\Title\TitleBgPrefab.h" />
@@ -291,6 +294,7 @@
     <ClInclude Include="Project\Prefab\Title\TitleLogoPrefab.h" />
     <ClInclude Include="Project\Prefab\Title\TitleWhiteBlockPrefab.h" />
     <ClInclude Include="Project\Scene\Game\GameScene.h" />
+    <ClInclude Include="Project\Scene\Result\ResultScene.h" />
     <ClInclude Include="Project\Scene\Title\TitleScene.h" />
     <ClInclude Include="Project\Script\Game\BlockScript.h" />
     <ClInclude Include="Project\Script\Game\CombatProcessing.h" />
