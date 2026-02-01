@@ -24,13 +24,57 @@ void BlockManager::Create() {
 	WhiteBlockPrefab whiteBlockPrefab;
 	BlackBlockPrefab blackBlockPrefab;
 
+	const int halfX = m_BlockCountX / 2;
+	const int halfZ = m_BlockCountZ / 2;
+
 	// チェス盤のようにブロックを配置
-	for (int x = -m_BlockCountX / 2; x <= m_BlockCountX / 2; ++x) {
-		for (int z = -m_BlockCountZ / 2; z <= m_BlockCountZ / 2; ++z) {
+	for (int x = -halfX; x <= halfX; ++x) {
+		for (int z = -halfZ; z <= halfZ; ++z) {
 			Prefab& blockPrefab = ((x + z) % 2 == 0) ? static_cast<Prefab&>(whiteBlockPrefab) : static_cast<Prefab&>(blackBlockPrefab);
 			auto block = blockPrefab.Create(m_GameObjectManager);
 			block->GetTransform().position = math::vector3f(static_cast<float>(x * block->GetTransform().scale.x), 0.0f, static_cast<float>(z * block->GetTransform().scale.x));
 			m_Blocks.push_back(block);
+		}
+	}
+
+	// =========================
+	// 外枠（白黒・3段・固定）
+	// =========================
+	const int wallOffset = 1;
+	const int wallHeight = 3;
+
+	for (int y = 0; y < wallHeight; ++y) {
+		for (int x = -halfX - wallOffset; x <= halfX + wallOffset; ++x) {
+			for (int z = -halfZ - wallOffset; z <= halfZ + wallOffset; ++z) {
+
+				// 外周のみ
+				bool isEdge =
+					x == -halfX - wallOffset ||
+					x == halfX + wallOffset ||
+					z == -halfZ - wallOffset ||
+					z == halfZ + wallOffset;
+
+				if (!isEdge) continue;
+
+				Prefab& prefab =
+					((x + z) % 2 == 0)
+					? static_cast<Prefab&>(whiteBlockPrefab)
+					: static_cast<Prefab&>(blackBlockPrefab);
+
+				auto wall = prefab.Create(m_GameObjectManager);
+
+				auto& t = wall->GetTransform();
+				t.position =
+					math::vector3f(
+						x * t.scale.x,
+						y * t.scale.y,
+						z * t.scale.z
+					);
+
+				if (auto script = wall->GetComponent<BlockScript>()) {
+					script->SetEnabled(false);
+				}
+			}
 		}
 	}
 }
