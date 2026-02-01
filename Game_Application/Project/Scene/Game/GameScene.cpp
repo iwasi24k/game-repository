@@ -27,11 +27,16 @@
 #include "Script/Game/Manager/TimerManager.h"
 #include "Script/Game/Manager/PlayerHpManager.h"
 
+#include "InputMouse.h"
+#include "InputKeyboard.h"
+
 using namespace Framework;
 
 bool GameScene::SceneInitialize() {
 	Global::GlobalGameData::GetInstance().SetGameFinished(false);
 	Global::GlobalGameData::GetInstance().ResetScore();
+	InputMouse::GetInstance().DisplayMouse(false);
+	InputMouse::GetInstance().EnableCursorLock(true);
 
 	CameraPrefab cameraPrefab;
 	cameraPrefab.Create(GetGameObjectManager());
@@ -60,7 +65,18 @@ void GameScene::SceneFinalize(){
 }
 
 void GameScene::SceneUpdate(){
+	if (InputKeyboard::GetInstance().IsKeyDown(KB::Alt)) {
+		InputMouse::GetInstance().DisplayMouse(true);
+		InputMouse::GetInstance().EnableCursorLock(false);
+	}
+	if (InputKeyboard::GetInstance().IsKeyReleased(KB::Alt)) {
+		InputMouse::GetInstance().DisplayMouse(false);
+		InputMouse::GetInstance().EnableCursorLock(true);
+	}
+
 	if (Global::GlobalGameData::GetInstance().IsGameFinished()) {
 		SceneManager::GetInstance().LoadScene(std::make_unique<ResultScene>());
+		InputMouse::GetInstance().DisplayMouse(true);
+		InputMouse::GetInstance().EnableCursorLock(false);
 	}
 }
