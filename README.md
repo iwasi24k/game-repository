@@ -210,45 +210,26 @@ To simulate real-world team development:
 
 **English**
 
-GitHub Actions workflow:
+This project integrates an automated AI-based code review pipeline using GitHub Actions.
 
-1. Trigger on Pull Request
-2. Extract diff only
-3. Send diff to OpenAI API
-4. Post automated review comment
+- Triggered on internal Pull Requests    
+- Extracts diff only    
+- Sends diff to OpenAI API    
+- Posts structured review comments    
 
-Optimization:
+The system is designed to minimize token usage and keep merge decisions fully manual.
 
-- Diff-only review
-- Token usage reduction
-- Manual merge decision required
-
-To skip AI review, include the following in the commit message:
-
-```
-[skip ai]
-```
 
 **日本語**
 
-GitHub Actionsによる自動化フロー：
+GitHub Actionsを用いたAIコードレビュー基盤を構築しています。
 
-1. プルリクエスト作成時に起動
-2. 差分のみ抽出
-3. OpenAI APIへ送信
-4. 自動レビューコメントを投稿
+- 内部プルリクエスト時に起動    
+- 差分のみ抽出    
+- OpenAI APIへ送信    
+- 自動レビューコメントを投稿    
 
-最適化方針：
-
-- 差分のみレビュー
-- トークン使用量削減
-- マージは人間が最終判断
-
-AIレビューをスキップする場合は、コミットメッセージに以下を含めてください：
-
-```
-[skip ai]
-```
+トークン使用量を抑制し、マージ判断は必ず人間が行う設計としています。
 
 ---
 
